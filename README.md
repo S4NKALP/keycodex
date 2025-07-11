@@ -39,7 +39,7 @@ Most importantly:
 Before you begin, ensure you have met the following requirements:
 
 - You have installed the latest version of `neovim`
-- Some command line tools: fd, ripgrep
+- Some command line tools: fd, ripgrep, python-pywal, python-watchdog
 
 ### 💻 Installation
 
