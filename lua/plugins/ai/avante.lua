@@ -4,6 +4,7 @@ local model_names = {
     'claude-3.5-sonnet',
     'claude-3.7-sonnet',
     'claude-3.7-sonnet-thought',
+    'claude-sonnet-4',
     'gemini-2.0-flash-001',
     'gemini-2.5-pro',
     'gpt-4.1',
@@ -13,38 +14,36 @@ local model_names = {
     'o4-mini',
 }
 
--- Generate provider configurations for each model
-local function generate_providers()
-    local providers_table = {}
-    for _, model_name in ipairs(model_names) do
-        local provider_key = 'copilot-' .. model_name
-        providers_table[provider_key] = {
-            __inherited_from = 'copilot',
-            model = model_name,
-            display_name = provider_key,
-        }
-    end
-    return providers_table
-end
-
 avante.setup({
     mode = 'agentic',
-    provider = 'copilot-claude-3.5-sonnet',
+    provider = 'copilot-gpt-4.1',
     -- cursor_applying_provider = 'copilot-o3-mini',
     -- auto_suggestions_provider = 'copilot-claude-3.7-sonnet',
-    
-    providers = vim.tbl_extend('force', {
-        copilot = {
-            endpoint = 'https://api.githubcopilot.com',
-            allow_insecure = false,
-            timeout = 10 * 60 * 1000,
-            extra_request_body = {
-                temperature = 0,
+
+    providers = (function()
+        local providers_table = {
+            copilot = {
+                endpoint = 'https://api.githubcopilot.com',
+                allow_insecure = false,
+                timeout = 10 * 60 * 1000,
+                extra_request_body = {
+                    temperature = 0,
+                    max_completion_tokens = 1000000,
+                    reasoning_effort = 'high',
+                },
             },
-            max_completion_tokens = 1000000,
-            reasoning_effort = 'high',
         }
-    }, generate_providers()),
+        for _, model_name in ipairs(model_names) do
+            local provider_key = 'copilot-' .. model_name
+            providers_table[provider_key] = {
+                __inherited_from = 'copilot',
+                model = model_name,
+                display_name = provider_key,
+            }
+        end
+
+        return providers_table
+    end)(),
 
     behaviour = {
         auto_suggestions = false,
@@ -168,6 +167,17 @@ avante.setup({
             require('mcphub.extensions.avante').mcp_tool(),
         }
     end,
-    disabled_tools = {},
+    disabled_tools = {
+        'list_files',
+        'search_files',
+        'read_file',
+        'create_file',
+        'rename_file',
+        'delete_file',
+        'create_dir',
+        'rename_dir',
+        'delete_dir',
+        'bash',
+    },
     slash_commands = {},
 })

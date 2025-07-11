@@ -150,5 +150,11 @@ map('v', '<leader>{', 's{}<esc>Pll', { desc = 'wrap selection with curly braces'
 map('v', "<leader>'", "s''<esc>Pll", { desc = 'wrap selection with single quotes' })
 map('v', '<leader>"', 's""<esc>Pll', { desc = 'wrap selection with double quotes' })
 
+-- Insert mode cursor movement with Ctrl+hjkl
+map('i', '<C-h>', '<Left>', { desc = 'Move cursor left' })
+map('i', '<C-j>', '<Down>', { desc = 'Move cursor down' })
+map('i', '<C-k>', '<Up>', { desc = 'Move cursor up' })
+map('i', '<C-l>', '<Right>', { desc = 'Move cursor right' })
+
 
 

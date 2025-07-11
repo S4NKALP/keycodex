@@ -1,34 +1,23 @@
 local lualine = require('lualine')
 local icons = require('lib.icons')
 
-local colors = {
-    bg = '#000000',
-    fg = '#bbc2cf',
-    yellow = '#ECBE7B',
-    cyan = '#008080',
-    darkblue = '#081633',
-    green = '#98be65',
-    orange = '#FF8800',
-    violet = '#a9a1e1',
-    magenta = '#c678dd',
-    blue = '#51afef',
-    red = '#ec5f67',
-}
+-- Get colors from base46 theme (chadwal)
+local colors = require("base46").get_theme_tb "base_30"
 
 local mode_color = {
     n = colors.green,
     i = colors.blue,
-    v = colors.magenta,
-    [''] = colors.magenta,
-    V = colors.magenta,
+    v = colors.pink,
+    [''] = colors.pink,
+    V = colors.pink,
     c = colors.yellow,
     t = colors.red,
     R = colors.orange,
     Rv = colors.orange,
-    no = colors.fg,
-    s = colors.violet,
-    S = colors.violet,
-    [''] = colors.violet,
+    no = colors.white,
+    s = colors.purple,
+    S = colors.purple,
+    [''] = colors.purple,
     ic = colors.yellow,
     cv = colors.red,
     ce = colors.red,
@@ -58,17 +47,17 @@ local conditions = {
     end,
 }
 
-local searchcount = { 'searchcount', color = { fg = colors.fg, gui = 'bold' } }
-local selectioncount = { 'selectioncount', color = { fg = colors.fg, gui = 'bold' } }
-local progress = { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+local searchcount = { 'searchcount', color = { fg = colors.white, gui = 'bold' } }
+local selectioncount = { 'selectioncount', color = { fg = colors.white, gui = 'bold' } }
+local progress = { 'progress', color = { fg = colors.white, gui = 'bold' } }
 local filetype = { 'filetype', color = { fg = colors.blue, gui = 'bold' } }
-local filesize = { 'filesize', color = { fg = colors.fg, gui = 'bold' }, cond = conditions.buffer_not_empty }
+local filesize = { 'filesize', color = { fg = colors.white, gui = 'bold' }, cond = conditions.buffer_not_empty }
 local fileformat = { 'fileformat', icons_enabled = true, color = { fg = colors.white, gui = 'bold' } }
 
 local filename = {
     'filename',
     cond = conditions.buffer_not_empty and conditions.buffer_is_file and conditions.buffer_not_scratch,
-    color = { fg = colors.magenta, gui = 'bold' },
+    color = { fg = colors.pink, gui = 'bold' },
 }
 
 local buffers = {
@@ -145,7 +134,7 @@ local lsp = {
         return msg
     end,
     icon = icons.ui.Gear,
-    color = { fg = colors.fg, gui = 'bold' },
+    color = { fg = colors.white, gui = 'bold' },
 }
 
 local encoding = {
@@ -168,14 +157,72 @@ local function mode(icon)
     }
 end
 
-local custom_onedark = require('lualine.themes.onedark')
-custom_onedark.normal.c.bg = colors.bg
+-- Modify the onedark theme to use chadwal colors
+local custom_theme = require('lualine.themes.onedark')
+
+-- Update normal mode
+custom_theme.normal.a.fg = colors.black
+custom_theme.normal.a.bg = colors.green
+custom_theme.normal.b.fg = colors.white
+custom_theme.normal.b.bg = colors.one_bg2
+custom_theme.normal.c.fg = colors.white
+custom_theme.normal.c.bg = colors.black
+
+-- Update insert mode
+custom_theme.insert.a.fg = colors.black
+custom_theme.insert.a.bg = colors.blue
+custom_theme.insert.b.fg = colors.white
+custom_theme.insert.b.bg = colors.one_bg2
+custom_theme.insert.c.fg = colors.white
+custom_theme.insert.c.bg = colors.black
+
+-- Update visual mode
+custom_theme.visual.a.fg = colors.black
+custom_theme.visual.a.bg = colors.pink
+custom_theme.visual.b.fg = colors.white
+custom_theme.visual.b.bg = colors.one_bg2
+custom_theme.visual.c.fg = colors.white
+custom_theme.visual.c.bg = colors.black
+
+-- Update replace mode
+custom_theme.replace.a.fg = colors.black
+custom_theme.replace.a.bg = colors.red
+custom_theme.replace.b.fg = colors.white
+custom_theme.replace.b.bg = colors.one_bg2
+custom_theme.replace.c.fg = colors.white
+custom_theme.replace.c.bg = colors.black
+
+-- Update command mode
+custom_theme.command.a.fg = colors.black
+custom_theme.command.a.bg = colors.yellow
+custom_theme.command.b.fg = colors.white
+custom_theme.command.b.bg = colors.one_bg2
+custom_theme.command.c.fg = colors.white
+custom_theme.command.c.bg = colors.black
+
+-- Update inactive mode
+custom_theme.inactive.a.fg = colors.grey
+custom_theme.inactive.a.bg = colors.black
+custom_theme.inactive.b.fg = colors.grey
+custom_theme.inactive.b.bg = colors.black
+custom_theme.inactive.c.fg = colors.grey
+custom_theme.inactive.c.bg = colors.black
+
+-- Update tabline to match theme
+if custom_theme.tabline then
+    custom_theme.tabline.a.fg = colors.white
+    custom_theme.tabline.a.bg = colors.one_bg2
+    custom_theme.tabline.b.fg = colors.white
+    custom_theme.tabline.b.bg = colors.black
+    custom_theme.tabline.c.fg = colors.grey
+    custom_theme.tabline.c.bg = colors.black
+end
 
 lualine.setup({
     options = {
         component_separators = '',
         -- section_separators = '',
-        theme = custom_onedark,
+        theme = custom_theme,
         disabled_filetypes = {
             'dashboard',
         },

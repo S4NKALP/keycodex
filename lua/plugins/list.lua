@@ -8,10 +8,21 @@ end
 local plugins = {
     -- UI
     {
-        'navarasu/onedark.nvim',
-        config = load_config('ui.onedark'),
+        'nvchad/ui',
+        config = function()
+            require('nvchad')
+        end,
+    },
+    {
+        'nvchad/base46',
         lazy = false,
         priority = 1000,
+        build = function()
+            require('base46').load_all_highlights()
+        end,
+        config = function()
+            require('base46').load_all_highlights()
+        end,
     },
     { 'nvim-tree/nvim-web-devicons' },
     {
