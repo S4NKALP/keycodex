@@ -157,75 +157,49 @@ local function mode(icon)
     }
 end
 
--- Modify the onedark theme to use chadwal colors
-local custom_theme = require('lualine.themes.onedark')
-
--- Update normal mode
-custom_theme.normal.a.fg = colors.black
-custom_theme.normal.a.bg = colors.green
-custom_theme.normal.b.fg = colors.white
-custom_theme.normal.b.bg = colors.one_bg2
-custom_theme.normal.c.fg = colors.white
-custom_theme.normal.c.bg = colors.black
-
--- Update insert mode
-custom_theme.insert.a.fg = colors.black
-custom_theme.insert.a.bg = colors.blue
-custom_theme.insert.b.fg = colors.white
-custom_theme.insert.b.bg = colors.one_bg2
-custom_theme.insert.c.fg = colors.white
-custom_theme.insert.c.bg = colors.black
-
--- Update visual mode
-custom_theme.visual.a.fg = colors.black
-custom_theme.visual.a.bg = colors.pink
-custom_theme.visual.b.fg = colors.white
-custom_theme.visual.b.bg = colors.one_bg2
-custom_theme.visual.c.fg = colors.white
-custom_theme.visual.c.bg = colors.black
-
--- Update replace mode
-custom_theme.replace.a.fg = colors.black
-custom_theme.replace.a.bg = colors.red
-custom_theme.replace.b.fg = colors.white
-custom_theme.replace.b.bg = colors.one_bg2
-custom_theme.replace.c.fg = colors.white
-custom_theme.replace.c.bg = colors.black
-
--- Update command mode
-custom_theme.command.a.fg = colors.black
-custom_theme.command.a.bg = colors.yellow
-custom_theme.command.b.fg = colors.white
-custom_theme.command.b.bg = colors.one_bg2
-custom_theme.command.c.fg = colors.white
-custom_theme.command.c.bg = colors.black
-
--- Update inactive mode
-custom_theme.inactive.a.fg = colors.grey
-custom_theme.inactive.a.bg = colors.black
-custom_theme.inactive.b.fg = colors.grey
-custom_theme.inactive.b.bg = colors.black
-custom_theme.inactive.c.fg = colors.grey
-custom_theme.inactive.c.bg = colors.black
-
--- Update tabline to match theme
-if custom_theme.tabline then
-    custom_theme.tabline.a.fg = colors.white
-    custom_theme.tabline.a.bg = colors.one_bg2
-    custom_theme.tabline.b.fg = colors.white
-    custom_theme.tabline.b.bg = colors.black
-    custom_theme.tabline.c.fg = colors.grey
-    custom_theme.tabline.c.bg = colors.black
-end
+-- Create a custom theme based on chadwal colors (onedark style)
+local custom_theme = {
+    normal = {
+        a = { fg = colors.black, bg = colors.green, gui = 'bold' },
+        b = { fg = colors.white, bg = colors.one_bg },
+        c = { fg = colors.light_grey, bg = 'NONE' },
+    },
+    insert = {
+        a = { fg = colors.black, bg = colors.blue, gui = 'bold' },
+        b = { fg = colors.white, bg = colors.one_bg },
+        c = { fg = colors.light_grey, bg = 'NONE' },
+    },
+    visual = {
+        a = { fg = colors.black, bg = colors.pink, gui = 'bold' },
+        b = { fg = colors.white, bg = colors.one_bg },
+        c = { fg = colors.light_grey, bg = 'NONE' },
+    },
+    replace = {
+        a = { fg = colors.black, bg = colors.red, gui = 'bold' },
+        b = { fg = colors.white, bg = colors.one_bg },
+        c = { fg = colors.light_grey, bg = 'NONE' },
+    },
+    command = {
+        a = { fg = colors.black, bg = colors.yellow, gui = 'bold' },
+        b = { fg = colors.white, bg = colors.one_bg },
+        c = { fg = colors.light_grey, bg = 'NONE' },
+    },
+    inactive = {
+        a = { fg = colors.grey, bg = 'NONE' },
+        b = { fg = colors.grey, bg = 'NONE' },
+        c = { fg = colors.grey, bg = 'NONE' },
+    },
+}
 
 lualine.setup({
     options = {
         component_separators = '',
-        -- section_separators = '',
+        section_separators = { left = '', right = '' },
         theme = custom_theme,
         disabled_filetypes = {
             'dashboard',
         },
+        globalstatus = true,
     },
     -- extensions = { 'quickfix', 'man', 'mason', 'lazy', 'toggleterm', 'nvim-tree' },
     tabline = {
