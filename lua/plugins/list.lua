@@ -477,6 +477,8 @@ local lsp_servers = {
     'lua_ls',
     'qmlls',
     'tailwindcss',
+    'typescript',
+    'pyright',
 }
 
 if util.is_present('npm') then
