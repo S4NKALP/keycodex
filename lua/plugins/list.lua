@@ -117,13 +117,6 @@ local plugins = {
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
-    -- {
-    --     'nvimtools/none-ls.nvim',
-    --     dependencies = { 'jay-babu/mason-null-ls.nvim' },
-    --     config = load_config('lang.null-ls'),
-    --     event = { 'BufReadPost', 'BufNewFile' },
-    -- },
-
     {
         'stevearc/conform.nvim',
         dependencies = { 'zapling/mason-conform.nvim' },
