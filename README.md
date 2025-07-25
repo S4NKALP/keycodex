@@ -18,7 +18,7 @@ Handcrafted Neovim setup for the ultimate CLI dev experience.
 - **Pretty colors**: Comes with treesitter and onedark preconfigured with full transparency support
 - **Tmux integration**: Works with your tmux configurations out of the box
 - **Dev tools**: Comes with debugging, testing, database and REPL support, pick and choose
-- **Auto install**: All necessary LSPs, Null LS sources, Treesitter Parsers etc. are auto installed
+- **Auto install**: All necessary LSPs, Formatter, Linters, Treesitter Parsers etc. are auto installed
 - **User module**: Configure keycodex according to your needs by using the `user` module!
 - and some more
 
@@ -70,8 +70,11 @@ local user = {
     user_lsp_servers = {
         -- Auto installed LSPs defined by user
     },
-    user_null_ls_sources = {
-        -- Auto installed Null LS sources defined by user
+    user_formatter_sources = {
+        -- Auto installed formatter sources defined by user
+    },
+    user_linter_sources = {
+        -- Auto installed lintere sources defined by user
     },
     user_treesitter_parsers = {
         -- Auto installed Treesitter parsers defined by user
@@ -121,3 +124,4 @@ You can check out the [plugins list file](./lua/plugins/list.lua) file to see th
 ## 🙏 Acknowledgments
 
 This project builds upon [nvim2k](https://github.com/2KAbhishek/nvim2k) by [2KAbhishek](https://github.com/2KAbhishek/), enhancing it with additional features and optimizations.
+

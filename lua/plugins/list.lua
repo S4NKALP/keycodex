@@ -130,14 +130,18 @@ local plugins = {
         config = load_config('lang.conform'),
         event = { 'BufReadPre', 'BufNewFile' },
     },
-
+    {
+        'mfussenegger/nvim-lint',
+        dependencies = { 'rshkarin/mason-nvim-lint' },
+        config = load_config('lang.nvim-lint'),
+        event = { 'BufReadPost', 'BufNewFile' },
+    },
     {
         'saghen/blink.cmp',
         dependencies = {
             'rafamadriz/friendly-snippets',
             'Kaiser-Yang/blink-cmp-avante',
-            'windwp/nvim-ts-autotag',
-            'f3fora/cmp-spell',
+            'ribru17/blink-cmp-spell',
             {
                 'L3MON4D3/LuaSnip',
                 config = function()
@@ -244,6 +248,13 @@ local plugins = {
                 desc = 'Flash Treesitter',
             },
         },
+    },
+    {
+        'windwp/nvim-ts-autotag',
+        event = { 'BufReadPre', 'BufNewFile' },
+        config = function()
+            require('nvim-ts-autotag').setup()
+        end,
     },
     {
         'gbprod/substitute.nvim',
@@ -442,8 +453,20 @@ local treesitter_parsers = {
     'yaml',
 }
 
-local null_ls_sources = {
+local linter_sources = {
     'shellcheck',
+    'write_good',
+    'markdownlint',
+    'eslint_d',
+    'hadolint',
+    'actionlint',
+    'vint',
+}
+
+local formatter_sources = {
+    'prettier',
+    'shfmt',
+    'stylua',
 }
 
 local lsp_servers = {
@@ -453,17 +476,12 @@ local lsp_servers = {
     'vimls',
     'lua_ls',
     'qmlls',
-    'tailwindcss', -- Add Tailwind CSS LSP
+    'tailwindcss',
 }
 
 if util.is_present('npm') then
     table.insert(lsp_servers, 'eslint')
     table.insert(lsp_servers, 'ts_ls')
-end
-
-if util.is_present('gem') then
-    table.insert(lsp_servers, 'solargraph')
-    table.insert(lsp_servers, 'rubocop')
 end
 
 if util.is_present('go') then
@@ -484,22 +502,20 @@ if util.is_present('pip') then
     table.insert(lsp_servers, 'pylsp')
 end
 
-if util.is_present('mix') then
-    table.insert(lsp_servers, 'elixirls')
-end
-
 if util.is_present('cargo') then
     table.insert(lsp_servers, 'rust_analyzer')
 end
 
 plugins = vim.tbl_extend('force', plugins, util.get_user_config('user_plugins', {}))
 lsp_servers = vim.tbl_extend('force', lsp_servers, util.get_user_config('user_lsp_servers', {}))
-null_ls_sources = vim.tbl_extend('force', null_ls_sources, util.get_user_config('user_null_ls_sources', {}))
+formatter_sources = vim.tbl_extend('force', formatter_sources, util.get_user_config('user_formatter_sources', {}))
+linter_sources = vim.tbl_extend('force', linter_sources, util.get_user_config('user_linter_sources', {}))
 treesitter_parsers = vim.tbl_extend('force', treesitter_parsers, util.get_user_config('user_tresitter_parsers', {}))
 
 return {
     plugins = plugins,
     lsp_servers = lsp_servers,
-    null_ls_sources = null_ls_sources,
+    formatter_sources = formatter_sources,
+    linter_sources = linter_sources,
     ts_parsers = treesitter_parsers,
 }

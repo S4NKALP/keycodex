@@ -15,8 +15,6 @@ conform.setup({
         json = { 'prettier' },
         yaml = { 'prettier' },
         sh = { 'shfmt' },
-        elixir = { 'mix' },
-        -- ruby = { "rubocop" }, -- optional
     },
 
     -- Autoformat on save
@@ -28,7 +26,7 @@ conform.setup({
 
 -- Setup mason-conform
 local auto_install = require('lib.util').get_user_config('auto_install', true)
-local installed_formatters = require('plugins.list').null_ls_sources or {}
+local installed_formatters = require('plugins.list').formatter_sources or {}
 
 require('mason-conform').setup({
     ensure_installed = installed_formatters,
