@@ -15,9 +15,21 @@ lint.linters_by_ft = {
 }
 
 -- Trigger linting on save and buffer events
-vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufReadPost', 'InsertLeave' }, {
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     callback = function()
-        lint.try_lint()
+        local lint = require('lint')
+
+        -- Get the filetype-specific linters
+        local ft = vim.bo.filetype
+        local linters = lint.linters_by_ft[ft] or {}
+
+        -- Add cspell if it's not already included
+        if not vim.tbl_contains(linters, 'cspell') then
+            table.insert(linters, 'cspell')
+        end
+
+        -- Run them all
+        lint.try_lint(linters)
     end,
 })
 

@@ -16,9 +16,6 @@ treesitter.setup({
     textobjects = textobjects,
     matchup = { enable = true },
     indent = { enable = true },
-    autotag = {
-        enable = true,
-    },
 
     highlight = {
         enable = true,
