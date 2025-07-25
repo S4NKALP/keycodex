@@ -14,7 +14,8 @@ conform.setup({
         html = { 'prettier' },
         json = { 'prettier' },
         yaml = { 'prettier' },
-        sh = { 'shfmt' },
+        sh = { 'shfmt', 'shellcheck' },
+        ['_'] = { 'trim_whitespace', lsp_format = 'prefer' },
     },
 
     -- Autoformat on save

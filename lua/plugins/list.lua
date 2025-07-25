@@ -126,6 +126,11 @@ local plugins = {
     {
         'mfussenegger/nvim-lint',
         dependencies = { 'rshkarin/mason-nvim-lint' },
+        init = function()
+            if vim.fn.executable('codespell') == 1 then
+                vim.o.spell = false
+            end
+        end,
         config = load_config('lang.nvim-lint'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
@@ -454,6 +459,8 @@ local linter_sources = {
     'hadolint',
     'actionlint',
     'vint',
+    'codespell',
+    'editorconfig-checker',
 }
 
 local formatter_sources = {

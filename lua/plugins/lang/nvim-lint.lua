@@ -14,23 +14,52 @@ lint.linters_by_ft = {
     yaml = { 'actionlint' },
 }
 
--- Trigger linting on save and buffer events
-vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    callback = function()
-        local lint = require('lint')
+table.insert(
+    require('lint').linters.codespell.args,
+    1,
+    '--config=' .. vim.fs.joinpath(require('dotfyls.files').config_dir, 'codespell', '.codespellrc')
+)
+table.insert(require('lint').linters.vala_lint.args, 1, '--config=vala-lint.conf')
+table.insert(
+    require('lint').linters.yamllint.args,
+    1,
+    '--config-file=' .. vim.fs.joinpath(require('dotfyls.files').config_dir, 'yamllint', 'config.yaml')
+)
 
-        -- Get the filetype-specific linters
-        local ft = vim.bo.filetype
-        local linters = lint.linters_by_ft[ft] or {}
+local function lint(bufnr)
+    local linters =
+        vim.list_extend({ 'codespell', 'editorconfig-checker' }, require('lint')._resolve_linter_by_ft(vim.bo.filetype))
 
-        -- Add cspell if it's not already included
-        if not vim.tbl_contains(linters, 'cspell') then
-            table.insert(linters, 'cspell')
-        end
+    local ctx = { filename = vim.api.nvim_buf_get_name(bufnr or 0) }
+    ctx.dirname = vim.fn.fnamemodify(ctx.filename, ':h')
 
-        -- Run them all
-        lint.try_lint(linters)
+    linters = vim.tbl_filter(function(name)
+        local linter = require('lint').linters[name]
+        return vim.fn.executable(linter.cmd) == 1
+            ---@diagnostic disable-next-line: undefined-field
+            and not (type(linter) == 'table' and linter.condition and not linter.condition(ctx))
+    end, linters)
+
+    if #linters > 0 then
+        require('lint').try_lint(linters)
+    end
+end
+
+lint()
+
+local timer = assert(vim.uv.new_timer())
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost', 'InsertLeave' }, {
+    group = require('dotfyls.interop').group,
+    callback = function(args)
+        timer:start(100, 0, function()
+            timer:stop()
+
+            vim.schedule(function()
+                lint(args.buf)
+            end)
+        end)
     end,
+    desc = 'Lint (nvim-lint)',
 })
 
 -- Setup mason-nvim-lint to auto-install linters

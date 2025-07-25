@@ -63,7 +63,7 @@ local normal_mappings = {
     { '<leader>cc', ':CccHighlighterToggle<cr>', desc = 'Highlight Colors' },
     { '<leader>cd', ':RootDir<cr>', desc = 'Root Directory' },
     { '<leader>ce', ':%SnipRun<cr>', desc = 'Execute File' },
-    { '<leader>cf', ':lua vim.lsp.buf.format({async = true})<cr>', desc = 'Format File' },
+    -- { '<leader>cf', ':lua vim.lsp.buf.format({async = true})<cr>', desc = 'Format File' },
     { '<leader>cl', '::g/^\\s*$/d<cr>', desc = 'Clean Empty Lines' },
     { '<leader>cm', ':MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' },
     { '<leader>co', ':Dashboard<cr>', desc = 'Dashboard' },
