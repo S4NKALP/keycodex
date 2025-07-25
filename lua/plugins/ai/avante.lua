@@ -158,26 +158,9 @@ avante.setup({
         debounce = 600,
         throttle = 600,
     },
-    system_prompt = function()
-        local hub = require('mcphub').get_hub_instance()
-        return hub:get_active_servers_prompt()
-    end,
-    custom_tools = function()
-        return {
-            require('mcphub.extensions.avante').mcp_tool(),
-        }
-    end,
     disabled_tools = {
-        'list_files',
-        'search_files',
-        'read_file',
-        'create_file',
-        'rename_file',
-        'delete_file',
-        'create_dir',
-        'rename_dir',
-        'delete_dir',
-        'bash',
+        'replace_in_file',
+        'web_search',
     },
     slash_commands = {},
 })

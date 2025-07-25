@@ -4,12 +4,6 @@
 
 <h3>Your Personalized Dev Env ❤️👨‍💻</h3>
 
-<figure>
-  <img src= "docs/img/screenshot.png" alt="keycodex Demo">
-  <br/>
-  <figcaption>keycodex screenshot</figcaption>
-</figure>
-
 </div>
 
 Handcrafted Neovim setup for the ultimate CLI dev experience.
@@ -39,7 +33,7 @@ Most importantly:
 Before you begin, ensure you have met the following requirements:
 
 - You have installed the latest version of `neovim`
-- Some command line tools: fd, ripgrep, python-pywal, python-watchdog
+- Some command line tools: fd, ripgrep
 
 ### 💻 Installation
 
@@ -87,8 +81,6 @@ local user = {
     enable_debugger = false, -- enable dap.nvim support
     enable_test_runner = false, -- enable neotest.nvim support
     enable_trainer = false, -- enable hardtime.nvim support
-    enable_wakatime = false, -- enable wakatime.nvim support
-    enable_smear_cursor = false, -- enable smear-cursor.nvim support
     user_plugins = {
         -- Add your lazy plugin spec here
     },

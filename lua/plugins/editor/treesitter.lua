@@ -18,8 +18,7 @@ treesitter.setup({
     indent = { enable = true },
     autotag = {
         enable = true,
-      },
-      
+    },
 
     highlight = {
         enable = true,

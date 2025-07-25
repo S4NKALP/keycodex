@@ -47,11 +47,6 @@ local plugins = {
         cmd = 'Gitsigns',
         event = { 'BufReadPost', 'BufNewFile' },
     },
-    {
-        '2kabhishek/markit.nvim',
-        config = load_config('ui.markit'),
-        event = { 'BufReadPost', 'BufNewFile' },
-    },
 
     -- Editor
     {
@@ -92,6 +87,14 @@ local plugins = {
         event = { 'BufReadPost', 'BufNewFile' },
     },
     {
+        'Wansmer/treesj',
+        keys = { '<space>m', '<space>j', '<space>s' },
+        dependencies = { 'nvim-treesitter/nvim-treesitter' }, -- if you install parsers with `nvim-treesitter`
+        config = function()
+            require('treesj').setup()
+        end,
+    },
+    {
         'chrisgrieser/nvim-spider',
         config = load_config('editor.spider'),
         event = { 'BufReadPost', 'BufNewFile' },
@@ -117,20 +120,38 @@ local plugins = {
         config = load_config('lang.mason'),
         cmd = 'Mason',
     },
+    -- {
+    --     'nvimtools/none-ls.nvim',
+    --     dependencies = { 'jay-babu/mason-null-ls.nvim' },
+    --     config = load_config('lang.null-ls'),
+    --     event = { 'BufReadPost', 'BufNewFile' },
+    -- },
+
     {
-        'nvimtools/none-ls.nvim',
-        dependencies = { 'jay-babu/mason-null-ls.nvim' },
-        config = load_config('lang.null-ls'),
-        event = { 'BufReadPost', 'BufNewFile' },
+        'stevearc/conform.nvim',
+        dependencies = { 'zapling/mason-conform.nvim' },
+        config = load_config('lang.conform'),
+        event = { 'BufReadPre', 'BufNewFile' },
     },
+
     {
         'saghen/blink.cmp',
         dependencies = {
             'rafamadriz/friendly-snippets',
             'Kaiser-Yang/blink-cmp-avante',
-            'L3MON4D3/LuaSnip',
-            version = 'v2.*',
+            {
+                'L3MON4D3/LuaSnip',
+                config = function()
+                    -- Lazy load VSCode-style snippets (including JSON)
+                    require('luasnip.loaders.from_vscode').lazy_load({
+                        paths = {
+                            vim.fn.stdpath('config') .. '/snippets', -- your custom snippets folder
+                        },
+                    })
+                end,
+            },
         },
+
         version = '*',
         config = load_config('lang.blink'),
         opts_extend = { 'sources.default' },
@@ -173,29 +194,8 @@ local plugins = {
         dependencies = {
             'MunifTanjim/nui.nvim',
             'nvim-lua/plenary.nvim',
-            'ravitemer/mcphub.nvim',
         },
     },
-    {
-        'ravitemer/mcphub.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' },
-        cmd = 'MCPHub',
-        -- build = 'npm install -g mcp-hub@latest', -- use this if you want to use the global mcp-hub
-        build = 'bundled_build.lua',
-        config = load_config('ai.mcphub'),
-    },
-    -- {
-    --     'L3MON4D3/LuaSnip',
-    --     dependencies = { 'rafamadriz/friendly-snippets' },
-    --     config = function()
-    --         -- Lazy load VSCode-style snippets (including JSON)
-    --         require("luasnip.loaders.from_vscode").lazy_load({
-    --             paths = {
-    --                 vim.fn.stdpath('config') .. '/snippets',  -- your custom snippets folder
-    --             },
-    --         })
-    --     end
-    -- },
 
     -- Tools
     {
@@ -314,27 +314,6 @@ local plugins = {
         cmd = { 'CodeSnap', 'CodeSnapSave', 'CodeSnapHighlight', 'CodeSnapASCII' },
     },
     {
-        'cvigilv/esqueleto.nvim',
-        event = 'VeryLazy',
-        opts = {
-            directories = {
-                vim.fn.stdpath('config') .. '/templates',
-            },
-            patterns = {
-                -- File
-                'README',
-                'LICENSE',
-                -- Filetype
-                'sh',
-                'markdown',
-                'python',
-                'lua',
-                'html',
-                'vue',
-            },
-        },
-    },
-    {
         'LudoPinelli/comment-box.nvim',
         event = 'BufReadPre',
         opts = {
@@ -356,16 +335,12 @@ local plugins = {
         },
         cmd = { 'CodeSnap', 'CodeSnapSave', 'CodeSnapHighlight', 'CodeSnapASCII' },
     },
-
-    -- 2kabhishek
     {
         '2kabhishek/pickme.nvim',
         cmd = 'PickMe',
         event = 'VeryLazy',
         dependencies = {
             'folke/snacks.nvim',
-            -- 'nvim-telescope/telescope.nvim',
-            -- 'ibhagwan/fzf-lua',
         },
         opts = {
             picker_provider = 'snacks',
@@ -374,59 +349,6 @@ local plugins = {
     {
         '2kabhishek/termim.nvim',
         cmd = { 'Fterm', 'FTerm', 'Sterm', 'STerm', 'Vterm', 'VTerm' },
-    },
-    {
-        '2kabhishek/octohub.nvim',
-        cmd = {
-            'OctoRepos',
-            'OctoReposByCreated',
-            'OctoReposByForks',
-            'OctoReposByIssues',
-            'OctoReposByLanguages',
-            'OctoReposByNames',
-            'OctoReposByPushed',
-            'OctoReposBySize',
-            'OctoReposByStars',
-            'OctoReposByUpdated',
-            'OctoReposTypeArchived',
-            'OctoReposTypeForked',
-            'OctoReposTypePrivate',
-            'OctoReposTypeStarred',
-            'OctoReposTypeTemplate',
-            'OctoRepo',
-            'OctoStats',
-            'OctoActivityStats',
-            'OctoContributionStats',
-            'OctoRepoStats',
-            'OctoProfile',
-            'OctoRepoWeb',
-        },
-        keys = {
-            '<leader>goa',
-            '<leader>goA',
-            '<leader>gob',
-            '<leader>goc',
-            '<leader>gof',
-            '<leader>goF',
-            '<leader>gog',
-            '<leader>goi',
-            '<leader>gol',
-            '<leader>goo',
-            '<leader>gop',
-            '<leader>goP',
-            '<leader>gor',
-            '<leader>gos',
-            '<leader>goS',
-            '<leader>got',
-            '<leader>goT',
-            '<leader>gou',
-            '<leader>goU',
-            '<leader>gow',
-        },
-        dependencies = {
-            '2kabhishek/utils.nvim',
-        },
-        config = load_config('tools.octohub'),
     },
 
     -- Optional
@@ -454,21 +376,6 @@ local plugins = {
         event = { 'VimEnter' },
         lazy = false,
         enabled = util.get_user_config('enable_wakatime', false),
-    },
-    {
-        'JohnnyJumper/neotypist.nvim',
-        opts = {
-            notify_interval = 60 * 100, -- one minute
-            high = 80,
-            low = 20,
-            show_virt_text = true,
-            notify = true,
-            update_time = 300,
-            virt_text = function(wpm)
-                return ('🚀 WPM: %.0f'):format(wpm)
-            end,
-            virt_text_pos = 'right_align',
-        },
     },
     {
         'm4xshen/hardtime.nvim',
@@ -541,6 +448,7 @@ local lsp_servers = {
     'typos_lsp',
     'vimls',
     'lua_ls',
+    'qmlls',
     'tailwindcss', -- Add Tailwind CSS LSP
 }
 
@@ -558,9 +466,10 @@ if util.is_present('go') then
     table.insert(lsp_servers, 'gopls')
 end
 
-if util.is_present('dart') then
-    table.insert(lsp_servers, 'dartls')
-end
+-- dartls comes with Dart SDK, not installed via Mason
+-- if util.is_present('dart') then
+--     table.insert(lsp_servers, 'dartls')
+-- end
 
 if util.is_present('java') then
     table.insert(lsp_servers, 'jdtls')
