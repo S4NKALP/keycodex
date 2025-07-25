@@ -477,7 +477,7 @@ local lsp_servers = {
     'lua_ls',
     'qmlls',
     'tailwindcss',
-    'typescript',
+    'ts_ls',
     'pyright',
 }
 
