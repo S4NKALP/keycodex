@@ -37,7 +37,6 @@ lint()
 
 local timer = assert(vim.uv.new_timer())
 vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost', 'InsertLeave' }, {
-    group = require('dotfyls.interop').group,
     callback = function(args)
         timer:start(100, 0, function()
             timer:stop()
