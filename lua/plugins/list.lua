@@ -60,10 +60,7 @@ local plugins = {
         config = load_config('editor.treesitter'),
         event = { 'BufReadPost', 'BufNewFile' },
     },
-    {
-        'windwp/nvim-ts-autotag',
-        event = 'InsertEnter',
-    },
+
     {
         'echasnovski/mini.bracketed',
         config = load_config('editor.bracketed'),
@@ -139,6 +136,7 @@ local plugins = {
         dependencies = {
             'rafamadriz/friendly-snippets',
             'Kaiser-Yang/blink-cmp-avante',
+            'windwp/nvim-ts-autotag',
             {
                 'L3MON4D3/LuaSnip',
                 config = function()
@@ -262,6 +260,11 @@ local plugins = {
             keymap.set('n', 'S', substitute.eol, { desc = 'Substitute to end of line' })
             keymap.set('x', 's', substitute.visual, { desc = 'Substitute in visual mode' })
         end,
+    },
+    {
+        'davidmh/mdx.nvim',
+        config = true,
+        lazy = false,
     },
     {
         'numToStr/Navigator.nvim',
