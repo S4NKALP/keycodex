@@ -1,5 +1,6 @@
 local lint = require('lint')
 
+-- Filetype to linters mapping
 lint.linters_by_ft = {
     javascript = { 'eslint_d' },
     typescript = { 'eslint_d' },
@@ -13,37 +14,44 @@ lint.linters_by_ft = {
     yaml = { 'actionlint' },
 }
 
-local function run_lint(bufnr)
-    bufnr = bufnr or 0
-    local ft = vim.bo[bufnr].filetype
+-- Generic lint function with global linters
+local function lint_buffer(bufnr)
+    local ft = vim.bo[bufnr or 0].filetype
+    local linters = vim.list_extend(
+        { 'codespell', 'editorconfig-checker' }, -- global linters
+        require('lint')._resolve_linter_by_ft(ft) or {}
+    )
 
-    local linters = vim.list_extend({ 'codespell', 'editorconfig-checker' }, require('lint')._resolve_linter_by_ft(ft))
-
-    local ctx = { filename = vim.api.nvim_buf_get_name(bufnr) }
+    local ctx = {
+        filename = vim.api.nvim_buf_get_name(bufnr or 0),
+    }
     ctx.dirname = vim.fn.fnamemodify(ctx.filename, ':h')
 
+    -- Filter linters by executable availability
     linters = vim.tbl_filter(function(name)
-        local linter = lint.linters[name]
-        return vim.fn.executable(linter.cmd) == 1
-            and not (type(linter) == 'table' and linter.condition and not linter.condition(ctx))
+        local linter = require('lint').linters[name]
+        return linter and vim.fn.executable(linter.cmd) == 1 and (not linter.condition or linter.condition(ctx))
     end, linters)
 
     if #linters > 0 then
-        lint.try_lint(linters)
+        require('lint').try_lint(linters)
     end
 end
 
-local timer = assert(vim.uv.new_timer())
+-- Create one reusable timer
+local uv = vim.loop
+local timer = uv.new_timer()
+
 vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufWritePost', 'InsertLeave' }, {
     callback = function(args)
+        timer:stop()
         timer:start(100, 0, function()
-            timer:stop()
             vim.schedule(function()
-                run_lint(args.buf)
+                lint_buffer(args.buf)
             end)
         end)
     end,
-    desc = 'Lint (nvim-lint)',
+    desc = 'Lint buffer with custom linters',
 })
 
 -- Setup mason-nvim-lint to auto-install linters
