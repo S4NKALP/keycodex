@@ -349,6 +349,19 @@ local plugins = {
         cmd = { 'CodeSnap', 'CodeSnapSave', 'CodeSnapHighlight', 'CodeSnapASCII' },
     },
     {
+        'jeryldev/pyworks.nvim',
+        lazy = false, -- Load immediately for autocmds
+        config = function()
+            require('pyworks').setup({
+                python = {
+                    preferred_venv_name = '.venv',
+                    use_uv = true, -- Use uv when available
+                },
+                auto_activate_venv = true,
+            })
+        end,
+    },
+    {
         '2kabhishek/pickme.nvim',
         cmd = 'PickMe',
         event = 'VeryLazy',
@@ -489,11 +502,6 @@ end
 if util.is_present('go') then
     table.insert(lsp_servers, 'gopls')
 end
-
--- dartls comes with Dart SDK, not installed via Mason
--- if util.is_present('dart') then
---     table.insert(lsp_servers, 'dartls')
--- end
 
 if util.is_present('java') then
     table.insert(lsp_servers, 'jdtls')

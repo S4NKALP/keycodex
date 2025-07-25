@@ -69,6 +69,7 @@ local normal_mappings = {
     { '<leader>co', ':Dashboard<cr>', desc = 'Dashboard' },
     { '<leader>cp', ':CccPick<cr>', desc = 'Pick Color' },
     { '<leader>cs', ':source %<cr>', desc = 'Source File' },
+    { '<leader>cp', ':PyworksWeb<cr>', desc = 'Pyworks Setup' },
 
     { '<leader>C', group = ' Comment' },
     { '<leader>Cb', '<cmd>CBccbox<CR>', desc = 'Comment Box' },

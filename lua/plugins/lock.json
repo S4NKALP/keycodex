@@ -48,6 +48,7 @@
   "nvim-web-devicons": { "branch": "master", "commit": "0422a19d9aa3aad2c7e5cca167e5407b13407a9d" },
   "pickme.nvim": { "branch": "main", "commit": "55ca0f1889ea2a4df4b45c77941327a590e025c5" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
+  "pyworks.nvim": { "branch": "main", "commit": "ecc25f9a524aef2b7a02255906cc5ffe7a11e5bb" },
   "showkeys": { "branch": "main", "commit": "cb0a50296f11f1e585acffba8c253b9e8afc1f84" },
   "smear-cursor.nvim": { "branch": "main", "commit": "1a3df9af4ed017fafecd93c6837956914f269472" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
