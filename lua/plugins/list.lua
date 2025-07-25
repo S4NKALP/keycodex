@@ -376,14 +376,14 @@ local plugins = {
         dependencies = { 'nvim-lua/plenary.nvim' },
         keys = {
             {
-                '<leader>tT',
+                '<leader>tt',
                 function()
                     require('snacks').picker.todo_comments({ keywords = { 'TODO' } })
                 end,
                 desc = 'Todo',
             },
             {
-                '<leader>tF',
+                '<leader>tf',
                 function()
                     require('snacks').picker.todo_comments({
                         keywords = { 'FIX', 'FIXME' },
@@ -392,7 +392,7 @@ local plugins = {
                 desc = 'Fix/Fixme',
             },
             {
-                '<leader>tN',
+                '<leader>tn',
                 function()
                     require('snacks').picker.todo_comments({ keywords = { 'NOTE' } })
                 end,
