@@ -374,11 +374,6 @@ local plugins = {
         'folke/todo-comments.nvim',
         event = { 'BufReadPre', 'BufNewFile' },
         dependencies = { 'nvim-lua/plenary.nvim' },
-        opts = {
-            highlight = {
-                multiline = false, -- I usually only want one line to be highlighted
-            },
-        },
         keys = {
             {
                 '<leader>tT',
@@ -390,7 +385,9 @@ local plugins = {
             {
                 '<leader>tF',
                 function()
-                    require('snacks').picker.todo_comments({ keywords = { 'FIX', 'FIXME' } })
+                    require('snacks').picker.todo_comments({
+                        keywords = { 'FIX', 'FIXME' },
+                    })
                 end,
                 desc = 'Fix/Fixme',
             },
