@@ -9,9 +9,9 @@ files.setup({
     mappings = {
         close = 'q',
         go_in = '<CR>',
-        go_in_plus = 'L',
+        go_in_plus = 'l',
         go_out = '-',
-        go_out_plus = 'H',
+        go_out_plus = 'h',
         reveal_cwd = '@',
         trim_left = '<',
         trim_right = '>',

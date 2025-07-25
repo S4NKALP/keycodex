@@ -137,6 +137,7 @@ local plugins = {
             'rafamadriz/friendly-snippets',
             'Kaiser-Yang/blink-cmp-avante',
             'windwp/nvim-ts-autotag',
+            'f3fora/cmp-spell',
             {
                 'L3MON4D3/LuaSnip',
                 config = function()

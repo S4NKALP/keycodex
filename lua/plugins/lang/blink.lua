@@ -30,7 +30,7 @@ blink.setup({
         kind_icons = icons.kind,
     },
     sources = {
-        default = { 'avante', 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+        default = { 'avante', 'lazydev', 'lsp', 'path', 'snippets', 'buffer', 'copilot', 'spell' },
         providers = {
             avante = {
                 module = 'blink-cmp-avante',
@@ -57,6 +57,20 @@ blink.setup({
                 module = 'lazydev.integrations.blink',
                 -- make lazydev completions top priority (see `:h blink.cmp`)
                 score_offset = 100,
+            },
+            spell = {
+                name = 'spell',
+                module = 'blink.compat.source',
+                max_items = 10,
+                score_offset = -20,
+                opts = {
+                    keep_all_entries = true, -- don't filter it
+                    -- enable_in_context = function()
+                    --   return require("cmp.config.context").in_treesitter_capture "spell"
+                    -- end,
+                    preselect_correct_word = false,
+                },
+                kind = 'Spell',
             },
         },
     },
