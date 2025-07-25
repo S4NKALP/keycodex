@@ -162,6 +162,10 @@ Snacks.setup({
         prompt_pos = 'title',
         win = { style = 'picker' },
         expand = true,
+        matchers = {
+            frecency = true,
+            cwd_bonus = false,
+        },
         sources = {
             -- layout options: dropdown, horizontal, vertical, vscode, ivy, ivy_split, telescope, top, left, right, bottom, sidebar
             buffers = { layout = files_layout() },
