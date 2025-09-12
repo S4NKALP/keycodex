@@ -46,10 +46,23 @@ end, {})
 
 -- Switch to git root or file parent dir
 vim.api.nvim_create_user_command('RootDir', function()
-    local root = require('lib.util').get_root_dir()
-
-    if root == '' then
+    local bufname = vim.fn.expand('%:p')
+    if vim.fn.filereadable(bufname) == 0 then
         return
     end
-    vim.cmd('lcd ' .. root)
+
+    local parent = vim.fn.fnamemodify(bufname, ':h')
+    local git_root = vim.fn.systemlist('git -C ' .. vim.fn.fnameescape(parent) .. ' rev-parse --show-toplevel')
+    local root = ''
+    if #git_root > 0 and git_root[1] ~= '' then
+        root = git_root[1]
+    else
+        root = parent
+    end
+
+    if root ~= '' then
+        vim.cmd('lcd ' .. vim.fn.fnameescape(root))
+        vim.notify('Changed directory to ' .. root, vim.log.levels.INFO)
+    end
 end, {})
+
