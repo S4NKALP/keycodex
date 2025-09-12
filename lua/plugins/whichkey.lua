@@ -79,6 +79,20 @@ return {
 			{ "<leader>fx", ":%bd|e#|bd#<cr>", desc = "Close except current" },
 			{ "<leader>ff", ":lua require('snacks').picker.files()", desc = "Find Files" },
 			{ "<leader>fg", ":lua require('snacks').picker.live_grep()", desc = "Live Grep" },
+			{
+				"<leader>fp",
+				function()
+					Snacks.picker.projects()
+				end,
+				desc = "Projects",
+			},
+			{
+				"<leader>ft",
+				function()
+					Snacks.picker.todo_comments()
+				end,
+				desc = "Search Todos",
+			},
 
 			{ "<leader>g", group = " Git" },
 			{ "<leader>gA", ":Gitsigns stage_buffer<cr>", desc = "Stage Buffer" },
@@ -91,7 +105,21 @@ return {
 			{ "<leader>gi", ":Gitsigns preview_hunk<cr>", desc = "Hunk Info" },
 			{ "<leader>gj", ":Gitsigns next_hunk<cr>", desc = "Next Hunk" },
 			{ "<leader>gk", ":Gitsigns prev_hunk<cr>", desc = "Prev Hunk" },
+			{
+				"<leader>gl",
+				function()
+					Snacks.picker.git_log()
+				end,
+				desc = "Checkout commit",
+			},
 			{ "<leader>gr", ":Gitsigns reset_hunk<cr>", desc = "Reset Hunk" },
+			{
+				"<leader>gs",
+				function()
+					Snacks.picker.git_status()
+				end,
+				desc = "Open changed file",
+			},
 			{ "<leader>gu", ":Gitsigns undo_stage_hunk<cr>", desc = "Undo Stage Hunk" },
 			{ "<leader>gv", ":Gitsigns select_hunk<cr>", desc = "Select Hunk" },
 			{ "<leader>gw", ':lua require("snacks").gitbrowse()<cr>', desc = "Git Browse" },

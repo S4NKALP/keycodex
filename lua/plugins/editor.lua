@@ -156,15 +156,48 @@ return {
 		end,
 	},
 
-	-- multiple cursor
-	-- {
-	-- 	"terryma/vim-multiple-cursors",
-	-- 	config = function()
-	-- 		vim.g.multi_cursor_use_default_mapping = 0
-	-- 		vim.g.multi_cursor_next_key = "<A-n>"
-	-- 		vim.g.multi_cursor_prev_key = "<A-p>"
-	-- 		vim.g.multi_cursor_skip_key = "<A-x>"
-	-- 		vim.g.multi_cursor_quit_key = "<leader>mc"
-	-- 	end,
-	-- },
+	-- code action
+	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{
+				"folke/snacks.nvim",
+				opts = {
+					terminal = {},
+				},
+			},
+		},
+		event = "LspAttach",
+		config = function()
+			local codeaction = require("tiny-code-action")
+
+			codeaction.setup({
+				picker = {
+					"buffer",
+					opts = {
+						auto_preview = true,
+						hotkeys = true,
+						hotkeys_mode = "sequential",
+					},
+				},
+			})
+
+			vim.keymap.set("n", "<leader>.", codeaction.code_action)
+		end,
+	},
+
+	-- visual multi
+	{
+		"mg979/vim-visual-multi",
+		event = "VeryLazy",
+		init = function()
+			vim.g.VM_maps = {
+				["Find Under"] = "<M-d>",
+				["Find Subword Under"] = "<M-d>",
+				["Select All"] = "<C-M-d>",
+				["Add Cursor Down"] = "<C-M-j>",
+				["Add Cursor Up"] = "<C-M-k>",
+			}
+		end,
+	},
 }

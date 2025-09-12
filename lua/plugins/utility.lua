@@ -80,7 +80,7 @@ return {
 	{
 		"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm" },
-		version = "v2.*",
+		version = "*",
 		config = function()
 			require("toggleterm").setup({
 				size = 10,
@@ -107,6 +107,20 @@ return {
 			})
 		end,
 	},
+	{
+		"nvzone/floaterm",
+		dependencies = "nvzone/volt",
+		opts = {
+			mappings = {
+				term = function(buf)
+					vim.keymap.set({ "n", "t" }, "<Tab>", function()
+						require("floaterm.api").cycle_term_bufs("prev")
+					end, { buffer = buf })
+				end,
+			},
+		},
+		cmd = "FloatermToggle",
+	},
 
 	-- smooth scrolling
 	{
@@ -119,23 +133,6 @@ return {
 	-- 	"vyfor/cord.nvim",
 	-- 	event = "VeryLazy",
 	-- },
-
-	{
-		"rachartier/tiny-code-action.nvim",
-		dependencies = {
-			{
-				"folke/snacks.nvim",
-				opts = {
-					terminal = {},
-				},
-			},
-		},
-		event = "LspAttach",
-		opts = {},
-		vim.keymap.set({ "n", "x" }, "<leader>ca", function()
-			require("tiny-code-action").code_action()
-		end, { noremap = true, silent = true }),
-	},
 
 	-- uv
 	{
@@ -160,10 +157,57 @@ return {
 		},
 	},
 
+	-- Project management
+	{
+		"ahmedkhalf/project.nvim",
+		config = function()
+			require("project_nvim").setup({
+				detection_methods = { "lsp", "pattern" },
+				patterns = { ".git", "_darcs", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+			})
+		end,
+	},
+
 	{ "wakatime/vim-wakatime", event = "VimEnter", lazy = false },
+
 	-- {
 	-- 	"m4xshen/hardtime.nvim",
 	-- 	lazy = false,
 	-- 	opts = {},
 	-- },
+
+	-- file operations
+	{
+		"chrisgrieser/nvim-genghis",
+		keys = {
+			{
+				"<leader>fp",
+				function()
+					require("genghis").createNewFile()
+				end,
+				desc = "New File",
+			},
+			{
+				"<leader>fd",
+				function()
+					require("genghis").duplicateFile()
+				end,
+				desc = "Duplicate File",
+			},
+			{
+				"<leader>fr",
+				function()
+					require("genghis").renameFile()
+				end,
+				desc = "Rename File",
+			},
+			{
+				"<leader>fx",
+				function()
+					require("genghis").chmodx()
+				end,
+				desc = "Make Executable",
+			},
+		},
+	},
 }
