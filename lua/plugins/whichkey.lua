@@ -82,6 +82,7 @@ return {
                 desc = 'Search Todos in Current File',
             },
             { '<leader>fT', ':lua Snacks.picker.todo_comments()<cr>', desc = 'Search Todos' },
+            { '<leader>fu', ':lua Snacks.picker.undo()<cr>', desc = 'Undotree' },
 
             { '<leader>g', group = ' Git' },
             { '<leader>gA', ':Gitsigns stage_buffer<cr>', desc = 'Stage Buffer' },
