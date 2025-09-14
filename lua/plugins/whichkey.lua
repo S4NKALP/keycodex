@@ -65,8 +65,8 @@ return {
 
             { '<leader>f', group = ' Find' },
             { '<leader>fx', ':%bd|e#|bd#<cr>', desc = 'Close except current' },
-            { '<leader>ff', ":lua require('snacks').picker.files()", desc = 'Find Files' },
-            { '<leader>fg', ":lua require('snacks').picker.live_grep()", desc = 'Live Grep' },
+            { '<leader>ff', ":lua require('snacks').picker.files()<cr>", desc = 'Find Files' },
+            { '<leader>fg', ":lua require('snacks').picker.live_grep()<cr>", desc = 'Live Grep' },
             { '<leader>fp', ':lua Snacks.picker.projects()<cr>', desc = 'Projects' },
             {
                 '<leader>ct',
