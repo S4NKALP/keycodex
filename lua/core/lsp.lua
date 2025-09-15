@@ -75,23 +75,23 @@ vim.lsp.config("basedpyright", {
 })
 vim.lsp.enable("basedpyright")
 
-vim.lsp.config("pylsp", {
-	settings = {
-		pylsp = {
-			plugins = {
-				-- use black as default formatter
-				yapf = { enabled = false },
-				autopep8 = { enabled = false },
-				black = { enabled = true },
-				pycodestyle = {
-					enabled = true,
-					ignore = { "E203", "E701", "W503" },
-					maxLineLength = 88,
-				},
-			},
-		},
-	},
-})
+-- vim.lsp.config("pylsp", {
+-- 	settings = {
+-- 		pylsp = {
+-- 			plugins = {
+-- 				-- use black as default formatter
+-- 				yapf = { enabled = false },
+-- 				autopep8 = { enabled = false },
+-- 				black = { enabled = true },
+-- 				pycodestyle = {
+-- 					enabled = true,
+-- 					ignore = { "E203", "E701", "W503" },
+-- 					maxLineLength = 88,
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- })
 
 -- latex
 vim.lsp.config("texlab", {
