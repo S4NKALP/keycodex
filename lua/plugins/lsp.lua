@@ -36,11 +36,10 @@ return {
 					"basedpyright",
 					"bashls",
 					"clangd",
-					-- "pylsp",
+					"pylsp",
 					"rust_analyzer",
 				},
-				-- auto-install configured servers (with lspconfig)
-				automatic_installation = true, -- not the same as ensure_installed
+				automatic_installation = false, -- Don't auto-install or auto-configure
 			})
 		end,
 	},
