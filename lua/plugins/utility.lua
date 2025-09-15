@@ -191,7 +191,6 @@ return {
     -- fold
     {
         'kevinhwang91/nvim-ufo',
-        -- commit = '5b75cf5',
         event = { 'BufReadPost', 'BufNewFile' },
         dependencies = { 'kevinhwang91/promise-async', event = 'BufReadPost' },
         opts = {
