@@ -1,5 +1,5 @@
 {
-  "title for blog post":{
+  "title metadata":{
     "prefix": "title",
     "body": [
       "---",
@@ -16,7 +16,7 @@
       "",
       "$0"
     ],
-    "description": "Title for my blog post"
+    "description": "Title metadata for my blog post"
   },
   "header 1": {
     "prefix": "h1",
