@@ -22,7 +22,7 @@ return {
                     'yaml',
                     'toml',
                     'javascript',
-                    'ts_ls',
+                    'typescript',
                     'gitignore',
                     'go',
                     'rust',

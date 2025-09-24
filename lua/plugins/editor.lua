@@ -101,12 +101,36 @@ return {
             })
         end,
         keys = {
-            { 'gcc', mode = 'n', desc = 'Toggle comment line' },
-            { 'gc', mode = { 'n', 'o' }, desc = 'Toggle comment linewise' },
-            { 'gc', mode = 'x', desc = 'Toggle comment linewise (visual)' },
-            { 'gbc', mode = 'n', desc = 'Toggle comment block' },
-            { 'gb', mode = { 'n', 'o' }, desc = 'Toggle comment blockwise' },
-            { 'gb', mode = 'x', desc = 'Toggle comment blockwise (visual)' },
+            {
+                'gcc',
+                mode = 'n',
+                desc = 'Toggle comment line',
+            },
+            {
+                'gc',
+                mode = { 'n', 'o' },
+                desc = 'Toggle comment linewise',
+            },
+            {
+                'gc',
+                mode = 'x',
+                desc = 'Toggle comment linewise (visual)',
+            },
+            {
+                'gbc',
+                mode = 'n',
+                desc = 'Toggle comment block',
+            },
+            {
+                'gb',
+                mode = { 'n', 'o' },
+                desc = 'Toggle comment blockwise',
+            },
+            {
+                'gb',
+                mode = 'x',
+                desc = 'Toggle comment blockwise (visual)',
+            },
             { '<leader>/', "<cmd>lua require('Comment.api').toggle.linewise.current()<cr>", desc = 'Toggle comment' },
             {
                 '<leader>/',
@@ -179,5 +203,10 @@ return {
                 ['Add Cursor Up'] = '<C-M-k>',
             }
         end,
+    },
+    {
+        'davidmh/mdx.nvim',
+        config = true,
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
     },
 }
