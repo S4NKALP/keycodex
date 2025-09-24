@@ -97,7 +97,7 @@ return {
             local cond = require('nvim-autopairs.conds')
             pairs.add_rules({
                 rule('$', '$', { 'tex', 'latex', 'plaintex' })
-                    -- do not move right when repeat character
+                -- do not move right when repeat character
                     :with_move(cond.none()),
             })
         end,

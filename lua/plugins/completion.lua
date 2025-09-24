@@ -5,7 +5,9 @@ return {
         version = '*',
         dependencies = { 'rafamadriz/friendly-snippets' },
         config = function()
-            require('luasnip.loaders.from_vscode').lazy_load()
+            require('luasnip.loaders.from_vscode').lazy_load({
+                paths = { vim.fn.stdpath('config') .. '/snippets' },
+            })
         end,
     },
 
@@ -66,11 +68,11 @@ return {
                 signature = {
                     window = { border = 'rounded' },
                 },
+                snippets = { preset = 'luasnip' },
                 sources = {
                     default = { 'lsp', 'path', 'snippets', 'buffer' },
                     providers = {},
                 },
-                snippets = { preset = 'luasnip' },
                 keymap = {
                     preset = 'none',
                     ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
