@@ -5,9 +5,13 @@ return {
         version = '*',
         dependencies = { 'rafamadriz/friendly-snippets' },
         config = function()
+            local luasnip = require('luasnip')
+
             require('luasnip.loaders.from_vscode').lazy_load({
                 paths = { vim.fn.stdpath('config') .. '/snippets' },
             })
+
+            luasnip.filetype_extend('mdx', { 'markdown' })
         end,
     },
 
