@@ -25,7 +25,7 @@ map({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsea
 map({ 'i', 'c' }, '<C-b>', '<Left>')
 map({ 'i', 'c' }, '<C-f>', '<Right>')
 
-map('n', '<leader>r', vim.lsp.buf.rename)
+map('n', '<leader>rL', vim.lsp.buf.rename, { desc = 'Rename Lsp Symbol' })
 map('n', '`', "'", { noremap = true }) -- better marks
 
 map('n', 'H', '^', { desc = 'Jump to line start' })
