@@ -81,12 +81,12 @@ return {
                 insert_mappings = true,
                 terminal_mappings = true,
                 persist_size = true,
-                direction = 'float', -- Use 'float' for floating terminal windows
+                direction = 'float', -- 'vertical' | 'horizontal' | 'tab' | 'float'
                 close_on_exit = true,
                 shell = vim.o.shell,
                 float_opts = {
-                    border = 'curved', -- or 'single', 'double', 'shadow', etc.
-                    winblend = 0, -- Set to 0 for full transparency
+                    border = 'curved', --  'single', 'double', 'shadow', etc.
+                    winblend = 0,      -- Set to 0 for full transparency
                     highlights = {
                         border = 'Normal',
                         background = 'Normal',
@@ -94,20 +94,6 @@ return {
                 },
             })
         end,
-    },
-    {
-        'nvzone/floaterm',
-        dependencies = 'nvzone/volt',
-        opts = {
-            mappings = {
-                term = function(buf)
-                    vim.keymap.set({ 'n', 't' }, '<Tab>', function()
-                        require('floaterm.api').cycle_term_bufs('prev')
-                    end, { buffer = buf })
-                end,
-            },
-        },
-        cmd = 'FloatermToggle',
     },
 
     -- smooth scrolling
@@ -131,16 +117,16 @@ return {
             picker_integration = true,
             keymaps = {
                 prefix = '<leader>u', -- Main prefix for uv commands
-                commands = true, -- Show uv commands menu (<leader>x)
-                run_file = true, -- Run current file (<leader>xr)
+                commands = true,      -- Show uv commands menu (<leader>x)
+                run_file = true,      -- Run current file (<leader>xr)
                 run_selection = true, -- Run selected code (<leader>xs)
-                run_function = true, -- Run function (<leader>xf)
-                venv = true, -- Environment management (<leader>xe)
-                init = true, -- Initialize uv project (<leader>xi)
-                add = true, -- Add a package (<leader>xa)
-                remove = true, -- Remove a package (<leader>xd)
-                sync = true, -- Sync packages (<leader>xc)
-                sync_all = true, -- Sync all packages, extras and groups (<leader>xC)
+                run_function = true,  -- Run function (<leader>xf)
+                venv = true,          -- Environment management (<leader>xe)
+                init = true,          -- Initialize uv project (<leader>xi)
+                add = true,           -- Add a package (<leader>xa)
+                remove = true,        -- Remove a package (<leader>xd)
+                sync = true,          -- Sync packages (<leader>xc)
+                sync_all = true,      -- Sync all packages, extras and groups (<leader>xC)
             },
         },
     },

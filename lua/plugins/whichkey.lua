@@ -101,23 +101,9 @@ return {
             { '<leader>gu', ':Gitsigns undo_stage_hunk<cr>', desc = 'Undo Stage Hunk' },
             { '<leader>gv', ':Gitsigns select_hunk<cr>', desc = 'Select Hunk' },
             { '<leader>gw', ':lua require("snacks").gitbrowse()<cr>', desc = 'Git Browse' },
-            { '<leader>gbr', ':lua Snacks.picker.git_branches()<cr>', desc = 'Pick and Switch Git Branches' },
+            { '<leader>gp', ':lua Snacks.picker.git_branches()<cr>', desc = 'Pick and Switch Git Branches' },
 
             { '<leader>h', group = 'Harpoon' },
-            -- {
-            --     '<leader>ha',
-            --     function()
-            --         require('harpoon'):list():add()
-            --     end,
-            --     desc = 'Harpoon add file',
-            -- },
-            -- {
-            --     '<leader>hl',
-            --     function()
-            --         require('harpoon').ui:toggle_quick_menu(require('harpoon'):list())
-            --     end,
-            --     desc = 'Harpoon quick menu',
-            -- },
 
             { '<leader>gt', group = 'Toggle' },
             { '<leader>gtb', ':Gitsigns toggle_current_line_blame<cr>', desc = 'Blame' },

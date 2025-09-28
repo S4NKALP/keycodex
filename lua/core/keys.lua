@@ -80,10 +80,12 @@ map('v', "<leader>'", "s''<esc>Pll", { desc = 'wrap selection with single quotes
 map('v', '<leader>"', 's""<esc>Pll', { desc = 'wrap selection with double quotes' })
 
 -- Insert mode cursor movement with Ctrl+hjkl
-map('i', '<C-h>', '<Left>', { desc = 'Move to end of previous line' })
-map('i', '<C-j>', '<Down>', { desc = 'Move cursor down' })
-map('i', '<C-k>', '<Up>', { desc = 'Move cursor up' })
-map('i', '<C-l>', '<Right>', { desc = 'Move cursor right' })
+map('i', '<C-h>', '<Left>', { noremap = true, silent = true })
+map('i', '<C-j>', '<Down>', { noremap = true, silent = true })
+map('i', '<C-k>', '<Up>', { noremap = true, silent = true })
+map('i', '<C-l>', '<Right>', { noremap = true, silent = true })
+
+map('n', '<leader>re', ':%s/<C-R><C-W>/', { desc = 'Shortcut to replace current word under cursor' })
 
 -- toggle inlay hints
 vim.keymap.set('n', '<leader>th', function()
@@ -91,17 +93,11 @@ vim.keymap.set('n', '<leader>th', function()
 end)
 
 -- No arrow navigation
-vim.api.nvim_set_keymap('n', '<Up>', '<Nop>', opts)
-vim.api.nvim_set_keymap('n', '<Down>', '<Nop>', opts)
-vim.api.nvim_set_keymap('n', '<Left>', '<Nop>', opts)
-vim.api.nvim_set_keymap('n', '<Right>', '<Nop>', opts)
+local modes = { 'n', 'v', 'i' }
+local arrows = { '<Up>', '<Down>', '<Left>', '<Right>' }
 
-vim.api.nvim_set_keymap('v', '<Up>', '<Nop>', opts)
-vim.api.nvim_set_keymap('v', '<Down>', '<Nop>', opts)
-vim.api.nvim_set_keymap('v', '<Left>', '<Nop>', opts)
-vim.api.nvim_set_keymap('v', '<Right>', '<Nop>', opts)
-
-vim.api.nvim_set_keymap('i', '<Up>', '<Nop>', opts)
-vim.api.nvim_set_keymap('i', '<Down>', '<Nop>', opts)
-vim.api.nvim_set_keymap('i', '<Left>', '<Nop>', opts)
-vim.api.nvim_set_keymap('i', '<Right>', '<Nop>', opts)
+for _, mode in ipairs(modes) do
+    for _, key in ipairs(arrows) do
+        vim.api.nvim_set_keymap(mode, key, '<Nop>', opts)
+    end
+end
