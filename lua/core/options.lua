@@ -60,6 +60,11 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
+-- netrw file explorer settings
+vim.g.netrw_winsize = 20
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 1
+
 vim.opt.path:append({ '**' })
 vim.opt.shortmess:append({ W = true, I = true, c = true }) -- disable greeting
 
