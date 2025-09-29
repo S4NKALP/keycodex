@@ -89,16 +89,24 @@ return {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
         config = function()
-            require('nvim-autopairs').setup()
-
-            -- add new rules
-            local pairs = require('nvim-autopairs')
-            local rule = require('nvim-autopairs.rule')
+            local npairs = require('nvim-autopairs')
+            local Rule = require('nvim-autopairs.rule')
             local cond = require('nvim-autopairs.conds')
-            pairs.add_rules({
-                rule('$', '$', { 'tex', 'latex', 'plaintex' })
-                -- do not move right when repeat character
-                    :with_move(cond.none()),
+
+            npairs.setup({
+                check_ts = true,
+            })
+
+            -- Your existing LaTeX rule
+            npairs.add_rules({
+                Rule('$', '$', { 'tex', 'latex', 'plaintex' }):with_move(cond.none()),
+            })
+
+            npairs.add_rules({
+                Rule(' ', ' '):with_pair(function(opts)
+                    local pair = opts.line:sub(opts.col - 1, opts.col)
+                    return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+                end),
             })
         end,
     },
@@ -128,7 +136,6 @@ return {
             })
         end,
     },
-
 
     {
         'Wansmer/treesj',
