@@ -91,21 +91,19 @@ return {
         config = function()
             local npairs = require('nvim-autopairs')
             local Rule = require('nvim-autopairs.rule')
-            local cond = require('nvim-autopairs.conds')
 
             npairs.setup({
                 check_ts = true,
-            })
-
-            -- Your existing LaTeX rule
-            npairs.add_rules({
-                Rule('$', '$', { 'tex', 'latex', 'plaintex' }):with_move(cond.none()),
+                enable_check_bracket_line = true,
+                fast_wrap = {},
+                map_cr = true,
+                map_bs = true,
             })
 
             npairs.add_rules({
                 Rule(' ', ' '):with_pair(function(opts)
                     local pair = opts.line:sub(opts.col - 1, opts.col)
-                    return vim.tbl_contains({ '()', '[]', '{}' }, pair)
+                    return vim.tbl_contains({ '()', '[]', '{}', '""', "''", '``' }, pair)
                 end),
             })
         end,
