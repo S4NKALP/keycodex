@@ -37,6 +37,7 @@ map({ 'v', 'x' }, 'p', '"_dP', opts)
 -- Do not copy on x
 map({ 'v', 'x' }, 'x', '"_x', opts)
 map('n', 'X', '"_D', opts)
+map('n', 'dd', '"_dd', opts)
 map({ 'v', 'x' }, 'X', '"_d', opts)
 
 -- Select all
