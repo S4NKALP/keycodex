@@ -14,31 +14,46 @@
     "body": "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
     "description": "Lorem Ipsum Paragraph"
   },
-  "MIT": {
-    "prefix": "mitl" ,
-    "description": "MIT License",
+  "copyright": {
+    "prefix": "c)",
+    "body": ["Copyright (c) ${CURRENT_YEAR} ${0:Author}. All Rights Reserved."],
+    "description": "Snippet to put copyright"
+  },
+  "date": {
+    "prefix": "date",
+    "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"],
+    "description": "Put the date in (Y-m-D) format"
+  },
+  "dateDMY": {
+    "prefix": "dateDMY",
+    "body": ["${CURRENT_DATE}/${CURRENT_MONTH}/${CURRENT_YEAR}"],
+    "description": "Put date in (DD/MM/YY) format"
+  },
+  "dateMDY": {
+    "prefix": "dateMDY",
+    "body": ["${CURRENT_MONTH}/${CURRENT_DATE}/${CURRENT_YEAR}"],
+    "description": "Put the date in (m/D/Y) format"
+  },
+  "time": {
+    "prefix": "time",
+    "body": ["${CURRENT_HOUR}:${CURRENT_MINUTE}"],
+    "description": "I give you back the time (H:M)"
+  },
+  "timeHMS": {
+    "prefix": "timeHMS",
+    "body": ["${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}"],
+    "description": "I give you back the time (H:M:S)"
+  },
+  "datetime": {
+    "prefix": "datetime",
     "body": [
-      "The MIT License (MIT)",
-      "",
-      "Copyright (c) ${CURRENT_YEAR} ${0:Author}",
-      "",
-      "Permission is hereby granted, free of charge, to any person obtaining a copy",
-      "of this software and associated documentation files (the \"Software\"), to deal",
-      "in the Software without restriction, including without limitation the rights",
-      "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell",
-      "copies of the Software, and to permit persons to whom the Software is",
-      "furnished to do so, subject to the following conditions:",
-      "",
-      "The above copyright notice and this permission notice shall be included in all",
-      "copies or substantial portions of the Software.",
-      "",
-      "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR",
-      "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,",
-      "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE",
-      "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER",
-      "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,",
-      "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE",
-      "SOFTWARE."
-    ]
-  }
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}"
+    ],
+    "description": "I give you back the time and date (Y-m-d H:M)"
+  },
+  "uuid": {
+    "prefix": "uuid",
+    "body": "${UUID}",
+    "description": "A Version 4 UUID"
+  },
 }
