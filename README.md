@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 <h1>
   <a href="https://S4NKALP.github.io/keycodex">keycodex</a>
@@ -36,7 +36,7 @@
 
 <p>Handcrafted Neovim setup for the ultimate CLI dev experience</p>
 
-</center>
+</div>
 
 ## 💻 Installation
 
