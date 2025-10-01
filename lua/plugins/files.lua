@@ -39,4 +39,60 @@ return {
             })
         end,
     },
+    {
+        'nvim-tree/nvim-tree.lua',
+        config = function()
+            local nvimtree = require('nvim-tree')
+
+            vim.g.loaded_netrw = 1
+            vim.g.loaded_netrwPlugin = 1
+
+            nvimtree.setup({
+                view = {
+                    width = 30,
+                    relativenumber = true,
+                    side = 'right',
+                },
+                sync_root_with_cwd = true,
+                renderer = {
+                    indent_markers = {
+                        enable = true,
+                    },
+                    icons = {
+                        glyphs = {
+                            folder = {
+                                arrow_closed = '›',
+                                arrow_open = '⌄',
+                            },
+                            git = {
+                                staged = 'A',
+                                unstaged = 'M',
+                                unmerged = '!',
+                                renamed = 'R',
+                                untracked = 'U',
+                                deleted = 'D',
+                                ignored = '◌',
+                            },
+                        },
+                    },
+                },
+                actions = {
+                    open_file = {
+                        window_picker = {
+                            enable = false,
+                        },
+                    },
+                },
+                filters = {
+                    dotfiles = true,
+                    custom = { '.DS_Store' },
+                },
+                git = {
+                    ignore = false,
+                },
+            })
+
+            vim.keymap.set('n', '<leader>eo', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' })
+        end,
+    },
 }
