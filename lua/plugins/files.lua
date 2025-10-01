@@ -42,57 +42,42 @@ return {
     {
         'nvim-tree/nvim-tree.lua',
         config = function()
-            local nvimtree = require('nvim-tree')
-
-            vim.g.loaded_netrw = 1
-            vim.g.loaded_netrwPlugin = 1
-
-            nvimtree.setup({
+            require('nvim-tree').setup({
+                filters = { dotfiles = false },
+                disable_netrw = true,
+                hijack_cursor = true,
+                sync_root_with_cwd = true,
+                update_focused_file = {
+                    enable = true,
+                    update_root = false,
+                },
                 view = {
                     width = 30,
-                    relativenumber = true,
                     side = 'right',
-                },
-                sync_root_with_cwd = true,
-                renderer = {
-                    indent_markers = {
-                        enable = true,
-                    },
-                    icons = {
-                        glyphs = {
-                            folder = {
-                                arrow_closed = '›',
-                                arrow_open = '⌄',
-                            },
-                            git = {
-                                staged = 'A',
-                                unstaged = 'M',
-                                unmerged = '!',
-                                renamed = 'R',
-                                untracked = 'U',
-                                deleted = 'D',
-                                ignored = '◌',
-                            },
-                        },
-                    },
-                },
-                actions = {
-                    open_file = {
-                        window_picker = {
-                            enable = false,
-                        },
-                    },
-                },
-                filters = {
-                    dotfiles = true,
-                    custom = { '.DS_Store' },
+                    preserve_window_proportions = true,
                 },
                 git = {
-                    ignore = false,
+                    enable = false,
+                    ignore = true,
+                },
+                renderer = {
+                    root_folder_label = false,
+                    indent_markers = { enable = true },
+                    icons = {
+                        glyphs = {
+                            default = '󰈚',
+                            folder = {
+                                default = '',
+                                empty = '',
+                                empty_open = '',
+                                open = '',
+                                symlink = '',
+                            },
+                        },
+                    },
                 },
             })
-
-            vim.keymap.set('n', '<leader>eo', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' })
         end,
+        vim.keymap.set('n', '<leader>eo', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' }),
     },
 }
