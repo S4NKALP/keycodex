@@ -56,14 +56,12 @@ return {
 
             { '<leader>e', group = ' Edit' },
             { '<leader>ea', ':b#<cr>', desc = 'Alternate File' },
-            { '<leader>ec', ':NvimTreeClose<cr>', desc = 'Close File Explorer' },
             { '<leader>eC', group = 'Edit Configs' },
             { '<leader>ee', ':lua MiniFiles.open()<cr>', desc = 'Explore Tree' },
             { '<leader>eE', ':lua Snacks.explorer()<cr>', desc = 'File Explorer' },
             { '<leader>ef', 'gf', desc = 'File Under Cursor' },
             { '<leader>em', ':e README.md<cr>', desc = 'Readme' },
             { '<leader>en', ':enew<cr>', desc = 'New File' },
-            { '<leader>eo', ':NvimTreeOpen<cr>', desc = 'File Explorer' },
             { '<leader>er', ":lua require('snacks').rename.rename_file()<cr>", desc = 'Rename Current File' },
 
             { '<leader>f', group = ' Find' },
