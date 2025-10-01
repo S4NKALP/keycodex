@@ -49,6 +49,7 @@ return {
             { '<leader>cF', ':retab<cr>', desc = 'Fix Tabs' },
             { '<leader>cd', ':RootDir<cr>', desc = 'Root Directory' },
             { '<leader>cf', ':lua vim.lsp.buf.format({async = true})<cr>', desc = 'Format File' },
+            { '<leader>cg', ':Neogen<cr>', desc = 'Generate Docstring' },
             { '<leader>cl', '::g/^\\s*$/d<cr>', desc = 'Clean Empty Lines' },
             { '<leader>cm', ':MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' },
             { '<leader>cq', ':lua Snacks.picker.qflist()<cr>', desc = 'Quickfix List' },
