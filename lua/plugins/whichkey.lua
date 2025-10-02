@@ -45,6 +45,8 @@ return {
 
             -- { "<leader>a", group = " AI" },
 
+            { '<leader>b', group = ' Buffer' },
+
             { '<leader>c', group = ' Code' },
             { '<leader>cF', ':retab<cr>', desc = 'Fix Tabs' },
             { '<leader>cd', ':RootDir<cr>', desc = 'Root Directory' },
@@ -57,7 +59,15 @@ return {
             { '<leader>e', group = ' Edit' },
             { '<leader>ea', ':b#<cr>', desc = 'Alternate File' },
             { '<leader>eC', group = 'Edit Configs' },
-            { '<leader>ee', ':lua MiniFiles.open()<cr>', desc = 'Explore Tree' },
+            {
+                '<leader>ee',
+                function()
+                    local minifiles = require('mini.files')
+                    minifiles.open(vim.api.nvim_buf_get_name(0), true)
+                    minifiles.reveal_cwd()
+                end,
+                desc = 'Explore Tree',
+            },
             { '<leader>eE', ':lua Snacks.explorer()<cr>', desc = 'File Explorer' },
             { '<leader>ef', 'gf', desc = 'File Under Cursor' },
             { '<leader>em', ':e README.md<cr>', desc = 'Readme' },

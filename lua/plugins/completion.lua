@@ -21,35 +21,6 @@ return {
         version = '*',
         config = function()
             require('blink.cmp').setup({
-                appearance = {
-                    kind_icons = {
-                        Text = '',
-                        Method = '',
-                        Function = 'ƒ',
-                        Constructor = '',
-                        Field = '',
-                        Variable = '',
-                        Property = '󰓹',
-                        Class = '',
-                        Interface = '',
-                        Struct = '',
-                        Module = '󰩦',
-                        Unit = '',
-                        Value = '',
-                        Enum = '',
-                        EnumMember = '',
-                        Keyword = '',
-                        Constant = 'П',
-                        Snippet = '',
-                        Color = '',
-                        File = '',
-                        Reference = '',
-                        Folder = '',
-                        Event = '',
-                        Operator = '',
-                        TypeParameter = '',
-                    },
-                },
                 completion = {
                     list = {
                         selection = {
@@ -64,6 +35,26 @@ return {
                     },
                     menu = {
                         border = 'rounded',
+                        draw = {
+                            components = {
+                                kind_icon = {
+                                    text = function(ctx)
+                                        local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                                        return kind_icon
+                                    end,
+                                    highlight = function(ctx)
+                                        local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                                        return hl
+                                    end,
+                                },
+                                kind = {
+                                    highlight = function(ctx)
+                                        local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                                        return hl
+                                    end,
+                                },
+                            },
+                        },
                     },
                 },
                 signature = {
