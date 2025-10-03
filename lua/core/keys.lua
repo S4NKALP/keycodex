@@ -81,10 +81,10 @@ map('v', "<leader>'", "s''<esc>Pll", { desc = 'wrap selection with single quotes
 map('v', '<leader>"', 's""<esc>Pll', { desc = 'wrap selection with double quotes' })
 
 -- Insert mode cursor movement with Ctrl+hjkl
-map('i', '<C-h>', '<Left>', { noremap = true, silent = true })
-map('i', '<C-j>', '<Down>', { noremap = true, silent = true })
-map('i', '<C-k>', '<Up>', { noremap = true, silent = true })
-map('i', '<C-l>', '<Right>', { noremap = true, silent = true })
+map({ 'i', 'c' }, '<C-h>', '<Left>', { noremap = true, silent = true })
+map({ 'i', 'c' }, '<C-j>', '<Down>', { noremap = true, silent = true })
+map({ 'i', 'c' }, '<C-k>', '<Up>', { noremap = true, silent = true })
+map({ 'i', 'c' }, '<C-l>', '<Right>', { noremap = true, silent = true })
 
 map('n', '<leader>re', ':%s/<C-R><C-W>/', { desc = 'Shortcut to replace current word under cursor' })
 
@@ -102,6 +102,10 @@ for _, mode in ipairs(modes) do
         vim.api.nvim_set_keymap(mode, key, '<Nop>', opts)
     end
 end
+
+-- Go to Beginning or End of line
+map({ 'n', 'v' }, 'H', '_^', { desc = 'Move to the beginning of the line' })
+map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 
 -- Search inside visually highlighted text.
 map('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
