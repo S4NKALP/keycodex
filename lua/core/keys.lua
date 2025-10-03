@@ -102,3 +102,6 @@ for _, mode in ipairs(modes) do
         vim.api.nvim_set_keymap(mode, key, '<Nop>', opts)
     end
 end
+
+-- Search inside visually highlighted text.
+map('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
