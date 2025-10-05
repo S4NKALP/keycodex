@@ -22,19 +22,19 @@
       },
       {
         "language": "c",
-        "path": "./c.json"
+        "path": "./languages/c.json"
       },
       {
         "language": "cpp",
-        "path": "./cpp.json"
+        "path": "./languages/cpp.json"
       },
       {
         "language": "lua",
-        "path": "./lua.json"
+        "path": "./languages/lua.json"
       },
       {
         "language": "go",
-        "path": "./go.json"
+        "path": "./languages/go.json"
       },
       {
         "language": [
@@ -43,18 +43,18 @@
           "sh",
           "zsh"
         ],
-        "path": "./shell.json"
+        "path": "./languages/shell.json"
       },
       {
         "language": [
           "markdown",
           "rmd"
         ],
-        "path": "./markdown.json"
+        "path": "./languages/markdown.json"
       },
       {
         "language": "java",
-        "path": "./java.json"
+        "path": "./languages/java.json"
       },
       {
         "language": [
@@ -63,8 +63,12 @@
           "pug",
           "eruby"
         ],
-        "path": "./html.json"
+        "path": "./languages/html.json"
       },
+      {
+          "lang:uages": ["html", "django"],
+          "path": "./languages/frameworks/django/htmldjango.json"
+      }
       {
         "language": [
           "css",
@@ -73,7 +77,7 @@
           "less",
           "stylus"
         ],
-        "path": "./css.json"
+        "path": "./languages/css.json"
       },
       {
         "language": [
@@ -82,90 +86,90 @@
           "vue",
           "svelte"
         ],
-        "path": "./javascript/javascript.json"
+        "path": "./languages/javascript/javascript.json"
       },
       {
         "language": [
           "typescript",
           "typescriptreact"
         ],
-        "path": "./javascript/typescript.json"
+        "path": "./languages/javascript/typescript.json"
       },
       {
         "language": "javascriptreact",
-        "path": "./javascript/react.json"
+        "path": "./languages/javascript/react.json"
       },
       {
         "language": "javascriptreact",
-        "path": "./javascript/react-native.json"
+        "path": "./languages/javascript/react-native.json"
       },
       {
         "language": "typescriptreact",
-        "path": "./javascript/react-ts.json"
+        "path": "./languages/javascript/react-ts.json"
       },
       {
         "language": "typescriptreact",
-        "path": "./javascript/react-native-ts.json"
+        "path": "./languages/javascript/react-native-ts.json"
       },
       {
         "language": "vue",
-        "path": "./frameworks/vue/html.json"
+        "path": "./languages/frameworks/vue/html.json"
       },
       {
         "language": "vue",
-        "path": "./frameworks/vue/pug.json"
+        "path": "./languages/frameworks/vue/pug.json"
       },
       {
         "language": "vue",
-        "path": "./frameworks/vue/javascript.json"
+        "path": "./languages/frameworks/vue/javascript.json"
       },
       {
         "language": "vue",
-        "path": "./frameworks/vue/vue.json"
+        "path": "./languages/frameworks/vue/vue.json"
       },
       {
         "language": "python",
-        "path": "./python/base.json"
+        "path": "./languages/python/base.json"
       },
       {
         "language": "python",
-        "path": "./python/comprehension.json"
+        "path": "./languages/python/comprehension.json"
       },
       {
         "language": "python",
-        "path": "./python/debug.json"
+        "path": "./languages/python/debug.json"
       },
       {
         "language": "python",
-        "path": "./python/python.json"
+        "path": "./languages/python/python.json"
       },
       {
         "language": "python",
-        "path": "./python/unittest.json"
+        "path": "./languages/python/unittest.json"
       },
       {
         "language": "django",
-        "path": "./frameworks/django/imports.json"
+        "path": "./languages/frameworks/django/imports.json"
       },
       {
         "language": "django",
-        "path": "./frameworks/django/forms.json"
+        "path": "./languages/frameworks/django/forms.json"
       },
       {
         "language": "django",
-        "path": "./frameworks/django/models.json"
+        "path": "./languages/frameworks/django/models.json"
       },
       {
         "language": "django",
-        "path": "./frameworks/django/views.json"
+        "path": "./languages/frameworks/django/views.json"
       },
       {
         "language": "django",
-        "path": "./frameworks/django/filetemplates.json"
+        "path": "./languages/frameworks/django/filetemplates.json"
       },
       {
         "language": "make",
-        "path": "./make.json"
+        "path": "./languages/make.json"
       }
     ]
   }
