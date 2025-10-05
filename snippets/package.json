@@ -11,9 +11,14 @@
           "markdown",
           "tex",
           "html",
-          "global"
+          "global",
+          "all"
         ],
         "path": "./global.json"
+      },
+      {
+          "language": "all",
+          "path": "./license.json"
       },
       {
         "language": "c",
@@ -22,13 +27,6 @@
       {
         "language": "cpp",
         "path": "./cpp.json"
-      },
-      {
-        "language": [
-          "gitcommit",
-          "NeogitCommitMessage"
-        ],
-        "path": "./gitcommit.json"
       },
       {
         "language": "lua",
