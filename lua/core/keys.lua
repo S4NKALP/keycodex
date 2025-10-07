@@ -28,8 +28,8 @@ map({ 'i', 'c' }, '<C-f>', '<Right>')
 map('n', '<leader>rL', vim.lsp.buf.rename, { desc = 'Rename Lsp Symbol' })
 map('n', '`', "'", { noremap = true }) -- better marks
 
-map('n', 'H', '^', { desc = 'Jump to line start' })
-map('n', 'L', '$', { desc = 'Jump to line end' })
+map({ 'n', 'v' }, 'H', '^', { desc = 'Move to the beginning of the line' })
+map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 
 -- Visual overwrite paste
 map({ 'v', 'x' }, 'p', '"_dP', opts)
