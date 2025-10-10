@@ -87,10 +87,10 @@ return {
     -- auto pairs
     {
         'windwp/nvim-autopairs',
+        enabled = false,
         event = 'InsertEnter',
         config = function()
             local npairs = require('nvim-autopairs')
-            local Rule = require('nvim-autopairs.rule')
 
             npairs.setup({
                 check_ts = true,
@@ -98,13 +98,6 @@ return {
                 fast_wrap = {},
                 map_cr = true,
                 map_bs = true,
-            })
-
-            npairs.add_rules({
-                Rule(' ', ' '):with_pair(function(opts)
-                    local pair = opts.line:sub(opts.col - 1, opts.col)
-                    return vim.tbl_contains({ '()', '[]', '{}', '""', "''", '``' }, pair)
-                end),
             })
         end,
     },

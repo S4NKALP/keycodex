@@ -1,64 +1,4 @@
 return {
-    -- surround actions
-    {
-        'nvim-mini/mini.surround',
-        version = '*',
-        config = function()
-            require('mini.surround').setup()
-        end,
-    },
-
-    -- indent guides
-    {
-        'nvim-mini/mini.indentscope',
-        event = 'VeryLazy',
-        config = function()
-            require('mini.indentscope').setup({
-                draw = {
-                    delay = 50,
-                    animation = require('mini.indentscope').gen_animation.linear({
-                        ease = 'out',
-                        duration = 15,
-                    }),
-                },
-                options = {
-                    border = 'top',
-                    try_as_border = true,
-                    indent_at_cursor = false,
-                },
-            })
-
-            -- disable for certain filetypes
-            vim.api.nvim_create_autocmd('BufEnter', {
-                pattern = '*',
-                callback = function(args)
-                    if vim.bo[args.buf].buftype ~= '' then
-                        vim.b[args.buf].miniindentscope_disable = true
-                    end
-                end,
-            })
-        end,
-    },
-
-    -- Go forward/backward with square brackets
-    {
-        'echasnovski/mini.bracketed',
-        event = { 'BufReadPost', 'BufNewFile' },
-        config = function()
-            require('mini.bracketed').setup()
-        end,
-    },
-
-    -- textobjects
-    {
-        'nvim-mini/mini.ai',
-        version = '*',
-        config = function()
-            require('mini.ai').setup({
-                silent = true,
-            })
-        end,
-    },
 
     -- Dimming the highlights of unused functions, variables, parameters, and more.
     {
@@ -85,62 +25,62 @@ return {
         end,
     },
 
-    {
-        'numToStr/Comment.nvim',
-        version = false,
-        dependencies = {
-            'JoosepAlviste/nvim-ts-context-commentstring',
-        },
-        config = function()
-            require('Comment').setup({
-                pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-                mappings = {
-                    basic = true,
-                    extra = true,
-                },
-            })
-        end,
-        keys = {
-            {
-                'gcc',
-                mode = 'n',
-                desc = 'Toggle comment line',
-            },
-            {
-                'gc',
-                mode = { 'n', 'o' },
-                desc = 'Toggle comment linewise',
-            },
-            {
-                'gc',
-                mode = 'x',
-                desc = 'Toggle comment linewise (visual)',
-            },
-            {
-                'gbc',
-                mode = 'n',
-                desc = 'Toggle comment block',
-            },
-            {
-                'gb',
-                mode = { 'n', 'o' },
-                desc = 'Toggle comment blockwise',
-            },
-            {
-                'gb',
-                mode = 'x',
-                desc = 'Toggle comment blockwise (visual)',
-            },
-            { '<leader>/', "<cmd>lua require('Comment.api').toggle.linewise.current()<cr>", desc = 'Toggle comment' },
-            {
-                '<leader>/',
-                "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-                desc = 'Toggle comment',
-                mode = 'v',
-            },
-        },
-        opts = {},
-    },
+    -- {
+    --     'numToStr/Comment.nvim',
+    --     version = false,
+    --     dependencies = {
+    --         'JoosepAlviste/nvim-ts-context-commentstring',
+    --     },
+    --     config = function()
+    --         require('Comment').setup({
+    --             pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+    --             mappings = {
+    --                 basic = true,
+    --                 extra = true,
+    --             },
+    --         })
+    --     end,
+    --     keys = {
+    --         {
+    --             'gcc',
+    --             mode = 'n',
+    --             desc = 'Toggle comment line',
+    --         },
+    --         {
+    --             'gc',
+    --             mode = { 'n', 'o' },
+    --             desc = 'Toggle comment linewise',
+    --         },
+    --         {
+    --             'gc',
+    --             mode = 'x',
+    --             desc = 'Toggle comment linewise (visual)',
+    --         },
+    --         {
+    --             'gbc',
+    --             mode = 'n',
+    --             desc = 'Toggle comment block',
+    --         },
+    --         {
+    --             'gb',
+    --             mode = { 'n', 'o' },
+    --             desc = 'Toggle comment blockwise',
+    --         },
+    --         {
+    --             'gb',
+    --             mode = 'x',
+    --             desc = 'Toggle comment blockwise (visual)',
+    --         },
+    --         { '<leader>/', "<cmd>lua require('Comment.api').toggle.linewise.current()<cr>", desc = 'Toggle comment' },
+    --         {
+    --             '<leader>/',
+    --             "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
+    --             desc = 'Toggle comment',
+    --             mode = 'v',
+    --         },
+    --     },
+    --     opts = {},
+    -- },
 
     -- Todo Comments
     {

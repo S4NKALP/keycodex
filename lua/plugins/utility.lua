@@ -1,11 +1,15 @@
 return {
-
     {
-        'nvim-mini/mini.icons',
-        lazy = true,
-        opts = {},
+        'JoosepAlviste/nvim-ts-context-commentstring',
+        opts = { enable_autocmd = false },
+        ft = {
+            'javascript',
+            'typescript',
+            'javascriptreact',
+            'typescriptreact',
+        },
+        keys = { { 'gc', mode = { 'n', 'x' } }, { 'gbc', mode = { 'n', 'x' } } },
     },
-
     --harpoon
     {
         'ThePrimeagen/harpoon',
@@ -92,7 +96,7 @@ return {
                 shell = vim.o.shell,
                 float_opts = {
                     border = 'curved', --  'single', 'double', 'shadow', etc.
-                    winblend = 0, -- Set to 0 for full transparency
+                    winblend = 0,      -- Set to 0 for full transparency
                     highlights = {
                         border = 'Normal',
                         background = 'Normal',
@@ -123,16 +127,16 @@ return {
             picker_integration = true,
             keymaps = {
                 prefix = '<leader>u', -- Main prefix for uv commands
-                commands = true, -- Show uv commands menu (<leader>x)
-                run_file = true, -- Run current file (<leader>xr)
+                commands = true,      -- Show uv commands menu (<leader>x)
+                run_file = true,      -- Run current file (<leader>xr)
                 run_selection = true, -- Run selected code (<leader>xs)
-                run_function = true, -- Run function (<leader>xf)
-                venv = true, -- Environment management (<leader>xe)
-                init = true, -- Initialize uv project (<leader>xi)
-                add = true, -- Add a package (<leader>xa)
-                remove = true, -- Remove a package (<leader>xd)
-                sync = true, -- Sync packages (<leader>xc)
-                sync_all = true, -- Sync all packages, extras and groups (<leader>xC)
+                run_function = true,  -- Run function (<leader>xf)
+                venv = true,          -- Environment management (<leader>xe)
+                init = true,          -- Initialize uv project (<leader>xi)
+                add = true,           -- Add a package (<leader>xa)
+                remove = true,        -- Remove a package (<leader>xd)
+                sync = true,          -- Sync packages (<leader>xc)
+                sync_all = true,      -- Sync all packages, extras and groups (<leader>xC)
             },
         },
     },
