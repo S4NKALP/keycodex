@@ -1,6 +1,5 @@
 return {
 
-    -- Dimming the highlights of unused functions, variables, parameters, and more.
     {
         'zbirenbaum/neodim',
         enabled = false,
@@ -143,10 +142,5 @@ return {
                 ['Add Cursor Up'] = '<C-M-k>',
             }
         end,
-    },
-    {
-        'davidmh/mdx.nvim',
-        config = true,
-        dependencies = { 'nvim-treesitter/nvim-treesitter' },
     },
 }
