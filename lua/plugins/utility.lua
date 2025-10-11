@@ -10,6 +10,7 @@ return {
         },
         keys = { { 'gc', mode = { 'n', 'x' } }, { 'gbc', mode = { 'n', 'x' } } },
     },
+
     --harpoon
     {
         'ThePrimeagen/harpoon',
@@ -143,18 +144,18 @@ return {
 
     { 'wakatime/vim-wakatime', event = 'VimEnter', lazy = false },
 
-    -- {
-    -- 	"m4xshen/hardtime.nvim",
-    -- 	lazy = false,
-    -- 	opts = {},
-    -- },
+    {
+        'm4xshen/hardtime.nvim',
+        lazy = false,
+        opts = {},
+    },
 
     -- file operations
     {
         'chrisgrieser/nvim-genghis',
         keys = {
             {
-                '<leader>fp',
+                '<leader>fn',
                 function()
                     require('genghis').createNewFile()
                 end,
