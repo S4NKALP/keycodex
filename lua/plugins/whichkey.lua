@@ -34,7 +34,7 @@ return {
             show_help = false,
             show_keys = true,
             triggers = {
-                { '<auto>', mode = 'nvisoct' },
+                { '<auto>',   mode = 'nvisoct' },
                 { '<leader>', mode = { 'n', 'v' } },
             },
         })
