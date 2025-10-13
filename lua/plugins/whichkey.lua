@@ -34,7 +34,7 @@ return {
             show_help = false,
             show_keys = true,
             triggers = {
-                { '<auto>',   mode = 'nvisoct' },
+                { '<auto>', mode = 'nvisoct' },
                 { '<leader>', mode = { 'n', 'v' } },
             },
         })
@@ -279,8 +279,8 @@ return {
             { '<C-l>', ':NavigatorRight<cr>', desc = 'Move Right' },
             { '<C-\\>', ':NavigatorPrevious<cr>', desc = 'Previous Pane' },
 
-            { '<S-h>', ':bprevious<cr>', desc = 'Previous Buffer' },
-            { '<S-l>', ':bnext<cr>', desc = 'Next Buffer' },
+            -- { '<S-h>', ':bprevious<cr>', desc = 'Previous Buffer' },
+            -- { '<S-l>', ':bnext<cr>', desc = 'Next Buffer' },
             { '<Tab>', ':bnext<cr>', desc = 'Next Buffer' },
             { '<S-Tab>', ':bprevious<cr>', desc = 'Previous Buffer' },
 

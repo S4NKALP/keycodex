@@ -1,6 +1,6 @@
 {
-  "title metadata":{
-    "prefix": "title",
+  "metadata":{
+    "prefix": "metadata",
     "body": [
       "---",
       "title: ${1:Your Title}",

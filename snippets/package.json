@@ -68,7 +68,7 @@
       {
           "lang:uages": ["html", "django"],
           "path": "./languages/frameworks/django/htmldjango.json"
-      }
+      },
       {
         "language": [
           "css",
