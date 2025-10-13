@@ -1,16 +1,4 @@
 return {
-    {
-        'JoosepAlviste/nvim-ts-context-commentstring',
-        opts = { enable_autocmd = false },
-        ft = {
-            'javascript',
-            'typescript',
-            'javascriptreact',
-            'typescriptreact',
-        },
-        keys = { { 'gc', mode = { 'n', 'x' } }, { 'gbc', mode = { 'n', 'x' } } },
-    },
-
     --harpoon
     {
         'ThePrimeagen/harpoon',
