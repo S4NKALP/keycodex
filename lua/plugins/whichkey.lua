@@ -34,7 +34,7 @@ return {
             show_help = false,
             show_keys = true,
             triggers = {
-                { '<auto>', mode = 'nvisoct' },
+                { '<auto>',   mode = 'nvisoct' },
                 { '<leader>', mode = { 'n', 'v' } },
             },
         })
@@ -114,8 +114,6 @@ return {
             { '<leader>gw', ':lua require("snacks").gitbrowse()<cr>', desc = 'Git Browse' },
             { '<leader>gp', ':lua Snacks.picker.git_branches()<cr>', desc = 'Pick and Switch Git Branches' },
 
-            { '<leader>h', group = 'Harpoon' },
-
             { '<leader>gt', group = 'Toggle' },
             { '<leader>gtb', ':Gitsigns toggle_current_line_blame<cr>', desc = 'Blame' },
             { '<leader>gtd', ':Gitsigns toggle_deleted<cr>', desc = 'Deleted' },
@@ -181,10 +179,10 @@ return {
 
             { '<leader>r', group = ' Refactor' },
             { '<leader>rd', '', desc = 'Go To Definition' }, -- treesitter navigation
+            { '<leader>rD', '', desc = 'List Definition' },
             { '<leader>rh', '', desc = 'List Definition Head' },
             { '<leader>rj', '', desc = 'Next Usage' },
             { '<leader>rk', '', desc = 'Previous Usage' },
-            { '<leader>rl', '', desc = 'List Definition' },
             { '<leader>rn', '', desc = 'Swap Next' },
             { '<leader>rp', '', desc = 'Swap Previous' },
             { '<leader>rr', '', desc = 'Smart Rename' },

@@ -109,3 +109,32 @@ map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 
 -- Search inside visually highlighted text.
 map('x', 'g/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
+
+-- Search & replace in current file/line
+map('v', '<leader>rw', '"9y:%s@<c-r>9@<c-r>9@g<left><left>', { desc = 'Search & replace selection', silent = false })
+map('n', '<leader>rw', 'viw"9y:%s@<c-r>9@<c-r>9@g<left><left>', { desc = 'Search & replace word', silent = false })
+map(
+    'v',
+    '<leader>rl',
+    '"9y:s@<c-r>9@<c-r>9@g<left><left>',
+    { desc = 'Search & replace in current line', silent = false }
+)
+map(
+    'n',
+    '<leader>rl',
+    'viw"9y:s@<c-r>9@<c-r>9@g<left><left>',
+    { desc = 'Search & replace word in current line', silent = false }
+)
+
+-- Folds
+map('n', '<leader><', function()
+    if not vim.opt.foldmethod then
+        vim.opt.foldmethod = 'indent'
+    end
+    vim.cmd('normal! zM')
+end, { desc = 'Fold all' })
+
+map('n', '<leader>>', function()
+    vim.opt.foldenable = false
+    vim.cmd('normal! zR')
+end, { desc = 'Open all folds' })

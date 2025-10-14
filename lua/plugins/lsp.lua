@@ -66,4 +66,45 @@ return {
             })
         end,
     },
+
+    -- inline diagnostic
+    {
+        'rachartier/tiny-inline-diagnostic.nvim',
+        event = 'VeryLazy',
+        priority = 1000,
+        config = function()
+            require('tiny-inline-diagnostic').setup()
+            vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+        end,
+    },
+
+    -- code action
+    {
+        'rachartier/tiny-code-action.nvim',
+        dependencies = {
+            {
+                'folke/snacks.nvim',
+                opts = {
+                    terminal = {},
+                },
+            },
+        },
+        event = 'LspAttach',
+        config = function()
+            local codeaction = require('tiny-code-action')
+
+            codeaction.setup({
+                picker = {
+                    'buffer',
+                    opts = {
+                        auto_preview = true,
+                        hotkeys = true,
+                        hotkeys_mode = 'sequential',
+                    },
+                },
+            })
+
+            vim.keymap.set('n', '<leader>.', codeaction.code_action)
+        end,
+    },
 }
