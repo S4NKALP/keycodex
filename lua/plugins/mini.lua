@@ -2,11 +2,36 @@ return {
     'echasnovski/mini.nvim',
     config = function()
         require('mini.ai').setup()
-        require('mini.surround').setup()
         require('mini.pairs').setup()
         require('mini.icons').setup()
         require('mini.bracketed').setup()
         require('mini.tabline').setup()
+        require('mini.splitjoin').setup({
+            mappings = {
+                toggle = '<leader>tj',
+                split = '',
+                join = '',
+            },
+        })
+        -- Add/delete/replace surroundings (brackets, quotes, etc.)
+        --
+        -- - asiw) - [Yank] Surrounding Inner Word )Paren (like in surround)
+        -- - ds'   - Delete Surround 'quotes
+        -- - rs)'  - Replace Surround ) '
+        require('mini.surround').setup({
+            mappings = {
+                add = 'ys',          -- Add surrounding in Normal and Visual modes
+                delete = 'ds',       -- Delete surrounding
+                find = '',           -- Find surrounding (to the right)
+                find_left = '',      -- Find surrounding (to the left)
+                highlight = '',      -- Highlight surrounding
+                replace = 'cs',      -- Replace surrounding
+                update_n_lines = '', -- Update `n_lines`
+
+                suffix_last = 'l',   -- Suffix to search with "prev" method
+                suffix_next = 'n',   -- Suffix to search with "next" method
+            },
+        })
         require('mini.indentscope').setup({
             draw = {
                 delay = 50,
