@@ -49,6 +49,29 @@ return {
             end,
         })
 
+        -- files
+        require('mini.files').setup({
+            mappings = {
+                close = 'q',
+                go_in = 'L',
+                go_in_plus = 'l',
+                go_out = 'h',
+                go_out_plus = 'H',
+                mark_goto = "'",
+                mark_set = 'm',
+                reset = '<BS>',
+                reveal_cwd = '@',
+                show_help = 'g?',
+                synchronize = '<CR>',
+                trim_left = '<',
+                trim_right = '>',
+            },
+            options = {
+                permanent_delete = true,
+                use_as_default_explorer = true,
+            },
+        })
+
         require('mini.statusline').setup({
             use_icons = true,
             content = {
