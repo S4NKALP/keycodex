@@ -1,11 +1,14 @@
 return {
     'echasnovski/mini.nvim',
     config = function()
-        require('mini.ai').setup()
-        require('mini.pairs').setup()
-        require('mini.icons').setup()
-        require('mini.bracketed').setup()
-        require('mini.tabline').setup()
+        require('mini.ai').setup()        -- Extend and create a/i textobjects
+        require('mini.pairs').setup()     -- Autopairs
+        require('mini.icons').setup()     -- Icons
+        require('mini.bracketed').setup() -- Go forward/backward with square brackets
+        require('mini.tabline').setup()   -- Tabline
+        require('mini.files').setup()     -- Files
+
+        -- splitjoin
         require('mini.splitjoin').setup({
             mappings = {
                 toggle = '<leader>tj',
@@ -13,11 +16,8 @@ return {
                 join = '',
             },
         })
-        -- Add/delete/replace surroundings (brackets, quotes, etc.)
-        --
-        -- - asiw) - [Yank] Surrounding Inner Word )Paren (like in surround)
-        -- - ds'   - Delete Surround 'quotes
-        -- - rs)'  - Replace Surround ) '
+
+        -- surround
         require('mini.surround').setup({
             mappings = {
                 add = 'ys',          -- Add surrounding in Normal and Visual modes
@@ -32,6 +32,8 @@ return {
                 suffix_next = 'n',   -- Suffix to search with "next" method
             },
         })
+
+        -- indents
         require('mini.indentscope').setup({
             draw = {
                 delay = 50,
@@ -49,29 +51,7 @@ return {
             end,
         })
 
-        -- files
-        require('mini.files').setup({
-            mappings = {
-                close = 'q',
-                go_in = 'L',
-                go_in_plus = 'l',
-                go_out = 'h',
-                go_out_plus = 'H',
-                mark_goto = "'",
-                mark_set = 'm',
-                reset = '<BS>',
-                reveal_cwd = '@',
-                show_help = 'g?',
-                synchronize = '<CR>',
-                trim_left = '<',
-                trim_right = '>',
-            },
-            options = {
-                permanent_delete = true,
-                use_as_default_explorer = true,
-            },
-        })
-
+        -- statusline
         require('mini.statusline').setup({
             use_icons = true,
             content = {
