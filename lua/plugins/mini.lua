@@ -8,6 +8,13 @@ return {
         require('mini.tabline').setup()   -- Tabline
         require('mini.files').setup()     -- Files
 
+        require('mini.misc').setup({
+            -- restore cursor position on file reopen
+            require('mini.misc').setup_restore_cursor(),
+            -- automated change of current directory
+            require('mini.misc').setup_auto_root(),
+        })
+
         -- splitjoin
         require('mini.splitjoin').setup({
             mappings = {
@@ -35,10 +42,7 @@ return {
 
         -- indents
         require('mini.indentscope').setup({
-            draw = {
-                delay = 50,
-                animation = require('mini.indentscope').gen_animation.linear({ ease = 'out', duration = 15 }),
-            },
+            draw = { animation = require('mini.indentscope').gen_animation.linear({ ease = 'out', duration = 15 }) },
             options = { border = 'top', try_as_border = true, indent_at_cursor = false },
         })
 
