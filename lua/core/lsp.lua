@@ -68,7 +68,7 @@ vim.lsp.config('basedpyright', {
                     reportDuplicateImport = 'none',
                     reportArgumentType = 'error',
                 },
-                typeCheckingMode = 'basic',
+                typeCheckingMode = 'standard',
             },
         },
     },

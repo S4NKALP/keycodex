@@ -17,8 +17,9 @@ return {
             },
         })
 
-        -- surround
+        -- surround action
         require('mini.surround').setup({
+            n_lines = 25,
             mappings = {
                 add = 'ys',          -- Add surrounding in Normal and Visual modes
                 delete = 'ds',       -- Delete surrounding
