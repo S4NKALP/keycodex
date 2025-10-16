@@ -34,7 +34,7 @@ return {
             show_help = false,
             show_keys = true,
             triggers = {
-                { '<auto>',   mode = 'nvisoct' },
+                { '<auto>', mode = 'nvisoct' },
                 { '<leader>', mode = { 'n', 'v' } },
             },
         })
@@ -101,6 +101,7 @@ return {
             { '<leader>ga', ':Gitsigns stage_hunk<cr>', desc = 'Stage Hunk' },
             { '<leader>gb', ":lua require('gitsigns').blame_line({full = true})<cr>", desc = 'Blame' },
             { '<leader>gB', ":lua require('snacks').git.blame_line()<cr>", desc = 'Detailed Blame' },
+            { '<leader>gc', ':Gitignore<cr>', desc = 'Generate .gitignore' },
             { '<leader>gd', ':Gitsigns diffthis HEAD<cr>', desc = 'Git Diff' },
             { '<leader>gF', ':Git<cr>', desc = 'Fugitive Panel' },
             { '<leader>gi', ':Gitsigns preview_hunk<cr>', desc = 'Hunk Info' },

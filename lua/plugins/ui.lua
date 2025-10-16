@@ -6,13 +6,14 @@ return {
         lazy = false,
         -- to load before treesitter
         priority = 45,
-        config = function()
-            require('markview').setup({
-                markdown = {
-                    code_blocks = { sign = false },
-                },
-            })
-        end,
+        opts = {
+            preview = {
+                enable = false,
+            },
+        },
+        keys = {
+            { '<leader>cv', '<Cmd>Markview toggle<CR>', desc = 'Toggle markdown preview', mode = 'n' },
+        },
     },
 
     -- markdown preview

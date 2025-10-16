@@ -1,4 +1,8 @@
 return {
+    {
+        'wintermute-cell/gitignore.nvim',
+        opts = {},
+    },
     -- FLOATING COMMIT WINDOW
     {
         'lsig/messenger.nvim',
