@@ -38,8 +38,6 @@ return {
                     extra = true,
                 },
             })
-            ft = require('Comment.ft')
-            ft.set('typescriptreact', { '//%s', '{/*%s*/}' })
         end,
         keys = {
             { 'gcc', mode = 'n',          desc = 'Toggle comment line' },
