@@ -27,6 +27,9 @@ return {
             },
             formatters_by_ft = {
                 ['lua'] = { 'stylua' },
+                ['c'] = { 'clang_format' },
+                ['cpp'] = { 'clang_format' },
+                ['h'] = { 'clang_format' },
                 ['python'] = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
                 ['javascript'] = { 'biome' },
                 ['typescript'] = { 'biome' },
@@ -52,9 +55,10 @@ return {
             vim.b.conform_disable = not vim.b.conform_disable
             local status = vim.b.conform_disable and 'disabled' or 'enabled'
             vim.notify('Autoformat ' .. status, vim.log.levels.INFO)
-        end)
+        end, { desc = 'Toggle autoformat' })
         require('mason-conform').setup({
             ensure_installed = {
+                'clang_format',
                 'ruff',
                 'stylua',
                 'prettier',

@@ -19,18 +19,17 @@ return {
 
         -- surround action
         require('mini.surround').setup({
-            n_lines = 25,
             mappings = {
-                add = 'ys',          -- Add surrounding in Normal and Visual modes
-                delete = 'ds',       -- Delete surrounding
-                find = '',           -- Find surrounding (to the right)
-                find_left = '',      -- Find surrounding (to the left)
-                highlight = '',      -- Highlight surrounding
-                replace = 'cs',      -- Replace surrounding
-                update_n_lines = '', -- Update `n_lines`
+                add = 'msa',
+                delete = 'msd',
+                find = 'msf',
+                find_left = 'msF',
+                highlight = 'msh',
+                replace = 'msr',
+                update_n_lines = 'msn',
 
-                suffix_last = 'l',   -- Suffix to search with "prev" method
-                suffix_next = 'n',   -- Suffix to search with "next" method
+                suffix_last = 'l',
+                suffix_next = 'n',
             },
         })
 

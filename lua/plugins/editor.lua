@@ -27,7 +27,6 @@ return {
     -- comment
     {
         'numToStr/Comment.nvim',
-        version = false,
         dependencies = {
             'JoosepAlviste/nvim-ts-context-commentstring',
         },
@@ -41,44 +40,14 @@ return {
             })
         end,
         keys = {
-            {
-                'gcc',
-                mode = 'n',
-                desc = 'Toggle comment line',
-            },
-            {
-                'gc',
-                mode = { 'n', 'o' },
-                desc = 'Toggle comment linewise',
-            },
-            {
-                'gc',
-                mode = 'x',
-                desc = 'Toggle comment linewise (visual)',
-            },
-            {
-                'gbc',
-                mode = 'n',
-                desc = 'Toggle comment block',
-            },
-            {
-                'gb',
-                mode = { 'n', 'o' },
-                desc = 'Toggle comment blockwise',
-            },
-            {
-                'gb',
-                mode = 'x',
-                desc = 'Toggle comment blockwise (visual)',
-            },
-            { '<leader>/', "<cmd>lua require('Comment.api').toggle.linewise.current()<cr>", desc = 'Toggle comment' },
-            {
-                '<leader>/',
-                "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>",
-                desc = 'Toggle comment',
-                mode = 'v',
-            },
+            { 'gcc', mode = 'n',          desc = 'Toggle comment line' },
+            { 'gc',  mode = { 'n', 'o' }, desc = 'Toggle comment linewise' },
+            { 'gc',  mode = 'x',          desc = 'Toggle comment linewise (visual)' },
+            { 'gbc', mode = 'n',          desc = 'Toggle comment block' },
+            { 'gb',  mode = { 'n', 'o' }, desc = 'Toggle comment blockwise' },
+            { 'gb',  mode = 'x',          desc = 'Toggle comment blockwise (visual)' },
         },
+
         opts = {},
     },
 

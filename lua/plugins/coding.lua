@@ -2,18 +2,23 @@ return {
     -- auto pairs
     {
         'windwp/nvim-autopairs',
-        enabled = false,
         event = 'InsertEnter',
         config = function()
             local npairs = require('nvim-autopairs')
+            local Rule = require('nvim-autopairs.rule')
+            local conds = require('nvim-autopairs.conds')
 
-            npairs.setup({
-                check_ts = true,
-                enable_check_bracket_line = true,
-                fast_wrap = {},
-                map_cr = true,
-                map_bs = true,
-            })
+            npairs.setup()
+
+            -- Autoclosing angle-brackets.
+            npairs.add_rule(Rule('<', '>', {
+                -- Avoid conflicts with nvim-ts-autotag.
+                '-html',
+                '-javascriptreact',
+                '-typescriptreact',
+            }):with_pair(conds.before_regex('%a+:?:?$', 3)):with_move(function(opts)
+                return opts.char == '>'
+            end))
         end,
     },
 
