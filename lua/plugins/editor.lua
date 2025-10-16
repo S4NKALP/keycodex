@@ -38,6 +38,8 @@ return {
                     extra = true,
                 },
             })
+            ft = require('Comment.ft')
+            ft.set('typescriptreact', { '//%s', '{/*%s*/}' })
         end,
         keys = {
             { 'gcc', mode = 'n',          desc = 'Toggle comment line' },
@@ -47,8 +49,6 @@ return {
             { 'gb',  mode = { 'n', 'o' }, desc = 'Toggle comment blockwise' },
             { 'gb',  mode = 'x',          desc = 'Toggle comment blockwise (visual)' },
         },
-
-        opts = {},
     },
 
     -- Todo Comments
