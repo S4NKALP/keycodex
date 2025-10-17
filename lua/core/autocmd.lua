@@ -127,3 +127,26 @@ vim.api.nvim_create_user_command('WriteNoFormat', function()
     -- Re-enable the autoformat autocmd
     enable_autoformat()
 end, {})
+
+-- Macro recording notifications
+vim.api.nvim_create_autocmd('RecordingEnter', {
+    callback = function()
+        vim.notify('Macro recording started', vim.log.levels.INFO, {
+            title = 'Macro',
+            timeout = 2000,
+        })
+        -- Print to command line for debugging
+        vim.cmd("echo 'Recording macro...'")
+    end,
+})
+
+vim.api.nvim_create_autocmd('RecordingLeave', {
+    callback = function()
+        vim.notify('Macro recording stopped', vim.log.levels.INFO, {
+            title = 'Macro',
+            timeout = 2000,
+        })
+        -- Print to command line for debugging
+        vim.cmd("echo 'Macro recording stopped'")
+    end,
+})
