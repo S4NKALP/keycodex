@@ -1,67 +1,57 @@
 return {
     -- default lsp configs
     {
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         config = function() end,
     },
 
     -- lsp installer
     {
-        'williamboman/mason.nvim',
+        "williamboman/mason.nvim",
         dependencies = {
-            'williamboman/mason-lspconfig.nvim',
+            "williamboman/mason-lspconfig.nvim",
         },
-        cmd = 'Mason',
+        cmd = "Mason",
         config = function()
             -- mason
-            require('mason').setup({
+            require("mason").setup({
                 ui = {
                     icons = {
-                        package_installed = '✓',
-                        package_pending = '➜',
-                        package_uninstalled = '✗',
+                        package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗",
                     },
-                    border = 'rounded',
+                    border = "rounded",
                     backdrop = 100,
                 },
             })
-            require('mason-lspconfig').setup({
-                -- list of servers for mason to install
-                ensure_installed = {
-                    'ts_ls',
-                    'html',
-                    'cssls',
-                    'tailwindcss',
-                    'lua_ls',
-                    'basedpyright',
-                    'bashls',
-                    'clangd',
-                    -- "pylsp",
-                    'rust_analyzer',
-                },
+            require("mason-lspconfig").setup({
+                ensure_installed = require("config.extensions").lsp_server,
                 automatic_installation = false, -- Don't auto-install or auto-configure
             })
         end,
     },
+
+    -- improve neovim lsp experience
     {
-        'nvimdev/lspsaga.nvim',
-        event = 'LspAttach',
+        "nvimdev/lspsaga.nvim",
+        event = "LspAttach",
         config = function()
-            require('lspsaga').setup({
+            require("lspsaga").setup({
                 ui = {
-                    theme = 'round',
-                    border = 'rounded',
+                    theme = "round",
+                    border = "rounded",
                     devicon = true,
                     title = true,
                     winblend = 1,
-                    expand = ' ',
-                    collapse = ' ',
-                    preview = '',
-                    code_action = '󰠠 ',
-                    diagnostic = ' ',
-                    incoming = ' ',
-                    outgoing = ' ',
-                    hover = ' ',
+                    expand = " ",
+                    collapse = " ",
+                    preview = "",
+                    code_action = "󰠠 ",
+                    diagnostic = " ",
+                    incoming = " ",
+                    outgoing = " ",
+                    hover = " ",
                 },
             })
         end,
@@ -69,42 +59,42 @@ return {
 
     -- inline diagnostic
     {
-        'rachartier/tiny-inline-diagnostic.nvim',
-        event = 'VeryLazy',
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy",
         priority = 1000,
         config = function()
-            require('tiny-inline-diagnostic').setup()
+            require("tiny-inline-diagnostic").setup()
             vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
         end,
     },
 
     -- code action
     {
-        'rachartier/tiny-code-action.nvim',
+        "rachartier/tiny-code-action.nvim",
         dependencies = {
             {
-                'folke/snacks.nvim',
+                "folke/snacks.nvim",
                 opts = {
                     terminal = {},
                 },
             },
         },
-        event = 'LspAttach',
+        event = "LspAttach",
         config = function()
-            local codeaction = require('tiny-code-action')
+            local codeaction = require("tiny-code-action")
 
             codeaction.setup({
                 picker = {
-                    'buffer',
+                    "buffer",
                     opts = {
                         auto_preview = true,
                         hotkeys = true,
-                        hotkeys_mode = 'sequential',
+                        hotkeys_mode = "sequential",
                     },
                 },
             })
 
-            vim.keymap.set('n', '<leader>.', codeaction.code_action)
+            vim.keymap.set("n", "<leader>.", codeaction.code_action)
         end,
     },
 }

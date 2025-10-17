@@ -1,7 +1,6 @@
 -- load config
-require('core.options')
-require('core.functions')
-require('core.keys')
-require('core.autocmd')
-require('core.lsp')
-require('core.lazy')
+require("config.options")
+require("config.keys")
+require("config.autocmd")
+require("config.lazy")
+require("config.lsp")
