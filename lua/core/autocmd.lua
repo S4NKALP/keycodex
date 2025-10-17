@@ -150,3 +150,38 @@ vim.api.nvim_create_autocmd('RecordingLeave', {
         vim.cmd("echo 'Macro recording stopped'")
     end,
 })
+
+-- Function to show macro replay notification
+local function show_macro_replay(count)
+    local message = count > 1 and string.format('Replaying macro %d times', count) or 'Replaying macro'
+    vim.notify(message, vim.log.levels.INFO, {
+        title = 'Macro',
+        timeout = 2000,
+    })
+end
+
+-- Function to clear all macros
+local function clear_all_macros()
+    -- Clear all registers from a to z
+    for i = 97, 122 do -- ASCII values for 'a' to 'z'
+        vim.fn.setreg(string.char(i), '')
+    end
+    -- Clear all registers from 0 to 9
+    for i = 48, 57 do -- ASCII values for '0' to '9'
+        vim.fn.setreg(string.char(i), '')
+    end
+    vim.notify('All macros cleared', vim.log.levels.INFO, {
+        title = 'Macro',
+        timeout = 2000,
+    })
+end
+
+-- Create keymaps for macro replay with notifications
+vim.keymap.set('n', '@', function()
+    local count = vim.v.count1
+    show_macro_replay(count)
+    return '@'
+end, { expr = true })
+
+-- Add keybinding to clear all macros
+vim.keymap.set('n', '<leader>mc', clear_all_macros, { desc = 'Clear all macros' })
