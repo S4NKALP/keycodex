@@ -45,11 +45,6 @@ local options = {
     wildmode = 'longest:full,full',
     wildoptions = 'pum',
 
-    -- Folds (keep open by default, works well with nvim-ufo)
-    foldlevel = 99,
-    foldlevelstart = 99,
-    foldenable = true,
-
     -- Window
     splitright = true,
     splitbelow = true,

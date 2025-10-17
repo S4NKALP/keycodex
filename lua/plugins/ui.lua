@@ -27,17 +27,55 @@ return {
         cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview' },
     },
 
-    -- fold
+    -- Better folding
     {
         'kevinhwang91/nvim-ufo',
-        event = { 'BufReadPost', 'BufNewFile' },
-        dependencies = { 'kevinhwang91/promise-async', event = 'BufReadPost' },
+        dependencies = 'kevinhwang91/promise-async',
+        event = 'BufReadPost',
+        keys = {
+            {
+                'zR',
+                function()
+                    require('ufo').openAllFolds()
+                end,
+            },
+            {
+                'zM',
+                function()
+                    require('ufo').closeAllFolds()
+                end,
+            },
+            {
+                'zr',
+                function()
+                    require('ufo').openFoldsExceptKinds()
+                end,
+            },
+            {
+                'zm',
+                function()
+                    require('ufo').closeFoldsWith()
+                end,
+            },
+        },
         config = function()
+            vim.o.foldcolumn = '1'
+            vim.o.foldlevel = 99
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+
             require('ufo').setup({
-                provider_selector = function(bufnr, filetype, buftype)
+                provider_selector = function()
                     return { 'treesitter', 'indent' }
                 end,
             })
         end,
+    },
+
+    -- Undo tree
+    {
+        'mbbill/undotree',
+        cmd = 'UndotreeToggle',
+        keys = { { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = 'Undo Tree' } },
     },
 }
