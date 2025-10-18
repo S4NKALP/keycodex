@@ -148,8 +148,6 @@ return {
             { '<leader>lT', ':Lspsaga peek_type_definition<cr>', desc = 'Peek Type Definition' },
 
             { '<leader>o', group = ' Options' },
-            { '<leader>oc', ':CodeSnap<cr>', desc = 'CodeSnap into clipboard' },
-            { '<leader>oC', ':CodeSnapSave<cr>', desc = 'CodeSnap in ~/Pictures' },
             { '<leader>oi', 'vim.show_pos', desc = 'Inspect Position' },
             { '<leader>oN', ':lua Snacks.notifier.show_history()<cr>', desc = 'Notification History' },
             { '<leader>or', ':set relativenumber!<cr>', desc = 'Relative Numbers' },
