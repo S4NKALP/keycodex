@@ -116,4 +116,26 @@ return {
         lazy = false,
         opts = {},
     },
+
+    {
+        'mistricky/codesnap.nvim',
+        build = 'make',
+        cmd = {
+            'CodeSnap',
+            'CodeSnapSave',
+            'CodeSnapHighlight',
+            'CodeSnapSaveHighlight',
+            'CodeSnapASCII',
+        },
+        opts = {
+            bg_theme = 'dusk',
+            code_font_family = 'JetBrainsMono Nerd Font',
+            save_path = os.getenv('XDG_SCREENSHOTS_DIR') or (os.getenv('HOME') .. '/Pictures'),
+            watermark = 'SANKALP',
+            watermark_font_family = 'Anurati',
+            has_breadcrumbs = true,
+            breadcrumbs_separator = '/',
+            has_line_number = true,
+        },
+    },
 }
