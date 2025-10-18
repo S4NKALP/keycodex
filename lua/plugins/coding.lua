@@ -174,4 +174,26 @@ return {
             })
         end,
     },
+
+    -- annotation generator
+    {
+        'danymat/neogen',
+        opts = {
+            snippet_engine = 'luasnip',
+            languages = {
+                python = {
+                    template = {
+                        annotation_convention = 'google_docstrings',
+                    },
+                },
+            },
+        },
+    },
+
+    -- syntax highlight for mdx
+    {
+        'davidmh/mdx.nvim',
+        config = true,
+        dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    },
 }
