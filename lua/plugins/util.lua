@@ -117,6 +117,7 @@ return {
         opts = {},
     },
 
+    -- Screenshot Tool
     {
         'mistricky/codesnap.nvim',
         build = 'make',
