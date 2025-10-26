@@ -34,7 +34,7 @@ return {
             show_help = false,
             show_keys = true,
             triggers = {
-                { '<auto>',   mode = 'nvisoct' },
+                { '<auto>', mode = 'nvisoct' },
                 { '<leader>', mode = { 'n', 'v' } },
             },
         })
@@ -216,7 +216,6 @@ return {
             { '<leader>t1', '<cmd>1ToggleTerm<cr>', desc = 'Toggle Terminal' },
             { '<leader>t2', '<cmd>2ToggleTerm<cr>', desc = 'Toggle Terminal' },
             { '<leader>tc', '<Cmd>close<CR>', desc = 'Hide Terminal' },
-
             { '<leader>th', group = 'Inlay Hints' },
 
             { '<leader>w', group = ' Writing' },
