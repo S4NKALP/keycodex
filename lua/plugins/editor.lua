@@ -215,6 +215,7 @@ return {
         priority = 45,
         opts = {
             preview = {
+                icon_provider = 'mini',
                 enable = false,
             },
         },
