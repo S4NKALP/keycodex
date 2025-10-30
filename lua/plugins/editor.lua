@@ -213,12 +213,14 @@ return {
         lazy = false,
         -- to load before treesitter
         priority = 45,
-        opts = {
-            preview = {
-                icon_provider = 'mini',
-                enable = false,
-            },
-        },
+        config = function()
+            require('markview').setup({
+                preview = {
+                    icon_provider = 'mini',
+                    enable = false,
+                },
+            })
+        end,
         keys = {
             { '<leader>cv', '<Cmd>Markview toggle<CR>', desc = 'Toggle markdown preview', mode = 'n' },
         },
