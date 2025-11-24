@@ -1,11 +1,10 @@
 return {
     'echasnovski/mini.nvim',
     config = function()
-        require('mini.ai').setup()        -- Extend and create a/i textobjects
-        require('mini.pairs').setup()     -- Autopairs
-        require('mini.icons').setup()     -- Icons
+        require('mini.ai').setup() -- Extend and create a/i textobjects
+        require('mini.pairs').setup() -- Autopairs
+        require('mini.icons').setup() -- Icons
         require('mini.bracketed').setup() -- Go forward/backward with square brackets
-        require('mini.tabline').setup()   -- Tabline
 
         -- File explorer
         require('mini.files').setup({
@@ -141,13 +140,13 @@ return {
                     local lsp_clients = section_lsp_clients({ trunc_width = 60 })
 
                     return MiniStatusline.combine_groups({
-                        { hl = mode_hl,                 strings = { mode:upper() } },
+                        { hl = mode_hl, strings = { mode:upper() } },
                         { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
                         '%<',
                         { hl = 'MiniStatuslineFilename', strings = { filename } },
                         '%=',
-                        { hl = 'MiniStatuslineDevinfo',  strings = { lsp_clients } },
-                        { hl = mode_hl,                  strings = { filetype, searchcount, loc } },
+                        { hl = 'MiniStatuslineDevinfo', strings = { lsp_clients } },
+                        { hl = mode_hl, strings = { filetype, searchcount, loc } },
                     })
                 end,
 
