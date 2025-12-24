@@ -208,7 +208,6 @@ return {
             { '<leader>sj', '<C-w>j', desc = 'Move Down' },
             { '<leader>sk', '<C-w>k', desc = 'Move Up' },
             { '<leader>sl', '<C-w>l', desc = 'Move Right' },
-            { '<leader>sp', ':NavigatorPrevious<cr>', desc = 'Previous Pane' },
             { '<leader>sq', '<C-w>c', desc = 'Close Split' },
             { '<leader>ss', ':vsplit<cr>', desc = 'Vertical Split' },
 
@@ -274,12 +273,6 @@ return {
             { '<C-Left>', ':vertical resize -10<cr>', desc = 'Decrease window width' },
             { '<C-Right>', ':vertical resize +10<cr>', desc = 'Increase window width' },
             { '<C-Up>', ':resize +10<cr>', desc = 'Increase window height' },
-
-            { '<C-h>', ':NavigatorLeft<cr>', desc = 'Move Left' },
-            { '<C-j>', ':NavigatorDown<cr>', desc = 'Move Down' },
-            { '<C-k>', ':NavigatorUp<cr>', desc = 'Move Up' },
-            { '<C-l>', ':NavigatorRight<cr>', desc = 'Move Right' },
-            { '<C-\\>', ':NavigatorPrevious<cr>', desc = 'Previous Pane' },
 
             -- { '<S-h>', ':bprevious<cr>', desc = 'Previous Buffer' },
             -- { '<S-l>', ':bnext<cr>', desc = 'Next Buffer' },
