@@ -124,8 +124,8 @@ return {
         lazy = true,
         opts = {
             -- Defaults
-            enable_close = true,           -- Auto close tags
-            enable_rename = true,          -- Auto rename pairs of tags
+            enable_close = true, -- Auto close tags
+            enable_rename = true, -- Auto rename pairs of tags
             enable_close_on_slash = false, -- Auto close on trailing </
         },
     },
@@ -146,12 +146,12 @@ return {
             })
         end,
         keys = {
-            { 'gcc', mode = 'n',          desc = 'Toggle comment line' },
-            { 'gc',  mode = { 'n', 'o' }, desc = 'Toggle comment linewise' },
-            { 'gc',  mode = 'x',          desc = 'Toggle comment linewise (visual)' },
-            { 'gbc', mode = 'n',          desc = 'Toggle comment block' },
-            { 'gb',  mode = { 'n', 'o' }, desc = 'Toggle comment blockwise' },
-            { 'gb',  mode = 'x',          desc = 'Toggle comment blockwise (visual)' },
+            { 'gcc', mode = 'n', desc = 'Toggle comment line' },
+            { 'gc', mode = { 'n', 'o' }, desc = 'Toggle comment linewise' },
+            { 'gc', mode = 'x', desc = 'Toggle comment linewise (visual)' },
+            { 'gbc', mode = 'n', desc = 'Toggle comment block' },
+            { 'gb', mode = { 'n', 'o' }, desc = 'Toggle comment blockwise' },
+            { 'gb', mode = 'x', desc = 'Toggle comment blockwise (visual)' },
         },
     },
 
@@ -193,7 +193,6 @@ return {
     -- syntax highlight for mdx
     {
         'davidmh/mdx.nvim',
-        config = true,
         dependencies = { 'nvim-treesitter/nvim-treesitter' },
     },
 }
