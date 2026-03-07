@@ -15,7 +15,7 @@
   "lazygit.nvim": { "branch": "main", "commit": "a04ad0dbc725134edbee3a5eea29290976695357" },
   "lspsaga.nvim": { "branch": "main", "commit": "562d9724e3869ffd1801c572dd149cc9f8d0cc36" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
-  "markview.nvim": { "branch": "main", "commit": "fdc8bac74550f2ac847578cb74c7ad99b3421bc2" },
+  "markview.nvim": { "branch": "main", "commit": "239feb70ed1cfc26e2c91b32590fd63f7b015599" },
   "mason-conform.nvim": { "branch": "main", "commit": "48da2ebd5efbaf8a99566eadc3ece82d523f03c5" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "a324581a3c83fdacdb9804b79de1cbe00ce18550" },
   "mason-nvim-lint": { "branch": "main", "commit": "767b8ccdddaa977bec8987fd7507b9865a279235" },
