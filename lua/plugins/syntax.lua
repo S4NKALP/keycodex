@@ -6,7 +6,7 @@ return {
         build = ':TSUpdate',
         event = { 'BufReadPost', 'BufNewFile' },
         config = function()
-            require('nvim-treesitter.configs').setup({
+            require('nvim-treesitter').setup({
                 ensure_installed = require('config.extensions').ts_parsers,
                 auto_install = true,
                 highlight = {
