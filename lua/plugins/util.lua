@@ -27,19 +27,6 @@ return {
         end,
     },
 
-    -- Navigator
-    -- {
-    --     'numToStr/Navigator.nvim',
-    --     event = 'VeryLazy',
-    --     config = function()
-    --         require('Navigator').setup({
-    --             auto_save = 'current',
-    --             disable_on_zoom = false,
-    --             mux = 'auto',
-    --         })
-    --     end,
-    -- },
-
     -- float terminal
     {
         'akinsho/toggleterm.nvim',
@@ -62,7 +49,7 @@ return {
                 shell = vim.o.shell,
                 float_opts = {
                     border = 'curved', --  'single', 'double', 'shadow', etc.
-                    winblend = 0,      -- Set to 0 for full transparency
+                    winblend = 0, -- Set to 0 for full transparency
                     highlights = {
                         border = 'Normal',
                         background = 'Normal',
@@ -77,29 +64,6 @@ return {
     -- 	"vyfor/cord.nvim",
     -- 	event = "VeryLazy",
     -- },
-
-    -- uv
-    {
-        'benomahony/uv.nvim',
-        ft = 'python',
-        event = 'BufReadPre',
-        opts = {
-            picker_integration = true,
-            keymaps = {
-                prefix = '<leader>u', -- Main prefix for uv commands
-                commands = true,      -- Show uv commands menu (<leader>x)
-                run_file = true,      -- Run current file (<leader>xr)
-                run_selection = true, -- Run selected code (<leader>xs)
-                run_function = true,  -- Run function (<leader>xf)
-                venv = true,          -- Environment management (<leader>xe)
-                init = true,          -- Initialize uv project (<leader>xi)
-                add = true,           -- Add a package (<leader>xa)
-                remove = true,        -- Remove a package (<leader>xd)
-                sync = true,          -- Sync packages (<leader>xc)
-                sync_all = true,      -- Sync all packages, extras and groups (<leader>xC)
-            },
-        },
-    },
 
     -- wakatime
     { 'wakatime/vim-wakatime', event = 'VimEnter', lazy = false },
