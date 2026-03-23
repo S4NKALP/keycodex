@@ -26,7 +26,7 @@
   </a>
 </p>
 
-> All commit messages in this repo are AI-generated using [DevTools](https://github.com/S4NKALP/DevTools)
+> All commit messages in this repo are AI-generated using [DevGen](https://github.com/S4NKALP/DevGen)
 
 <h3>My Personalized Dev Env ❤️👨‍💻</h3>
 
