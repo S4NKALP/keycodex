@@ -92,4 +92,17 @@ return {
         --     })
         -- end,
     },
+
+    -- navigator
+    {
+        'numToStr/Navigator.nvim',
+        event = 'VeryLazy',
+        config = function()
+            require('Navigator').setup({
+                auto_save = 'current',
+                disable_on_zoom = false,
+                mux = 'auto',
+            })
+        end,
+    },
 }

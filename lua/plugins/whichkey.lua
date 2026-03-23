@@ -274,6 +274,12 @@ return {
             { '<C-Right>', ':vertical resize +10<cr>', desc = 'Increase window width' },
             { '<C-Up>', ':resize +10<cr>', desc = 'Increase window height' },
 
+            { '<C-h>', ':NavigatorLeft<cr>', desc = 'Move Left' },
+            { '<C-j>', ':NavigatorDown<cr>', desc = 'Move Down' },
+            { '<C-k>', ':NavigatorUp<cr>', desc = 'Move Up' },
+            { '<C-l>', ':NavigatorRight<cr>', desc = 'Move Right' },
+            { '<C-\\>', ':NavigatorPrevious<cr>', desc = 'Previous Pane' },
+
             -- { '<S-h>', ':bprevious<cr>', desc = 'Previous Buffer' },
             -- { '<S-l>', ':bnext<cr>', desc = 'Next Buffer' },
             { '<Tab>', ':bnext<cr>', desc = 'Next Buffer' },

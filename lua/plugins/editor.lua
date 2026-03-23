@@ -13,21 +13,6 @@ return {
         cmd = { 'SudaRead', 'SudaWrite' },
     },
 
-    -- Undo History Visualizer
-    {
-        'mbbill/undotree',
-        cmd = { 'UndotreeToggle' },
-        keys = { { '<leader>u', '<cmd>UndotreeToggle<cr>', desc = 'Undo Tree' } },
-        config = function()
-            vim.g.undotree_WindowLayout = 2
-            vim.g.undotree_SetFocusWhenToggle = 1
-            vim.g.undotree_SplitWidth = 35
-            vim.g.undotree_DiffpanelHeight = 15
-            vim.g.undotree_DiffCommand = 'diff --unified=0'
-            -- vim.g.undotree_DiffCommand = "git diff --no-index --unified=0 --patience"
-        end,
-    },
-
     -- visual multi
     {
         'mg979/vim-visual-multi',
@@ -94,7 +79,7 @@ return {
                 desc = 'Rename File',
             },
             {
-                '<leader>fx',
+                '<leader>fz',
                 function()
                     require('genghis').chmodx()
                 end,

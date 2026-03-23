@@ -6,7 +6,16 @@ return {
         version = '*',
         config = function()
             require('blink.cmp').setup({
+                fuzzy = { implementation = 'prefer_rust' },
+                snippets = { preset = 'luasnip' },
+                sources = {
+                    default = { 'lsp', 'path', 'snippets', 'buffer' },
+                    providers = {},
+                },
+
                 completion = {
+                    ghost_text = { enabled = true },
+
                     list = {
                         selection = {
                             preselect = false,
@@ -44,11 +53,6 @@ return {
                 },
                 signature = {
                     window = { border = 'rounded' },
-                },
-                snippets = { preset = 'luasnip' },
-                sources = {
-                    default = { 'lsp', 'path', 'snippets', 'buffer' },
-                    providers = {},
                 },
                 keymap = {
                     preset = 'none',
