@@ -22,7 +22,7 @@
   "mason-nvim-lint": { "branch": "main", "commit": "767b8ccdddaa977bec8987fd7507b9865a279235" },
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
   "mdx.nvim": { "branch": "main", "commit": "30222997ed4c0c7cc7447c4fce360fce87101bbf" },
-  "mini.nvim": { "branch": "main", "commit": "debd726e1b620e9934d554c2772de2e99cd3ccbe" },
+  "mini.nvim": { "branch": "main", "commit": "af5f75c9ce572a4d1f0c77d6fb4ea764d16c1b3c" },
   "neogen": { "branch": "main", "commit": "23e7e9f883d01289ebd90e98025acc860ea26366" },
   "neoscroll.nvim": { "branch": "master", "commit": "c8d29979cb0cb3a2437a8e0ae683fd82f340d3b8" },
   "nvim-autopairs": { "branch": "master", "commit": "59bce2eef357189c3305e25bc6dd2d138c1683f5" },

@@ -3,63 +3,63 @@ local function augroup(name)
 end
 
 -- hide sensetive data in .env
-local group = vim.api.nvim_create_augroup('EnvMask', { clear = true })
-local hidden = {}
-
-local function mask_line(line)
-    if line:match('^%s*#') or line:match('^%s*$') then
-        return line
-    end
-
-    local key, value = line:match('^([%w_]+)%s*=%s*(.*)')
-    if not key or not value then
-        return line
-    end
-
-    return key .. '=' .. string.rep('*', #value)
-end
-
-local function hide(buf)
-    if hidden[buf] then
-        return
-    end
-
-    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-    hidden[buf] = lines
-
-    local masked = {}
-    for i, line in ipairs(lines) do
-        masked[i] = mask_line(line)
-    end
-
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, masked)
-end
-
-local function show(buf)
-    if not hidden[buf] then
-        return
-    end
-    vim.api.nvim_buf_set_lines(buf, 0, -1, false, hidden[buf])
-    hidden[buf] = nil
-end
-
-vim.api.nvim_create_autocmd('BufReadPost', {
-    group = group,
-    pattern = { '.env', '.env.*', '*.env' },
-    callback = function(args)
-        vim.cmd('silent! noautocmd redraw')
-        hide(args.buf)
-    end,
-})
-
-vim.keymap.set('n', '<leader>ot', function()
-    local buf = vim.api.nvim_get_current_buf()
-    if hidden[buf] then
-        show(buf)
-    else
-        hide(buf)
-    end
-end, { desc = 'Toggle env masking' })
+-- local group = vim.api.nvim_create_augroup('EnvMask', { clear = true })
+-- local hidden = {}
+--
+-- local function mask_line(line)
+--     if line:match('^%s*#') or line:match('^%s*$') then
+--         return line
+--     end
+--
+--     local key, value = line:match('^([%w_]+)%s*=%s*(.*)')
+--     if not key or not value then
+--         return line
+--     end
+--
+--     return key .. '=' .. string.rep('*', #value)
+-- end
+--
+-- local function hide(buf)
+--     if hidden[buf] then
+--         return
+--     end
+--
+--     local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+--     hidden[buf] = lines
+--
+--     local masked = {}
+--     for i, line in ipairs(lines) do
+--         masked[i] = mask_line(line)
+--     end
+--
+--     vim.api.nvim_buf_set_lines(buf, 0, -1, false, masked)
+-- end
+--
+-- local function show(buf)
+--     if not hidden[buf] then
+--         return
+--     end
+--     vim.api.nvim_buf_set_lines(buf, 0, -1, false, hidden[buf])
+--     hidden[buf] = nil
+-- end
+--
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--     group = group,
+--     pattern = { '.env', '.env.*', '*.env' },
+--     callback = function(args)
+--         vim.cmd('silent! noautocmd redraw')
+--         hide(args.buf)
+--     end,
+-- })
+--
+-- vim.keymap.set('n', '<leader>ot', function()
+--     local buf = vim.api.nvim_get_current_buf()
+--     if hidden[buf] then
+--         show(buf)
+--     else
+--         hide(buf)
+--     end
+-- end, { desc = 'Toggle env masking' })
 
 -- Strip trailing spaces before write
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
