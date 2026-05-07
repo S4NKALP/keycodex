@@ -3,7 +3,7 @@ add({
 	"karb94/neoscroll.nvim", -- smooth scrolling
 	"OXY2DEV/markview.nvim", -- rendering for html and markdown
 	"serhez/bento.nvim", -- buffer manager
-	{ src = "akinsho/toggleterm.nvim", version = "*" }, --float terminal
+	"akinsho/toggleterm.nvim", --float terminal
 	"max397574/better-escape.nvim", -- better escape
 	"zbirenbaum/neodim", -- dimming the highlights of unused functions, variables, parameters, and more
 })
@@ -49,7 +49,7 @@ vim.keymap.set("n", "<leader>cv", "<cmd>Markview toggle<cr>", { desc = "toggle m
 
 -- smart column only when needed
 require("smartcolumn").setup({
-	colorcolumn = 120,
+	colorcolumn = "120",
 	disabled_filetypes = {
 		"help",
 		"text",
