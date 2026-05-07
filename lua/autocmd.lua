@@ -2,9 +2,27 @@ local function augroup(name)
 	return vim.api.nvim_create_augroup("nvim_" .. name, { clear = true })
 end
 
--- -----------------------------------------------------------------------------
--- General UI & Behavior
--- -----------------------------------------------------------------------------
+-- smart column only when needed
+local smart_column_group = vim.api.nvim_create_augroup('SmartColumn', { clear = true })
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufEnter' }, {
+    group = smart_column_group,
+    callback = function()
+        local limit = 120
+        local disabled_fts = { 'help', 'text', 'markdown', 'oil', 'snacks_dashboard', 'dashboard' }
+
+        if vim.tbl_contains(disabled_fts, vim.bo.filetype) then
+            vim.wo.colorcolumn = ''
+            return
+        end
+
+        local curr_line = vim.api.nvim_get_current_line()
+        if vim.fn.strdisplaywidth(curr_line) > limit then
+            vim.wo.colorcolumn = tostring(limit)
+        else
+            vim.wo.colorcolumn = ''
+        end
+    end,
+})
 
 -- Secure .env Masking (Conceal method)
 local function toggle_env_mask()
@@ -98,10 +116,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
--- -----------------------------------------------------------------------------
--- LSP Related
--- -----------------------------------------------------------------------------
-
 -- Document Highlight on CursorHold
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = augroup("lsp_attach_autocmds"),
@@ -119,10 +133,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
-
--- -----------------------------------------------------------------------------
--- Filetype Specific
--- -----------------------------------------------------------------------------
 
 -- Wrap and spellcheck in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
@@ -150,10 +160,8 @@ vim.api.nvim_create_user_command("TSInstallAll", function()
 	require("nvim-treesitter.install").install(parsers)
 end, { desc = "Install all configured Tree-sitter parsers" })
 
--- -----------------------------------------------------------------------------
--- Macro Notifications
--- -----------------------------------------------------------------------------
 
+-- Macro Notifications
 vim.api.nvim_create_autocmd("RecordingEnter", {
 	callback = function()
 		vim.notify("Recording macro...", vim.log.levels.INFO, { title = "Macro", timeout = 1000 })
@@ -167,10 +175,8 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 	end,
 })
 
--- -----------------------------------------------------------------------------
--- Auto-Save (3s Debounce)
--- -----------------------------------------------------------------------------
 
+-- Auto-Save (3s Debounce)
 local save_timer = nil
 vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "BufLeave", "FocusLost" }, {
 	group = augroup("autosave"),

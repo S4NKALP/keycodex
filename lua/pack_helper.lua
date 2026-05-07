@@ -1,5 +1,5 @@
 --- @class PackHelper
-local M = { registered = {} }
+local M = {}
 
 -- Shorthands: gh (default), gl: (GitLab), cb: (Codeberg)
 local SOURCES = setmetatable({
@@ -26,21 +26,8 @@ _G.add = function(specs)
 			return s
 		end)() or s)
 		table.insert(res, n)
-		M.registered[type(n) == "table" and n.src or n] = true
 	end
 	if #res > 0 then pcall(vim.pack.add, res) end
-end
-
-M.clean = function()
-	local del = {}
-	for url in pairs(vim.pack.get()) do
-		if not M.registered[url] then table.insert(del, url) end
-	end
-	if #del == 0 then return vim.notify("Plugins up to date", 2) end
-	if vim.fn.input("Delete " .. #del .. " plugins? (y/n): "):lower() == "y" then
-		for _, u in ipairs(del) do vim.pack.del(u) end
-		vim.notify("Cleaned " .. #del, 2)
-	end
 end
 
 return M
