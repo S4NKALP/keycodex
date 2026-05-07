@@ -1,12 +1,12 @@
 add({
-    'm4xshen/smartcolumn.nvim', -- smart column when needed
     'karb94/neoscroll.nvim', -- smooth scrolling
     'OXY2DEV/markview.nvim', -- rendering for html and markdown
-    { 'serhez/bento.nvim' }, -- buffer manager
+    'serhez/bento.nvim', -- buffer manager
     'akinsho/toggleterm.nvim', --float terminal
     'max397574/better-escape.nvim', -- better escape
     'zbirenbaum/neodim', -- dimming the highlights of unused functions, variables, parameters, and more
 })
+require('bento').setup({})
 
 -- lazy load UI enhancement plugins
 vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
@@ -46,21 +46,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end,
 })
 vim.keymap.set('n', '<leader>cv', '<cmd>Markview toggle<cr>', { desc = 'toggle markdown preview' })
-
--- smart column only when needed
-require('smartcolumn').setup({
-    colorcolumn = '120',
-    disabled_filetypes = {
-        'help',
-        'text',
-        'markdown',
-        'oil',
-        'snacks_dashboard',
-        'dashboard',
-    },
-})
-
-require('bento').setup({})
 
 require('toggleterm').setup({
     size = 10,
