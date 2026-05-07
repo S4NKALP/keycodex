@@ -26,8 +26,7 @@
     },
     "blink.cmp": {
       "rev": "d3874d2a13aa19b095bdd10d37a82a8f0aa7cad3",
-      "src": "https://github.com/saghen/blink.cmp",
-      "version": "'v0.*'"
+      "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
       "rev": "f29d8bac6549bc1e7d699c83f680823d7def98bd",
@@ -97,7 +96,7 @@
     },
     "mini.nvim": {
       "rev": "48555f1615f08c6318150aacb52bf7d61a5af798",
-      "src": "https://github.com/nvim-mini/mini.nvim"
+      "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neodim": {
       "rev": "1b8bda59a53b49ec2b59885e9fe78f8e90a1de76",
@@ -161,8 +160,7 @@
     },
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
-      "src": "https://github.com/akinsho/toggleterm.nvim",
-      "version": "'*'"
+      "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "vim-visual-multi": {
       "rev": "a6975e7c1ee157615bbc80fc25e4392f71c344d4",
