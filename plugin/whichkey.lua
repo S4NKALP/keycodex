@@ -153,6 +153,7 @@ local normal_mappings = {
 	{ "<leader>p", group = " Packages" },
 	{ "<leader>pm", ":Mason<cr>", desc = "Mason" },
 	{ "<leader>pu", ":lua vim.pack.update()<cr>", desc = "Update Plugins" },
+	{ "<leader>px", ":lua require('pack_helper').clean()<cr>", desc = "Clean Unused Plugins" },
 	{ "<leader>pt", ':lua require("snacks").profiler.toggle()<cr>', desc = "Profiler Toggle" },
 
 	{ "<leader>q", group = " Quit" },
