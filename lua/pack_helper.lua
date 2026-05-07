@@ -1,70 +1,45 @@
-local M = {}
+--- @class PackHelper
+local M = { registered = {} }
 
--- Define sources outside the function to avoid re-allocation
-local SOURCES = {
+-- Shorthands: gh (default), gl: (GitLab), cb: (Codeberg)
+local SOURCES = setmetatable({
 	gl = "https://gitlab.com/",
 	cb = "https://codeberg.org/",
 	gh = "https://github.com/",
-}
+}, {
+	__index = function(t, k) return rawget(t, k) or t.gh end,
+})
 
---- Resolves a shorthand URL or full URL to its canonical form.
-local function resolve_url(url)
-	if not url or url:match("^https?://") then
-		return url
-	end
-
-	-- Extract prefix if present (e.g., 'gl:user/repo')
+local function resolve(url)
+	if not url or url:match("^https?://") then return url end
 	local prefix, rest = url:match("^(%w+):(.+)$")
-	if prefix and SOURCES[prefix] then
-		return SOURCES[prefix] .. rest
-	end
-
-	-- Default to GitHub if no prefix or unknown prefix
-	return SOURCES.gh .. url
+	return (prefix and SOURCES[prefix] or SOURCES.gh) .. (rest or url)
 end
 
---- Normalizes a plugin specification.
-local function normalize_spec(spec)
-	if type(spec) == "string" then
-		return resolve_url(spec)
-	elseif type(spec) == "table" and spec.src then
-		spec.src = resolve_url(spec.src)
-		return spec
-	end
-	return spec
-end
-
---- Global helper to add plugins to the package manager.
---- Supports shorthand for GitHub (default), GitLab (gl:), and Codeberg (cb:).
----
---- Examples:
----   add("user/repo")               --> https://github.com/user/repo
----   add("gl:user/repo")            --> https://gitlab.com/user/repo
----   add("cb:user/repo")            --> https://codeberg.org/user/repo
----   add({ "user/repo", version = "main" })
----   add({ "user/repo", "gl:other/repo" })
----
+--- Examples: add("user/repo"), add("gl:user/repo"), add({ "user/repo", version = "main" })
 _G.add = function(specs)
-	-- Normalize input to a table if a single spec is provided
-	local list = type(specs) == "table" and (specs.src or not specs[1]) and { specs } or specs
-	if type(list) ~= "table" then
-		list = { specs }
+	local list = (type(specs) == "table" and (specs.src or not specs[1])) and { specs } or specs
+	local res = {}
+	for _, s in ipairs(type(list) == "table" and list or { list }) do
+		local n = type(s) == "string" and resolve(s) or (type(s) == "table" and s.src and (function()
+			s.src = resolve(s.src)
+			return s
+		end)() or s)
+		table.insert(res, n)
+		M.registered[type(n) == "table" and n.src or n] = true
 	end
+	if #res > 0 then pcall(vim.pack.add, res) end
+end
 
-	local resolved = {}
-	for _, spec in ipairs(list) do
-		local normalized = normalize_spec(spec)
-		if normalized then
-			table.insert(resolved, normalized)
-		end
+M.clean = function()
+	local del = {}
+	for url in pairs(vim.pack.get()) do
+		if not M.registered[url] then table.insert(del, url) end
 	end
-
-	if #resolved > 0 then
-		-- Wrap in pcall to handle potential vim.pack errors gracefully
-		local ok, err = pcall(vim.pack.add, resolved)
-		if not ok then
-			vim.notify("vim.pack.add failed: " .. tostring(err), vim.log.levels.ERROR, { title = "Pack Helper" })
-		end
+	if #del == 0 then return vim.notify("Plugins up to date", 2) end
+	if vim.fn.input("Delete " .. #del .. " plugins? (y/n): "):lower() == "y" then
+		for _, u in ipairs(del) do vim.pack.del(u) end
+		vim.notify("Cleaned " .. #del, 2)
 	end
 end
 
