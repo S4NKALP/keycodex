@@ -12,6 +12,7 @@ add({
     'm4xshen/hardtime.nvim', -- workflow
     'mg979/vim-visual-multi', -- multiple cursors
     'pmizio/typescript-tools.nvim',
+    'nvim-lua/plenary.nvim', -- dependency for typescript-tools
 })
 
 vim.g.VM_maps = {
