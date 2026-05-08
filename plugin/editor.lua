@@ -13,6 +13,7 @@ add({
     'mg979/vim-visual-multi', -- multiple cursors
     'pmizio/typescript-tools.nvim',
     'nvim-lua/plenary.nvim', -- dependency for typescript-tools
+    -- 'nvim-flutter/flutter-tools.nvim', -- flutter tools
 })
 
 vim.g.VM_maps = {
