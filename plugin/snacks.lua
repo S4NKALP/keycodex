@@ -105,7 +105,7 @@ Snacks.setup({
 			siblings = true,
 		},
 	},
-	explorer = { enabled = false },
+	explorer = { enabled = true },
 	projects = {
 		enabled = true,
 		dirs = {
@@ -328,9 +328,10 @@ Snacks.setup({
 			},
 		},
 	},
-	scroll = { enabled = false },
+	scroll = { enabled = true },
+	select = { enabled = true },
 	statuscolumn = {
-		enabled = false, -- Change this to false
+		enabled = true, -- Change this to false
 		left = { "mark", "sign" },
 		right = { "fold", "git" },
 		folds = {
@@ -342,10 +343,10 @@ Snacks.setup({
 		},
 		refresh = 50,
 	},
-	terminal = { enabled = false },
-	toggle = { enabled = false },
+	terminal = { enabled = true },
+	toggle = { enabled = true },
 	win = { enabled = true },
-	words = { enabled = false },
+	words = { enabled = true },
 	zen = {
 		enabled = true,
 		toggles = {

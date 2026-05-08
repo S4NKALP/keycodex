@@ -36,14 +36,6 @@ require("conform").setup({
 				end
 			end,
 		},
-		["markdownlint-cli2"] = {
-			condition = function(_, ctx)
-				local diag = vim.tbl_filter(function(d)
-					return d.source == "markdownlint"
-				end, vim.diagnostic.get(ctx.buf))
-				return #diag > 0
-			end,
-		},
 	},
 	formatters_by_ft = {
 		["lua"] = { "stylua" },
@@ -54,8 +46,8 @@ require("conform").setup({
 		["javascript"] = { "biome" },
 		["typescript"] = { "biome" },
 		["typescriptreact"] = { "biome" },
-		["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-		["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+		["markdown"] = { "prettier", "markdownlint-cli2"},
+		["markdown.mdx"] = { "prettier", "markdownlint-cli2" },
 		["mdx"] = { "prettier" },
 		["_"] = { "trim_whitespace" },
 	},

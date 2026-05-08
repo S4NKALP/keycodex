@@ -166,14 +166,14 @@ local normal_mappings = {
 	{ "<leader>qw", ":wq<cr>", desc = "Write and Quit" },
 
 	{ "<leader>r", group = " Refactor" },
-	{ "<leader>rd", "", desc = "Go To Definition" }, -- treesitter navigation
-	{ "<leader>rD", "", desc = "List Definition" },
-	{ "<leader>rh", "", desc = "List Definition Head" },
-	{ "<leader>rj", "", desc = "Next Usage" },
-	{ "<leader>rk", "", desc = "Previous Usage" },
-	{ "<leader>rn", "", desc = "Swap Next" },
-	{ "<leader>rp", "", desc = "Swap Previous" },
-	{ "<leader>rr", "", desc = "Smart Rename" },
+	{ "<leader>rd", desc = "Go To Definition" }, -- treesitter navigation
+	{ "<leader>rD", desc = "List Definition" },
+	{ "<leader>rh", desc = "List Definition Head" },
+	{ "<leader>rj", desc = "Next Usage" },
+	{ "<leader>rk", desc = "Previous Usage" },
+	{ "<leader>rn", desc = "Swap Next" },
+	{ "<leader>rp", desc = "Swap Previous" },
+	{ "<leader>rr", desc = "Smart Rename" },
 	{ "<leader>rs", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", desc = "Replace Word Buffer" },
 
 	{ "<leader>s", group = " Split" },

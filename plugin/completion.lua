@@ -1,7 +1,7 @@
 add({
 	"saghen/blink.lib",
-	"saghen/blink.cmp",
-	"L3MON4D3/LuaSnip",
+	{ src = "saghen/blink.cmp", build = "cargo build --release" },
+	{ src = "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 	"rafamadriz/friendly-snippets",
 })
 
@@ -9,8 +9,12 @@ require("blink.cmp").setup({
 	fuzzy = { implementation = "prefer_rust" },
 	snippets = { preset = "luasnip" },
 	sources = {
-		default = { "lsp", "path", "snippets", "buffer" },
-		providers = {},
+		default = function()
+			local type = vim.fn.getcmdtype()
+			if type == "/" or type == "?" then return { "buffer" } end
+			if type == ":" then return { "cmdline" } end
+			return { "lsp", "path", "snippets", "buffer" }
+		end,
 	},
 
 	completion = {
