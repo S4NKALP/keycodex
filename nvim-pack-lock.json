@@ -127,7 +127,7 @@
       "src": "https://github.com/folke/todo-comments.nvim"
     },
     "toggleterm.nvim": {
-      "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
+      "rev": "50ea089fc548917cc3cc16b46a8211833b9e3c7c",
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "typescript-tools.nvim": {
