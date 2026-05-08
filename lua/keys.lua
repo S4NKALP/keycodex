@@ -5,6 +5,7 @@ local function map(mode, lhs, rhs, opts)
 end
 local opts = { noremap = true, silent = true }
 
+
 -- Space as leader
 map('n', '<Space>', '', opts)
 vim.g.mapleader = ' '
@@ -18,6 +19,13 @@ vim.g.maplocalleader = ' '
 map('t', 'jk', '<C-\\><C-n>')
 map('t', 'kj', '<C-\\><C-n>')
 map('t', '<ESC>', '<C-\\><C-n>')
+
+-- Insert Mode Mappings
+map('i', 'jk', '<Esc>')
+map('n', '<leader>ps', require('packui').open, {desc = "Open Vim Pack UI"})
+-- Comments
+map('n', '<leader>/', 'gcc', { remap = true, desc = 'Toggle comment' })
+map('v', '<leader>/', 'gc', { remap = true, desc = 'Toggle comment' })
 
 -- Clear search, diff update and redraw
 map({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and clear hlsearch' })

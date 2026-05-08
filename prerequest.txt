@@ -1,0 +1,40 @@
+# System Prerequisites for Neovim Configuration (nvim-new)
+
+## Core Tools
+- git (Plugin management)
+- curl (Treesitter/Mason downloads)
+- tar (Parser extraction)
+- gcc / g++ (Compiling Treesitter parsers)
+
+## Search & Navigation
+- ripgrep (rg) - Fast grep for Snacks Picker
+- fd - Fast file find for Snacks Picker
+
+## Git Enhancements
+- lazygit (Integrated git UI in Snacks) [pacman: lazygit]
+
+## Snacks.image & Media Rendering
+- imagemagick (Image processing) [pacman: imagemagick]
+- ghostscript (gs) - PDF rendering [pacman: ghostscript]
+- tectonic (LaTeX rendering) [pacman: tectonic]
+- mermaid-cli (mmdc) - Mermaid diagram rendering [pacman: mermaid-cli]
+
+## Clipboard (Wayland)
+- wl-clipboard (wl-copy / wl-paste) [pacman: wl-clipboard]
+
+## Language Runtimes (for Mason & LSPs)
+- nodejs & npm (JS/TS, Tailwind, etc.) [pacman: nodejs, npm]
+- python3 & python-pip (Python LSPs) [pacman: python, python-pip]
+- go (Go LSPs) [pacman: go]
+- cargo (Rust LSPs) [pacman: rust]
+- ruby (Ruby LSPs) [pacman: ruby]
+- php & composer (PHP LSPs) [pacman: php, composer]
+- openjdk (Java LSPs) [pacman: jdk-openjdk]
+- luarocks (Lua dependency building) [pacman: luarocks]
+
+## System Integration
+- gio (Used by Snacks Explorer for trash support) [pacman: glib2]
+
+---
+### Installation Command (Arch Linux)
+sudo pacman -S git curl tar gcc ripgrep fd lazygit imagemagick ghostscript tectonic mermaid-cli wl-clipboard nodejs npm python python-pip go rust ruby php composer jdk-openjdk luarocks glib2
