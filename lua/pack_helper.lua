@@ -27,7 +27,7 @@ _G.add = function(specs)
 		end)() or s)
 		table.insert(res, n)
 	end
-	if #res > 0 then pcall(vim.pack.add, res) end
+	if #res > 0 then pcall(vim.pack.add, res, { confirm = false }) end
 end
 
 return M

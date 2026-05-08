@@ -198,3 +198,23 @@ vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "BufLeave", "FocusLo
 		end, delay)
 	end,
 })
+
+-- Autoinstall missing plugins on startup
+vim.api.nvim_create_autocmd('VimEnter', {
+    group = augroup('autoinstall'),
+    callback = function()
+        local ok, items = pcall(vim.pack.get, nil, { info = true })
+        if ok then
+            local missing = {}
+            for _, item in ipairs(items) do
+                if not item.path or vim.fn.isdirectory(item.path) == 0 then
+                    table.insert(missing, item.spec.name or item.spec.src:match('([^/]+)/*$'))
+                end
+            end
+            if #missing > 0 then
+                vim.notify('Installing missing plugins...', vim.log.levels.INFO, { title = 'vim.pack' })
+                vim.pack.update(missing, { force = true })
+            end
+        end
+    end,
+})
