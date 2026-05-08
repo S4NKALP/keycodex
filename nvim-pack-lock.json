@@ -102,6 +102,10 @@
       "rev": "88c1453db4ba7dd24131086fe51fdf74e587d275",
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
@@ -125,6 +129,10 @@
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
       "src": "https://github.com/akinsho/toggleterm.nvim"
+    },
+    "typescript-tools.nvim": {
+      "rev": "c2f5910074103705661e9651aa841e0d7eea9932",
+      "src": "https://github.com/pmizio/typescript-tools.nvim"
     },
     "vim-visual-multi": {
       "rev": "a6975e7c1ee157615bbc80fc25e4392f71c344d4",
