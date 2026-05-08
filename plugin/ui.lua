@@ -1,37 +1,11 @@
 add({
-    'karb94/neoscroll.nvim', -- smooth scrolling
     'OXY2DEV/markview.nvim', -- rendering for html and markdown
     'serhez/bento.nvim', -- buffer manager
     'akinsho/toggleterm.nvim', --float terminal
-    'max397574/better-escape.nvim', -- better escape
-    'zbirenbaum/neodim', -- dimming the highlights of unused functions, variables, parameters, and more
 })
 require('bento').setup({})
 
--- lazy load UI enhancement plugins
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
-    callback = function()
-        require('neoscroll').setup({
-            mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
-        })
-        require('neodim').setup({
-            alpha = 0.5,
-            blend_color = nil,
-            hide = {
-                underline = true,
-                virtual_text = true,
-                signs = true,
-            },
-            regex = {
-                '[uU]nused',
-                '[nN]ever [rR]ead',
-                '[nN]ot [rR]ead',
-            },
-            priority = 128,
-            disable = {},
-        })
-    end,
-})
+
 
 -- lazy load markdown preview
 vim.api.nvim_create_autocmd('FileType', {
@@ -71,19 +45,4 @@ require('toggleterm').setup({
     },
 })
 
--- lazy load better escape
-vim.api.nvim_create_autocmd('InsertEnter', {
-    callback = function()
-        require('better_escape').setup({
-            mappings = {
-                i = {
-                    k = { j = '<Esc>' },
-                    j = { k = '<Esc>', j = '<Esc>' },
-                    -- disable jj
-                    -- j = { j = false },
-                },
-            },
-        })
-    end,
-    once = true,
-})
+

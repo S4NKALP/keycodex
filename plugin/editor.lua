@@ -1,10 +1,8 @@
 add({
-    'windwp/nvim-autopairs', -- autopairs
     'windwp/nvim-ts-autotag', -- autotag
     'folke/todo-comments.nvim', -- todo comment highlights
     'wakatime/vim-wakatime', --wakaTime coding time tracker
     'lambdalisue/suda.vim', -- edit files as sudo (:SudaWrite)
-    'numToStr/Comment.nvim', -- smart comment toggling
     'NMAC427/guess-indent.nvim', -- auto-detect tab/space indentation
     'brenoprata10/nvim-highlight-colors', -- color highlighting
     'davidmh/mdx.nvim', -- syntax highlighter for mdx
@@ -12,7 +10,6 @@ add({
     'Exafunction/windsurf.vim', -- windsurf ai for autocompletion
     'numToStr/Navigator.nvim', -- navigator
     'm4xshen/hardtime.nvim', -- workflow
-    'lukas-reineke/indent-blankline.nvim', --indent guides
     'mg979/vim-visual-multi', -- multiple cursors
 })
 
@@ -27,7 +24,6 @@ vim.g.VM_maps = {
 -- lazy load insert mode enhancements
 vim.api.nvim_create_autocmd('InsertEnter', {
     callback = function()
-        require('nvim-autopairs').setup({})
         require('nvim-ts-autotag').setup({})
     end,
     once = true,
@@ -37,7 +33,6 @@ vim.api.nvim_create_autocmd('InsertEnter', {
 vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
     callback = function()
         require('todo-comments').setup({ signs = false })
-        require('Comment').setup()
         require('guess-indent').setup({})
         require('nvim-highlight-colors').setup({ render = 'background' })
         require('Navigator').setup({
@@ -49,7 +44,6 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
 })
 
 require('hardtime').setup({})
-require('ibl').setup({})
 
 require('nvim-treesitter').setup({
     ensure_installed = require('extensions').ts_parsers,

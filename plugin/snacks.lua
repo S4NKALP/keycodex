@@ -107,11 +107,13 @@ Snacks.setup({
 	},
 	explorer = { enabled = false },
 	projects = {
-        dirs = {
-            "~/Project",
-            "~/.config/Modus"
-        }
-    },
+		enabled = true,
+		dirs = {
+			"~/Projects",
+			"~/Projects/other",
+			"~/.config/Modus",
+		}
+	},
 	git = { enabled = true },
 	gitbrowse = { enabled = true },
 	image = { enabled = true },
@@ -197,7 +199,10 @@ Snacks.setup({
 			help = { layout = { preset = "ivy_split" } },
 			man = { layout = { preset = "ivy_split" } },
 			notifications = { layout = palette_layout() },
-			projects = { layout = files_layout(0.8) },
+			projects = {
+				dev = { "~/Projects", "~/Projects/other" },
+				layout = files_layout(0.8),
+			},
 			recent = { layout = files_layout() },
 			search_history = { layout = palette_layout() },
 			smart = { layout = files_layout() },
