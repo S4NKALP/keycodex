@@ -11,6 +11,7 @@ add({
     'numToStr/Navigator.nvim', -- navigator
     'm4xshen/hardtime.nvim', -- workflow
     'mg979/vim-visual-multi', -- multiple cursors
+    'pmizio/typescript-tools.nvim',
 })
 
 vim.g.VM_maps = {
@@ -64,3 +65,27 @@ end, { expr = true, silent = true })
 vim.keymap.set('i', '<A-x>', function()
     return vim.fn['codeium#Clear']()
 end, { expr = true, silent = true })
+
+-- typescript tools
+require('typescript-tools').setup({
+    settings = {
+        separate_diagnostic_server = true,
+        publish_diagnostic_on = 'insert_leave',
+        expose_as_code_action = {
+            'fix_all',
+            'add_missing_imports',
+            'remove_unused',
+            'remove_unused_imports',
+            'organize_imports',
+        },
+        tsserver_plugins = {},
+        complete_function_calls = false,
+        include_completions_with_insert_text = true,
+        code_lens = 'off',
+        disable_member_code_lens = true,
+        jsx_close_tag = {
+            enable = false,
+            filetypes = { 'javascriptreact', 'typescriptreact' },
+        },
+    },
+})
