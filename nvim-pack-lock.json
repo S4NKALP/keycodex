@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "Comment.nvim": {
-      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
-      "src": "https://github.com/numToStr/Comment.nvim"
-    },
     "Lspsaga.nvim": {
       "rev": "e6c04f88836d79f2fd7e46fd170e7ee986c789d4",
       "src": "https://github.com/nvimdev/Lspsaga.nvim"
@@ -20,10 +16,6 @@
       "rev": "aee8a542bc1839ff1764992ef2aa41c981d0bba4",
       "src": "https://github.com/serhez/bento.nvim"
     },
-    "better-escape.nvim": {
-      "rev": "3f4bc0b326606264ff75967f59091b5ddada0554",
-      "src": "https://github.com/max397574/better-escape.nvim"
-    },
     "blink.cmp": {
       "rev": "d3874d2a13aa19b095bdd10d37a82a8f0aa7cad3",
       "src": "https://github.com/saghen/blink.cmp"
@@ -39,10 +31,6 @@
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
-    },
-    "gitignore": {
-      "rev": "0344f643768c4d64af4add8c1bdddf6f7d4c9010",
-      "src": "https://github.com/wintermute-cell/gitignore.nvim"
     },
     "gitignore.nvim": {
       "rev": "0344f643768c4d64af4add8c1bdddf6f7d4c9010",
@@ -63,10 +51,6 @@
     "hardtime.nvim": {
       "rev": "b4e431934af1fe224a3a801f632c008278cb7628",
       "src": "https://github.com/m4xshen/hardtime.nvim"
-    },
-    "indent-blankline.nvim": {
-      "rev": "d28a3f70721c79e3c5f6693057ae929f3d9c0a03",
-      "src": "https://github.com/lukas-reineke/indent-blankline.nvim"
     },
     "markview.nvim": {
       "rev": "dbf74b6db11c1468d5128a38b26b6d99dc7316e9",
@@ -98,18 +82,6 @@
       "rev": "48555f1615f08c6318150aacb52bf7d61a5af798",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
-    "neodim": {
-      "rev": "1b8bda59a53b49ec2b59885e9fe78f8e90a1de76",
-      "src": "https://github.com/zbirenbaum/neodim"
-    },
-    "neoscroll.nvim": {
-      "rev": "c8d29979cb0cb3a2437a8e0ae683fd82f340d3b8",
-      "src": "https://github.com/karb94/neoscroll.nvim"
-    },
-    "nvim-autopairs": {
-      "rev": "59bce2eef357189c3305e25bc6dd2d138c1683f5",
-      "src": "https://github.com/windwp/nvim-autopairs"
-    },
     "nvim-highlight-colors": {
       "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",
       "src": "https://github.com/brenoprata10/nvim-highlight-colors"
@@ -130,10 +102,6 @@
       "rev": "88c1453db4ba7dd24131086fe51fdf74e587d275",
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
-    "smartcolumn.nvim": {
-      "rev": "b9cdbdf42f7ac5a659204cd5926017c7ff724a19",
-      "src": "https://github.com/m4xshen/smartcolumn.nvim"
-    },
     "snacks.nvim": {
       "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
       "src": "https://github.com/folke/snacks.nvim"
@@ -145,10 +113,6 @@
     "tiny-code-action.nvim": {
       "rev": "0d040ed81f7953118b81cd12681fcdfcac069803",
       "src": "https://github.com/rachartier/tiny-code-action.nvim"
-    },
-    "tiny-glimmer.nvim": {
-      "rev": "cc285167914e947fc130523d02927fdaf24636a6",
-      "src": "https://github.com/rachartier/tiny-glimmer.nvim"
     },
     "tiny-inline-diagnostic.nvim": {
       "rev": "147af4e49f51dd48f41972de26552872b8ba7b25",
