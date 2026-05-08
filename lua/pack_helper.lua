@@ -30,4 +30,31 @@ _G.add = function(specs)
 	if #res > 0 then pcall(vim.pack.add, res, { confirm = false }) end
 end
 
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local spec = ev.data.spec
+		local kind = ev.data.kind
+		local path = ev.data.path
+		if spec.build and (kind == "install" or kind == "update") then
+			vim.notify("Building " .. (spec.name or spec.src) .. "...", vim.log.levels.INFO, { title = "vim.pack" })
+			local cmd = type(spec.build) == "string" and { "sh", "-c", spec.build } or spec.build
+			vim.system(cmd, { cwd = path }, function(res)
+				if res.code ~= 0 then
+					vim.notify(
+						"Build failed for " .. (spec.name or spec.src) .. ": " .. res.stderr,
+						vim.log.levels.ERROR,
+						{ title = "vim.pack" }
+					)
+				else
+					vim.notify(
+						"Build successful for " .. (spec.name or spec.src),
+						vim.log.levels.INFO,
+						{ title = "vim.pack" }
+					)
+				end
+			end)
+		end
+	end,
+})
+
 return M

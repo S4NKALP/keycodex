@@ -36,6 +36,46 @@ vim.schedule(function()
 
 	vim.lsp.enable("html")
 	vim.lsp.enable("cssls")
+	vim.lsp.config("tailwindcss", {
+		filetypes = {
+			"astro",
+			"blade",
+			"edge",
+			"ejs",
+			"erb",
+			"gohtml",
+			"gohtmltmpl",
+			"handlebars",
+			"hbs",
+			"html",
+			"jade",
+			"leaf",
+			"liquid",
+			"markdown",
+			"mdx",
+			"mustache",
+			"nunjucks",
+			"php",
+			"razor",
+			"slim",
+			"twig",
+			"css",
+			"less",
+			"postcss",
+			"sass",
+			"scss",
+			"stylus",
+			"sugarss",
+			"javascript",
+			"javascriptreact",
+			"rescript",
+			"typescript",
+			"typescriptreact",
+			"vue",
+			"svelte",
+			"templ",
+		},
+	})
 	vim.lsp.enable("tailwindcss")
 
 	-- rust

@@ -21,6 +21,12 @@ local treesitter_parsers = {
 	"css",
 	"scss",
 	"markdown_inline",
+	"regex",
+	"latex",
+	"tsx",
+	"svelte",
+	"typst",
+	"vue",
 }
 
 local lsp_server = {

@@ -58,6 +58,11 @@ end
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
 vim.opt.path:append({ "**" })
 vim.opt.shortmess:append({ W = true, I = true, c = true }) -- disable greeting
 
@@ -65,3 +70,22 @@ vim.opt.shortmess:append({ W = true, I = true, c = true }) -- disable greeting
 vim.g.markdown_recommended_style = 0
 
 vim.cmd([[set fillchars+=eob:\ ]])
+
+vim.filetype.add({
+	extension = {
+		astro = "astro",
+		ejs = "ejs",
+		hbs = "hbs",
+		njk = "nunjucks",
+		postcss = "postcss",
+		razor = "razor",
+		slim = "slim",
+		sugarss = "sugarss",
+		edge = "edge",
+		jade = "jade",
+		leaf = "leaf",
+		erb = "erb",
+		gohtml = "gohtml",
+		gohtmltmpl = "gohtmltmpl",
+	},
+})
