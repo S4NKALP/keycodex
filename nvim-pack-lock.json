@@ -66,8 +66,7 @@
     },
     "mason-lspconfig.nvim": {
       "rev": "1423254f58a3407a5afd5ade0ccd901f3eecc6ba",
-      "src": "https://github.com/mason-org/mason-lspconfig.nvim",
-      "version": "'main'"
+      "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-nvim-lint": {
       "rev": "cafbc5d82d8eb4af0daf0057332a325ddf2f436b",
@@ -75,8 +74,7 @@
     },
     "mason.nvim": {
       "rev": "cb8445f8ce85d957416c106b780efd51c6298f89",
-      "src": "https://github.com/mason-org/mason.nvim",
-      "version": "'main'"
+      "src": "https://github.com/mason-org/mason.nvim"
     },
     "mdx.nvim": {
       "rev": "6c3dc7c4a4b58b5d86404c21a9b4655282ca08c5",
