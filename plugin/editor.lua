@@ -11,7 +11,8 @@ add({
     'numToStr/Navigator.nvim', -- navigator
     'm4xshen/hardtime.nvim', -- workflow
     'mg979/vim-visual-multi', -- multiple cursors
-    'pmizio/typescript-tools.nvim',
+    'pmizio/typescript-tools.nvim', -- typescript tools
+    { src = 'iamcco/markdown-preview.nvim', build = 'cd app && npm install' },
     'nvim-lua/plenary.nvim', -- dependency for typescript-tools
     -- 'nvim-flutter/flutter-tools.nvim', -- flutter tools
 })
