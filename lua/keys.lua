@@ -42,6 +42,10 @@ map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 -- Visual overwrite paste
 map({ 'v', 'x' }, 'p', '"_dP', opts)
 
+-- Paste and auto-indent (context-aware)
+map('n', 'p', 'p=`]', { desc = 'Paste and auto-indent' })
+map('n', 'P', 'P=`]', { desc = 'Paste before and auto-indent' })
+
 -- Do not copy on x
 map({ 'v', 'x' }, 'x', '"_x', opts)
 map('n', 'X', '"_D', opts)
