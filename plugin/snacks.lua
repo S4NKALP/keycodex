@@ -98,7 +98,7 @@ Snacks.setup({
             },
         },
     },
-    debug = { enabled = true },
+    debug = { enabled = false },
     dim = {
         enabled = true,
         scope = {
