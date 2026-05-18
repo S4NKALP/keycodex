@@ -4,10 +4,6 @@
       "rev": "3e33a6a6c5d379f3d4fae77fae6b53b762a0a30f",
       "src": "https://github.com/nvimdev/Lspsaga.nvim"
     },
-    "LuaSnip": {
-      "rev": "a62e1083a3cfe8b6b206e7d3d33a51091df25357",
-      "src": "https://github.com/L3MON4D3/LuaSnip"
-    },
     "Navigator.nvim": {
       "rev": "91d86506ac2a039504d5205d32a1d4bc7aa57072",
       "src": "https://github.com/numToStr/Navigator.nvim"
