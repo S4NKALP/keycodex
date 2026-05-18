@@ -129,21 +129,20 @@ local normal_mappings = {
 	{ "<leader>it", ":put =strftime('## %r')<cr>", desc = "Time" },
 
 	{ "<leader>l", group = " LSP" },
-	{ "<leader>la", ":Lspsaga code_action<cr>", desc = "Code Action" },
-	{ "<leader>ld", ":Lspsaga goto_definition<cr>", desc = "Goto Definition" },
-	{ "<leader>lf", ":Lspsaga finder<cr>", desc = "Finder" },
-	{ "<leader>lh", ":Lspsaga hover_doc<cr>", desc = "Hover" },
+	{ "<leader>la", ":lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+	{ "<leader>ld", ":lua Snacks.picker.lsp_definitions()<cr>", desc = "Goto Definition" },
+	{ "<leader>lf", ":lua Snacks.picker.lsp_references()<cr>", desc = "Finder (References)" },
+	{ "<leader>lh", ":lua vim.lsp.buf.hover()<cr>", desc = "Hover" },
 	{ "<leader>lI", ":LspInfo<cr>", desc = "LSP Info" },
-	{ "<leader>lj", ":Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
-	{ "<leader>lk", ":Lspsaga diagnostic_jump_prev<cr>", desc = "Prev Diagnostic" },
-	{ "<leader>lo", ":Lspsaga outline<cr>", desc = "Outline" },
-	{ "<leader>lp", ":Lspsaga peek_definition<cr>", desc = "Peek Definition" },
+	{ "<leader>lj", ":lua vim.diagnostic.goto_next()<cr>", desc = "Next Diagnostic" },
+	{ "<leader>lk", ":lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
+	{ "<leader>lo", ":lua Snacks.picker.lsp_symbols()<cr>", desc = "Outline (Symbols)" },
+	{ "<leader>lp", ":lua Snacks.picker.lsp_definitions()<cr>", desc = "Peek Definition" },
 	{ "<leader>lq", ":LspStop<cr>", desc = "Stop LSP" },
 	{ "<leader>lQ", ":LspRestart<cr>", desc = "Restart LSP" },
-	{ "<leader>lr", ":Lspsaga rename<cr>", desc = "Rename" },
-	{ "<leader>lR", ":Lspsaga project_replace<cr>", desc = "Replace" },
-	{ "<leader>lt", ":Lspsaga goto_type_definition<cr>", desc = "Goto Type Definition" },
-	{ "<leader>lT", ":Lspsaga peek_type_definition<cr>", desc = "Peek Type Definition" },
+	{ "<leader>lr", ":lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+	{ "<leader>lt", ":lua Snacks.picker.lsp_type_definitions()<cr>", desc = "Goto Type Definition" },
+	{ "<leader>lT", ":lua Snacks.picker.lsp_type_definitions()<cr>", desc = "Peek Type Definition" },
 
 	{ "<leader>o", group = " Options" },
 	{ "<leader>oi", "vim.show_pos", desc = "Inspect Position" },
@@ -244,7 +243,7 @@ local visual_mappings = {
 	{ "<leader>gu", ":'<,'>Gitsigns undo_stage_hunk<cr>", desc = "Undo Stage Hunk" },
 
 	{ "<leader>l", group = " LSP" },
-	{ "<leader>la", ":<C-U>Lspsaga range_code_action<cr>", desc = "Code Action" },
+	{ "<leader>la", ":lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
 
 	-- { "<leader>o", group = " Options" },
 
@@ -270,7 +269,7 @@ local no_leader_mappings = {
 	{ "<Tab>", ":bnext<cr>", desc = "Next Buffer" },
 	{ "<S-Tab>", ":bprevious<cr>", desc = "Previous Buffer" },
 
-	{ "K", ":Lspsaga hover_doc<cr>", desc = "LSP Hover" },
+	{ "K", ":lua vim.lsp.buf.hover()<cr>", desc = "LSP Hover" },
 	{ "Q", ":qall!<cr>", desc = "Force Quit!" },
 	{ "U", ":redo<cr>", desc = "Redo" },
 
@@ -282,7 +281,7 @@ local no_leader_mappings = {
 	{ "]g", ":Gitsigns next_hunk<cr>", desc = "Git Hunk" },
 	{ "]o", group = "Textobjects" },
 
-	{ "gd", ":Lspsaga goto_definition<cr>", desc = "Goto Definition" },
+	{ "gd", ":lua Snacks.picker.lsp_definitions()<cr>", desc = "Goto Definition" },
 }
 
 wk.add(normal_mappings)

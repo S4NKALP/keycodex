@@ -2,7 +2,6 @@ add({
     'mason-org/mason.nvim', -- lsp installer manager
     'mason-org/mason-lspconfig.nvim', -- lsp installer
     'neovim/nvim-lspconfig', -- lsp config
-    'nvimdev/Lspsaga.nvim', -- lsp ui
     'rachartier/tiny-inline-diagnostic.nvim', -- inline diagnostic
     'rachartier/tiny-code-action.nvim', -- code action
 })
@@ -28,23 +27,6 @@ require('mason-lspconfig').setup({
 -- improve neovim lsp experience
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function()
-        require('lspsaga').setup({
-            ui = {
-                theme = 'round',
-                border = 'rounded',
-                devicon = true,
-                title = true,
-                winblend = 1,
-                expand = ' ',
-                collapse = ' ',
-                preview = '',
-                code_action = '󰠠 ',
-                diagnostic = ' ',
-                incoming = ' ',
-                outgoing = ' ',
-                hover = ' ',
-            },
-        })
 
         --inline diagnostic
         require('tiny-inline-diagnostic').setup({
