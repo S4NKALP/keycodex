@@ -342,7 +342,7 @@ Snacks.setup({
         },
         refresh = 50,
     },
-    terminal = { enabled = true },
+    terminal = { enabled = false },
     toggle = { enabled = true },
     win = { enabled = true },
     words = { enabled = true },
