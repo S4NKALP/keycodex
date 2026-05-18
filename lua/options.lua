@@ -6,7 +6,6 @@ local options = {
 	undofile = true, -- save state of file on write
 	undodir = vim.fn.stdpath("cache") .. "/undo",
 	undolevels = 10000,
-	autoread = true, -- autoread changes from other sources
 	signcolumn = "yes",
 	cursorline = true,
 	cursorlineopt = "number",
@@ -19,10 +18,8 @@ local options = {
 	backup = false, -- creates a backup file
 	writebackup = false, -- do not edit backups
 	winminwidth = 5, -- Minimum window width
-	termguicolors = true, -- set term gui colors (most terminals support this)
 	showtabline = 0, -- always show tabs
 	showcmd = false,
-	mouse = "a", -- allow the mouse to be used in neovim
 	confirm = true, -- Confirm to save changes before exiting modified buffer
 
 	-- tabs
@@ -31,8 +28,6 @@ local options = {
 	expandtab = true, -- <tab> key will create " " instead of "\t"
 	shiftwidth = 4, -- indent change after backspace and >> <<
 	softtabstop = 4, -- number of spaces instead of tab
-	autoindent = true, -- auto indent
-	smartindent = true, -- make indenting smarter again
 	list = true,
 	listchars = { tab = "» ", trail = "·", nbsp = "␣" },
 	showbreak = string.rep(" ", 3),
@@ -40,8 +35,6 @@ local options = {
 	-- Search
 	ignorecase = true,
 	smartcase = true,
-	hlsearch = true,
-	wildmenu = true,
 	wildmode = "longest:full,full",
 	wildoptions = "pum",
 

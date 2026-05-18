@@ -63,13 +63,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
--- Highlight on yank
-vim.api.nvim_create_autocmd("TextYankPost", {
-	group = augroup("highlight_yank"),
-	callback = function()
-		vim.highlight.on_yank({ timeout = 200 })
-	end,
-})
 
 -- Resize splits if window got resized
 vim.api.nvim_create_autocmd("VimResized", {
@@ -79,17 +72,6 @@ vim.api.nvim_create_autocmd("VimResized", {
 	end,
 })
 
--- Go to last location when opening a buffer
-vim.api.nvim_create_autocmd("BufReadPost", {
-	group = augroup("last_loc"),
-	callback = function()
-		local mark = vim.api.nvim_buf_get_mark(0, '"')
-		local lcount = vim.api.nvim_buf_line_count(0)
-		if mark[1] > 0 and mark[1] <= lcount then
-			pcall(vim.api.nvim_win_set_cursor, 0, mark)
-		end
-	end,
-})
 
 -- Close specific filetypes with <q>
 vim.api.nvim_create_autocmd("FileType", {
@@ -116,11 +98,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
--- Document Highlight on CursorHold
+-- LSP Attach Features
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = augroup("lsp_attach_autocmds"),
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		
+		-- Document Highlight
 		if client and client:supports_method("textDocument/documentHighlight") then
 			vim.api.nvim_create_autocmd({ "CursorHold" }, {
 				buffer = args.buf,
@@ -130,6 +114,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				buffer = args.buf,
 				callback = vim.lsp.buf.clear_references,
 			})
+		end
+
+		-- Inlay Hints
+		if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+			vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
 		end
 	end,
 })
