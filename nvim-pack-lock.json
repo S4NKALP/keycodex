@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "Lspsaga.nvim": {
-      "rev": "3e33a6a6c5d379f3d4fae77fae6b53b762a0a30f",
-      "src": "https://github.com/nvimdev/Lspsaga.nvim"
-    },
     "Navigator.nvim": {
       "rev": "91d86506ac2a039504d5205d32a1d4bc7aa57072",
       "src": "https://github.com/numToStr/Navigator.nvim"
