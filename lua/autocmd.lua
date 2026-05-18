@@ -122,7 +122,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
 		if client and client:supports_method("textDocument/documentHighlight") then
-			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+			vim.api.nvim_create_autocmd({ "CursorHold" }, {
 				buffer = args.buf,
 				callback = vim.lsp.buf.document_highlight,
 			})
@@ -176,26 +176,35 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 })
 
 
--- Auto-Save (3s Debounce)
+-- Auto-Save on InsertLeave with 3s Debounce
 local save_timer = nil
-vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "BufLeave", "FocusLost" }, {
+
+local function clear_timer()
+	if save_timer then
+		save_timer:stop()
+		save_timer = nil
+	end
+end
+
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+	group = augroup("autosave_cancel"),
+	callback = clear_timer,
+})
+
+vim.api.nvim_create_autocmd({ "InsertLeave" }, {
 	group = augroup("autosave"),
 	callback = function(args)
-		if not vim.bo[args.buf].modified or vim.bo[args.buf].buftype ~= "" then
-			return
+		clear_timer()
+		if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].modified and vim.bo[args.buf].buftype == "" then
+			save_timer = vim.defer_fn(function()
+				if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].modified then
+					vim.api.nvim_buf_call(args.buf, function()
+						vim.cmd("silent! write")
+						vim.notify("Autosaved " .. vim.fn.expand("%:t"), vim.log.levels.INFO, { title = "Auto-Save" })
+					end)
+				end
+			end, 3000)
 		end
-		if save_timer then
-			save_timer:stop()
-		end
-
-		local delay = (args.event == "BufLeave" or args.event == "FocusLost") and 0 or 3000
-		save_timer = vim.defer_fn(function()
-			if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].modified then
-				vim.api.nvim_buf_call(args.buf, function()
-					vim.cmd("silent! write")
-				end)
-			end
-		end, delay)
 	end,
 })
 
