@@ -24,33 +24,54 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufEnter' }, {
     end,
 })
 
--- Secure .env Masking (Conceal method)
-local function toggle_env_mask()
-	local buf = vim.api.nvim_get_current_buf()
-	if vim.wo.conceallevel > 0 then
-		vim.wo.conceallevel = 0
-		vim.notify("Env masking disabled", vim.log.levels.INFO, { title = "Security" })
+-- Secure .env Masking
+local env_ns = vim.api.nvim_create_namespace("secure_env")
+
+local function toggle_env(buf)
+	local is_mod = vim.bo[buf].modified
+	vim.bo[buf].modifiable = true
+	if vim.b[buf].env_cache then
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.b[buf].env_cache)
+		vim.api.nvim_buf_clear_namespace(buf, env_ns, 0, -1)
+		vim.b[buf].env_cache = nil
 	else
-		vim.wo.conceallevel = 2
-		vim.wo.concealcursor = "n" -- Show when editing (insert mode)
-		vim.notify("Env masking enabled", vim.log.levels.INFO, { title = "Security" })
+		local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+		vim.b[buf].env_cache = vim.deepcopy(lines)
+		for i, l in ipairs(lines) do
+			if not l:match("^%s*#") then
+				lines[i] = l:gsub("(=%s*[\"']?)(.-)([\"']?%s*)$", function(p, v, s)
+					return #v > 0 and (p .. string.rep("*", math.max(#v, 8)) .. s) or l
+				end)
+			end
+		end
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+		vim.api.nvim_buf_set_extmark(buf, env_ns, 0, 0, { virt_text = {{"  [Values Hidden]", "WarningMsg"}}, virt_text_pos = "eol" })
+		vim.bo[buf].modifiable = false
 	end
+	vim.bo[buf].modified = is_mod
 end
 
--- Auto-mask .env files on load
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-	group = augroup("env_masking"),
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile", "BufWriteCmd" }, {
+	group = augroup("secure_env"),
 	pattern = { ".env", ".env.*", "*.env" },
-	callback = function()
-		vim.opt_local.conceallevel = 2
-		vim.opt_local.concealcursor = "n"
-		-- Match everything after '=' (only if not empty) and conceal it with '*'
-		vim.fn.matchadd("Conceal", [[=\zs.\+]], 10, -1, { conceal = "*" })
+	callback = function(args)
+		local ev, buf = args.event, args.buf
+		if ev == "BufReadPost" or ev == "BufNewFile" then
+			vim.keymap.set("n", "<leader>et", function() toggle_env(buf) end, { buffer = buf, desc = "Toggle env" })
+			if not vim.b[buf].env_cache then toggle_env(buf) end
+		elseif ev == "BufWriteCmd" then
+			local file = vim.api.nvim_buf_get_name(buf)
+			if file ~= "" then
+				local lines = vim.b[buf].env_cache or vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+				if pcall(vim.fn.writefile, lines, file) then
+					vim.bo[buf].modified = false
+				else
+					vim.notify("Write failed!", vim.log.levels.ERROR)
+				end
+			end
+		end
 	end,
 })
-
-vim.keymap.set("n", "<leader>ot", toggle_env_mask, { desc = "Toggle .env masking" })
-
 
 -- Strip trailing spaces before write
 vim.api.nvim_create_autocmd("BufWritePre", {
