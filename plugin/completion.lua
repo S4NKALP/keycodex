@@ -1,13 +1,12 @@
 add({
 	"saghen/blink.lib",
 	{ src = "saghen/blink.cmp", build = "cargo build --release" },
-	{ src = "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 	"rafamadriz/friendly-snippets",
 })
 
 require("blink.cmp").setup({
 	fuzzy = { implementation = "prefer_rust" },
-	snippets = { preset = "luasnip" },
+	snippets = { preset = "default" },
 	sources = {
 		default = function()
 			local type = vim.fn.getcmdtype()
@@ -15,6 +14,14 @@ require("blink.cmp").setup({
 			if type == ":" then return { "cmdline" } end
 			return { "lsp", "path", "snippets", "buffer" }
 		end,
+		providers = {
+			snippets = {
+				opts = {
+					search_paths = { vim.fn.stdpath("config") .. "/snippets" },
+					extended_filetypes = { mdx = { "markdown" } },
+				},
+			},
+		},
 	},
 
 	completion = {
@@ -70,10 +77,3 @@ require("blink.cmp").setup({
 	},
 })
 
-local luasnip = require("luasnip")
-require("luasnip.loaders.from_vscode").lazy_load()
-require("luasnip.loaders.from_vscode").lazy_load({
-	paths = { vim.fn.stdpath("config") .. "/snippets" },
-})
-
-luasnip.filetype_extend("mdx", { "markdown" })
