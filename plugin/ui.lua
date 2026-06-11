@@ -2,10 +2,9 @@ add({
     'OXY2DEV/markview.nvim', -- rendering for html and markdown
     'serhez/bento.nvim', -- buffer manager
     'akinsho/toggleterm.nvim', --float terminal
+    'nvzone/showkeys', -- show keystrokes
 })
 require('bento').setup({})
-
-
 
 -- lazy load markdown preview
 vim.api.nvim_create_autocmd('FileType', {
@@ -45,4 +44,21 @@ require('toggleterm').setup({
     },
 })
 
+-- showkeys
+require('showkeys').setup({
+    position = 'top-right',
+    show_count = true,
+    winopts = {
+        focusable = false,
+        relative = 'editor',
+        style = 'minimal',
+        border = 'single',
+        height = 1,
+        row = 1,
+        col = 0,
+    },
+})
 
+vim.keymap.set('n', '<leader>ok', '<cmd>ShowkeysToggle<CR>', {
+    desc = 'Toggle Showkeys',
+})
