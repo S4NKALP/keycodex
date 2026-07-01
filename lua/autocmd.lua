@@ -241,6 +241,17 @@ vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
     end,
 })
 
+-- Disable conform during VimLeavePre to prevent LSP shutdown race
+vim.api.nvim_create_autocmd('VimLeavePre', {
+    group = augroup('disable_conform_on_exit'),
+    pattern = '*',
+    callback = function()
+        for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            vim.b[buf].conform_disable = true
+        end
+    end,
+})
+
 -- Autoinstall missing plugins on startup
 vim.api.nvim_create_autocmd('VimEnter', {
     group = augroup('autoinstall'),
