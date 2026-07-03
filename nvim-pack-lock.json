@@ -4,17 +4,25 @@
       "rev": "91d86506ac2a039504d5205d32a1d4bc7aa57072",
       "src": "https://github.com/numToStr/Navigator.nvim"
     },
+    "anchor.nvim": {
+      "rev": "d9ec4542293c691ba5db416d6c02559034e68d5a",
+      "src": "https://github.com/zachyarbrough/anchor.nvim"
+    },
     "bento.nvim": {
       "rev": "3b529fb1ff417fe0ab5759a712372a6a64152271",
       "src": "https://github.com/serhez/bento.nvim"
     },
     "blink.cmp": {
-      "rev": "bda905a4bf1b3edfa708b0be193b8c63d8620c96",
+      "rev": "67c9c3f9e3121df32d0eee406a76087a9f0a62eb",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
       "rev": "5876dd95deeb70aadbe9f1c0b7117a135061cdac",
       "src": "https://github.com/saghen/blink.lib"
+    },
+    "catppuccin": {
+      "rev": "e068ab5f8261f23f6f71ffd8791ae40315b77b9c",
+      "src": "https://github.com/catppuccin/nvim"
     },
     "conform.nvim": {
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
@@ -23,6 +31,10 @@
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "fzf-lua": {
+      "rev": "d2084cf776049b4bce6764eb58cda567dec781c4",
+      "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitignore.nvim": {
       "rev": "0344f643768c4d64af4add8c1bdddf6f7d4c9010",
@@ -49,7 +61,7 @@
       "src": "https://github.com/iamcco/markdown-preview.nvim"
     },
     "markview.nvim": {
-      "rev": "301e431c7b618235f5447d54465c70934bd33668",
+      "rev": "c363dc67ca9549270dc7da8e50b504ba439418dd",
       "src": "https://github.com/OXY2DEV/markview.nvim"
     },
     "mason-conform.nvim": {
@@ -73,7 +85,7 @@
       "src": "https://github.com/davidmh/mdx.nvim"
     },
     "mini.nvim": {
-      "rev": "1599a473aa6f5290a5d740b1144846e6f0c3963d",
+      "rev": "c5cdbadeb423ff724e27a42ab2d1c504d1d6fc5a",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim-highlight-colors": {
@@ -85,7 +97,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "3371bf298c1f56efc26771ee961f461176958fb5",
+      "rev": "292f44408498103c47996ff5c18fd366293840d8",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
