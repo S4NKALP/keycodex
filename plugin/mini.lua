@@ -54,12 +54,6 @@ require('mini.surround').setup({
     },
 })
 
--- indents
-require('mini.indentscope').setup({
-    draw = { animation = require('mini.indentscope').gen_animation.linear({ ease = 'out', duration = 15 }) },
-    options = { border = 'top', try_as_border = true, indent_at_cursor = false },
-})
-
 vim.api.nvim_create_autocmd('BufEnter', {
     pattern = '*',
     callback = function(args)
