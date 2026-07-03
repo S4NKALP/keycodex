@@ -5,7 +5,6 @@ local function map(mode, lhs, rhs, opts)
 end
 local opts = { noremap = true, silent = true }
 
-
 -- Space as leader
 map('n', '<Space>', '', opts)
 vim.g.mapleader = ' '
@@ -22,7 +21,7 @@ map('t', '<ESC>', '<C-\\><C-n>')
 
 -- Insert Mode Mappings
 map('i', 'jk', '<Esc>')
-map('n', '<leader>ps', require('packui').open, {desc = "Open Vim Pack UI"})
+map('n', '<leader>ps', require('packui').open, { desc = 'Open Vim Pack UI' })
 -- Comments
 map('n', '<leader>/', 'gcc', { remap = true, desc = 'Toggle comment' })
 map('v', '<leader>/', 'gc', { remap = true, desc = 'Toggle comment' })
@@ -41,10 +40,6 @@ map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 
 -- Visual overwrite paste
 map({ 'v', 'x' }, 'p', '"_dP', opts)
-
--- Paste and auto-indent (context-aware)
-map('n', 'p', 'p=`]', { desc = 'Paste and auto-indent' })
-map('n', 'P', 'P=`]', { desc = 'Paste before and auto-indent' })
 
 -- Do not copy on x
 map({ 'v', 'x' }, 'x', '"_x', opts)
