@@ -12,6 +12,7 @@ add({
     'm4xshen/hardtime.nvim', -- workflow
     'mg979/vim-visual-multi', -- multiple cursors
     { src = 'iamcco/markdown-preview.nvim', build = 'cd app && npm install' },
+    'kevinhwang91/nvim-hlslens',
     -- 'nvim-flutter/flutter-tools.nvim', -- flutter tools
 })
 
@@ -59,6 +60,8 @@ require('nvim-treesitter').setup({
     },
 })
 
+require('hlslens').setup()
+
 -- windsurf
 vim.keymap.set('i', '<A-f>', function()
     return vim.fn['codeium#Accept']()
@@ -66,4 +69,3 @@ end, { expr = true, silent = true })
 vim.keymap.set('i', '<A-x>', function()
     return vim.fn['codeium#Clear']()
 end, { expr = true, silent = true })
-
