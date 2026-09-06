@@ -13,6 +13,7 @@ add({
     'mg979/vim-visual-multi', -- multiple cursors
     { src = 'iamcco/markdown-preview.nvim', build = 'cd app && npm install' },
     'kevinhwang91/nvim-hlslens',
+    'abecodes/tabout.nvim',
     -- 'nvim-flutter/flutter-tools.nvim', -- flutter tools
 })
 
@@ -61,6 +62,7 @@ require('nvim-treesitter').setup({
 })
 
 require('hlslens').setup()
+require('tabout').setup({})
 
 -- windsurf
 vim.keymap.set('i', '<A-f>', function()
