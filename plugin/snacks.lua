@@ -150,7 +150,7 @@ Snacks.setup({
     notifier = {
         enabled = true,
         timeout = 2000,
-        width = { min = 40, max = 0.4 },
+        width = { min = 20, max = 0.4 },
         height = { min = 1, max = 0.6 },
         margin = { top = 0, right = 1, bottom = 0 },
         padding = true,
@@ -373,3 +373,44 @@ Snacks.setup({
         },
     },
 })
+
+--- LSP Notifications via Snacks
+local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
+
+-- Notify when an LSP server connects
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client then
+            vim.notify('Attached ' .. client.name, vim.log.levels.INFO, {
+                title = 'LSP',
+                icon = '󰒋 ',
+                timeout = 1500,
+            })
+        end
+    end,
+})
+
+-- Show progress using Neovim's built-in vim.lsp.status()
+vim.api.nvim_create_autocmd('LspProgress', {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        local is_done = ev.data.params.value.kind == 'end'
+        local msg = vim.lsp.status()
+        if msg == '' then
+            msg = is_done and 'Ready' or 'Processing...'
+        end
+
+        vim.notify(msg, vim.log.levels.INFO, {
+            id = 'lsp_progress',
+            title = client and client.name or 'LSP',
+            timeout = is_done and 1000 or false,
+            opts = function(notif)
+                notif.icon = is_done and ' '
+                    or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+            end,
+        })
+    end,
+})
+
+

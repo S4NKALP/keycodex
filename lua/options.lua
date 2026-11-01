@@ -21,8 +21,8 @@ local options = {
     showtabline = 0, -- always show tabs
     showcmd = false,
     confirm = true, -- Confirm to save changes before exiting modified buffer
-    spell = true, -- enable spell check
-    spelllang = 'en_US',
+    -- spell = true, -- enable spell check
+    -- spelllang = 'en_US',
 
     -- tabs
     smarttab = true,
