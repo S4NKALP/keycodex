@@ -13,7 +13,7 @@
       "src": "https://github.com/serhez/bento.nvim"
     },
     "blink.cmp": {
-      "rev": "d4318ec75309a37e09757de0f16faa67bf22b890",
+      "rev": "7b31e1b6497be70f620bbad83a789929248697ac",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "blink.lib": {
@@ -37,7 +37,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "07fce8ac8dffba4e11f1cbe5490d730a2cc5ec7a",
+      "rev": "11357ee24a9f092b1db503237eb57e2a11e48434",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitignore.nvim": {
@@ -45,11 +45,11 @@
       "src": "https://github.com/wintermute-cell/gitignore.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "1e9d0fbfe7ff848bc402d2c2e2854fb4eff2dce7",
+      "rev": "ef707fb93301a9b856f36eae4c8f56f5b988a794",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "gruvbox.nvim": {
-      "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
+      "rev": "48262cda6a8a921b159c8ec3e21b48ccd870b7b2",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
     },
     "guess-indent.nvim": {
@@ -73,7 +73,7 @@
       "src": "https://github.com/zapling/mason-conform.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "cd6c64d85c9871aaf759d26f2371029d6d674a48",
+      "rev": "3a5cd6d562a01f6829a35ae761dc383264ea452b",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-nvim-lint": {
@@ -89,7 +89,7 @@
       "src": "https://github.com/davidmh/mdx.nvim"
     },
     "mini.nvim": {
-      "rev": "6d5a29e86a7352739506c28e0bc50fe214b5216f",
+      "rev": "a321b535c75ca88ba7fddfd8eb5b583fbda50dd6",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim-highlight-colors": {
@@ -105,11 +105,11 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "d8d2fda7aae57030452ce8cd6e770b1eb704514e",
+      "rev": "d5c7e7bcc15bccc01bf1601a03473e10de2f0f7e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "a9c4e1457e2e59f1b82c8f78dcdb3b2517555200",
+      "rev": "915f2bd3d4e2a33704bfc476b5137e9befa82f3d",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-ts-autotag": {
