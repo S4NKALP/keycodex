@@ -1,18 +1,45 @@
 add({
-    'nvim-treesitter/nvim-treesitter', -- nvim-treesitter
-    'davidmh/mdx.nvim', -- syntax highlighter for mdx
-    'windwp/nvim-ts-autotag', -- autotag
+    'nvim-treesitter/nvim-treesitter',
+    'neovim-treesitter/treesitter-parser-registry',
+    'davidmh/mdx.nvim',
+    'windwp/nvim-ts-autotag',
+    'andymass/vim-matchup',
+})
+
+local treesitter = require('nvim-treesitter')
+local parsers = require('extensions').ts_parsers
+
+treesitter.setup({})
+treesitter.install(parsers)
+
+-- Enable Treesitter highlighting and indentation
+local group = vim.api.nvim_create_augroup('UserTreesitter', { clear = true })
+
+vim.api.nvim_create_autocmd('FileType', {
+    group = group,
+    callback = function(args)
+        -- Only enable for configured languages
+        local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+
+        if not lang or not vim.tbl_contains(parsers, lang) then
+            return
+        end
+
+        -- Highlighting
+        local ok = pcall(vim.treesitter.start, args.buf, lang)
+
+        if not ok then
+            return
+        end
+
+        -- Treesitter indentation
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
 })
 
 require('nvim-ts-autotag').setup({})
-require('nvim-treesitter').setup({
-    ensure_installed = require('extensions').ts_parsers,
-    auto_install = true,
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = true,
-    },
-    indent = {
-        enable = true,
-    },
-})
+
+vim.g.matchup_matchparen_offscreen = {
+    method = 'popup',
+    scrolloff = 1,
+}
