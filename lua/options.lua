@@ -9,6 +9,7 @@ local options = {
     signcolumn = 'yes',
     cursorline = true,
     cursorlineopt = 'number',
+    mouse = '', -- disable mouse, keyboard only
     wrap = false,
     scrolloff = 3,
     ruler = false, -- removes cursor position from lastline

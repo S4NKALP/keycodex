@@ -1,20 +1,13 @@
 add({
-    'windwp/nvim-ts-autotag', -- autotag
-    'folke/todo-comments.nvim', -- todo comment highlights
-    'wakatime/vim-wakatime', --wakaTime coding time tracker
-    'lambdalisue/suda.vim', -- edit files as sudo (:SudaWrite)
-    'NMAC427/guess-indent.nvim', -- auto-detect tab/space indentation
-    'brenoprata10/nvim-highlight-colors', -- color highlighting
-    'davidmh/mdx.nvim', -- syntax highlighter for mdx
-    'nvim-treesitter/nvim-treesitter', -- nvim-treesitter
-    'Exafunction/windsurf.vim', -- windsurf ai for autocompletion
+    'saghen/blink.lib',
+    { src = 'saghen/blink.cmp', build = 'cargo build --release' },
+    'rafamadriz/friendly-snippets',
     'numToStr/Navigator.nvim', -- navigator
     'm4xshen/hardtime.nvim', -- workflow
     'mg979/vim-visual-multi', -- multiple cursors
-    { src = 'iamcco/markdown-preview.nvim', build = 'cd app && npm install' },
+    'NMAC427/guess-indent.nvim', -- auto-detect tab/space indentation
     'kevinhwang91/nvim-hlslens',
     'abecodes/tabout.nvim',
-    -- 'nvim-flutter/flutter-tools.nvim', -- flutter tools
 })
 
 vim.g.VM_maps = {
@@ -25,49 +18,89 @@ vim.g.VM_maps = {
     ['Add Cursor Up'] = '<C-M-k>', -- Ctrl + Alt + k | Add a cursor on the line above
 }
 
--- lazy load insert mode enhancements
-vim.api.nvim_create_autocmd('InsertEnter', {
-    callback = function()
-        require('nvim-ts-autotag').setup({})
-    end,
-    once = true,
-})
-
--- lazy load general editor enhancements
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
-    callback = function()
-        require('todo-comments').setup({ signs = false })
-        require('guess-indent').setup({})
-        require('nvim-highlight-colors').setup({ render = 'background' })
-        require('Navigator').setup({
-            auto_save = 'current',
-            disable_on_zoom = false,
-            mux = 'auto',
-        })
-    end,
-})
-
-require('hardtime').setup({})
-
-require('nvim-treesitter').setup({
-    ensure_installed = require('extensions').ts_parsers,
-    auto_install = true,
-    highlight = {
-        enable = true,
-        additional_vim_regex_highlighting = true,
-    },
-    indent = {
-        enable = true,
-    },
-})
-
+require('guess-indent').setup({})
 require('hlslens').setup()
 require('tabout').setup({})
+require('hardtime').setup({})
+require('blink.cmp').setup({
+    fuzzy = { implementation = 'prefer_rust' },
+    snippets = { preset = 'default' },
+    sources = {
+        default = function()
+            local type = vim.fn.getcmdtype()
+            if type == '/' or type == '?' then
+                return { 'buffer' }
+            end
+            if type == ':' then
+                return { 'cmdline' }
+            end
+            return { 'lsp', 'path', 'snippets', 'buffer' }
+        end,
+        providers = {
+            snippets = {
+                opts = {
+                    search_paths = { vim.fn.stdpath('config') .. '/snippets' },
+                    extended_filetypes = { mdx = { 'markdown' } },
+                },
+            },
+        },
+    },
 
--- windsurf
-vim.keymap.set('i', '<A-f>', function()
-    return vim.fn['codeium#Accept']()
-end, { expr = true, silent = true })
-vim.keymap.set('i', '<A-x>', function()
-    return vim.fn['codeium#Clear']()
-end, { expr = true, silent = true })
+    completion = {
+        ghost_text = { enabled = true },
+
+        list = {
+            selection = {
+                preselect = false,
+                auto_insert = true,
+            },
+        },
+        documentation = {
+            window = { border = 'rounded' },
+            auto_show = true,
+            auto_show_delay_ms = 50,
+        },
+        menu = {
+            border = 'rounded',
+            draw = {
+                components = {
+                    kind_icon = {
+                        text = function(ctx)
+                            local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                            return kind_icon
+                        end,
+                        highlight = function(ctx)
+                            local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                            return hl
+                        end,
+                    },
+                    kind = {
+                        highlight = function(ctx)
+                            local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+                            return hl
+                        end,
+                    },
+                },
+            },
+        },
+    },
+    signature = {
+        window = { border = 'rounded' },
+    },
+    keymap = {
+        preset = 'none',
+        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        ['<CR>'] = { 'accept', 'fallback' },
+        ['<C-space>'] = { 'hide', 'show' },
+        ['<C-y>'] = { 'show', 'show_documentation', 'hide_documentation' },
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+    },
+})
+
+require('Navigator').setup({
+    auto_save = 'current',
+    disable_on_zoom = false,
+    mux = 'auto',
+})

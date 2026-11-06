@@ -4,10 +4,6 @@
       "rev": "91d86506ac2a039504d5205d32a1d4bc7aa57072",
       "src": "https://github.com/numToStr/Navigator.nvim"
     },
-    "anchor.nvim": {
-      "rev": "d9ec4542293c691ba5db416d6c02559034e68d5a",
-      "src": "https://github.com/zachyarbrough/anchor.nvim"
-    },
     "bento.nvim": {
       "rev": "3a944910987f552b41fce22fbb7eed0bf0a6f1eb",
       "src": "https://github.com/serhez/bento.nvim"
@@ -20,10 +16,6 @@
       "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",
       "src": "https://github.com/saghen/blink.lib"
     },
-    "catppuccin": {
-      "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
-      "src": "https://github.com/catppuccin/nvim"
-    },
     "codediff.nvim": {
       "rev": "09d9ebef2cc5a5c04db7a349cd6c61bdf84ecc8e",
       "src": "https://github.com/esmuellert/codediff.nvim"
@@ -35,10 +27,6 @@
     "friendly-snippets": {
       "rev": "b2ea5c41a150ba72fb656eedb4ed0a86d138d945",
       "src": "https://github.com/rafamadriz/friendly-snippets"
-    },
-    "fzf-lua": {
-      "rev": "11357ee24a9f092b1db503237eb57e2a11e48434",
-      "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitignore.nvim": {
       "rev": "15ed88abbaeb5deffe6d7c6d51af9b6ff784135f",

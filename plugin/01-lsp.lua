@@ -2,11 +2,8 @@ add({
     'mason-org/mason.nvim', -- lsp installer manager
     'mason-org/mason-lspconfig.nvim', -- lsp installer
     'neovim/nvim-lspconfig', -- lsp config
-    'rachartier/tiny-inline-diagnostic.nvim', -- inline diagnostic
-    'rachartier/tiny-code-action.nvim', -- code action
 })
 
--- lsp installer
 require('mason').setup({
     ui = {
         icons = {
@@ -23,34 +20,3 @@ require('mason-lspconfig').setup({
     ensure_installed = require('extensions').lsp_server,
     automatic_installation = false, -- Don't auto-install or auto-configure
 })
-
--- improve neovim lsp experience
-vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function()
-
-        --inline diagnostic
-        require('tiny-inline-diagnostic').setup({
-            options = {
-                show_source = true,
-                multiple_diag_under_cursor = true,
-            },
-        })
-
-        --code action
-        require('tiny-code-action').setup({
-            picker = {
-                'buffer',
-                opts = {
-                    auto_preview = true,
-                    hotkeys = true,
-                    hotkeys_mode = 'sequential',
-                },
-            },
-        })
-    end,
-})
-
-vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
-vim.keymap.set('n', '<leader>.', function()
-    require('tiny-code-action').code_action()
-end, { desc = 'Code action' })

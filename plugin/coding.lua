@@ -2,11 +2,13 @@ add({
     'mfussenegger/nvim-lint', -- linter
     'rshkarin/mason-nvim-lint', -- linter installer
     'stevearc/conform.nvim', -- autoformater
-    'szw/vim-maximizer',
     'zapling/mason-conform.nvim', -- formatter installer
+    'folke/todo-comments.nvim', -- todo comment highlights
+    'rachartier/tiny-inline-diagnostic.nvim', -- inline diagnostic
+    'rachartier/tiny-code-action.nvim', -- code action
 })
 
--- linter
+require('todo-comments').setup({ signs = false })
 require('lint').linters_by_ft = {
     ['*'] = { 'codespell' },
     ['javascript'] = { 'eslint_d', 'cspell' },
@@ -20,12 +22,30 @@ require('lint').linters_by_ft = {
     ['yaml'] = { 'actionlint' },
     ['python'] = { 'ruff' },
 }
+
+require('tiny-code-action').setup({
+    picker = {
+        'buffer',
+        opts = {
+            auto_preview = true,
+            hotkeys = true,
+            hotkeys_mode = 'sequential',
+        },
+    },
+})
+
+require('tiny-inline-diagnostic').setup({
+    options = {
+        show_source = true,
+        multiple_diag_under_cursor = true,
+    },
+})
+
 require('mason-nvim-lint').setup({
     ensure_installed = require('extensions').linter,
     automatic_installation = false,
 })
 
--- formatter
 require('conform').setup({
     formatters = {
         ['markdown-toc'] = {
@@ -73,3 +93,8 @@ require('mason-conform').setup({
     ensure_installed = require('extensions').formatter,
     automatic_installation = true,
 })
+
+vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+vim.keymap.set('n', '<leader>.', function()
+    require('tiny-code-action').code_action()
+end, { desc = 'Code action' })
