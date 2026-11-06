@@ -38,6 +38,19 @@ require('mini.splitjoin').setup({
     },
 })
 
+-- git diff
+require('mini.diff').setup({
+    view = {
+        -- show whole reference part above whole buffer part, as in `git diff`
+        overlay_style = 'hunk',
+    },
+    mappings = {
+        -- same keymaps as codediff.nvim
+        goto_next = ']c',
+        goto_prev = '[c',
+    },
+})
+
 -- surround action
 require('mini.surround').setup({
     mappings = {

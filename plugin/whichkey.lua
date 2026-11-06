@@ -103,7 +103,14 @@ local normal_mappings = {
     { '<leader>gb', ":lua require('gitsigns').blame_line({full = true})<cr>", desc = 'Blame' },
     { '<leader>gB', ":lua require('snacks').git.blame_line()<cr>", desc = 'Detailed Blame' },
     { '<leader>gc', ':Gitignore<cr>', desc = 'Generate .gitignore' },
-    { '<leader>gd', ':Gitsigns diffthis HEAD<cr>', desc = 'Git Diff' },
+    {
+        '<leader>gd',
+        function()
+            local MiniDiff = require('mini.diff')
+            MiniDiff.toggle_overlay()
+        end,
+        desc = 'Toggle MiniDiff overlay',
+    },
     { '<leader>gF', ':Git<cr>', desc = 'Fugitive Panel' },
     { '<leader>gi', ':Gitsigns preview_hunk<cr>', desc = 'Hunk Info' },
     { '<leader>gj', ':Gitsigns next_hunk<cr>', desc = 'Next Hunk' },
