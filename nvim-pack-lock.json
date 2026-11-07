@@ -104,6 +104,10 @@
       "rev": "d7220b55e16ed3c04e88086256def5d282429493",
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
+    "showkeys": {
+      "rev": "cb0a50296f11f1e585acffba8c253b9e8afc1f84",
+      "src": "https://github.com/nvzone/showkeys"
+    },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"

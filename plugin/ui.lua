@@ -3,10 +3,12 @@ add({
     'OXY2DEV/markview.nvim', -- rendering for html and markdown
     'serhez/bento.nvim', -- buffer manager
     'brenoprata10/nvim-highlight-colors', -- color highlighting
+    { src = 'nvzone/showkeys', cmd = 'ShowkeysToggle' },
 })
 
 require('nvim-highlight-colors').setup({ render = 'background' })
 require('bento').setup({})
+require('showkeys').setup({})
 
 local palette = require('gruvbox').palette
 require('gruvbox').setup({
