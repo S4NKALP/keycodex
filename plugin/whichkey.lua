@@ -158,6 +158,22 @@ local normal_mappings = {
     { '<leader>oN', ':lua Snacks.notifier.show_history()<cr>', desc = 'Notification History' },
     { '<leader>or', ':set relativenumber!<cr>', desc = 'Relative Numbers' },
 
+    { '<leader>O', group = '󰚩 OpenCode' },
+    { '<leader>Oo', desc = 'Toggle Panel' },
+    { '<leader>Oi', desc = 'Open Input' },
+    { '<leader>On', desc = 'New Session' },
+    { '<leader>Om', desc = 'Switch Model' },
+    { '<leader>Ov', desc = 'Choose Variant' },
+    { '<leader>Oa', desc = 'Switch Agent' },
+    { '<leader>Oe', desc = 'Edit Last Prompt' },
+    { '<leader>Or', desc = 'Redo Last Prompt' },
+    { '<leader>Os', desc = 'Sessions' },
+    { '<leader>Oh', desc = 'Prompt History' },
+    { '<leader>Od', desc = 'Review Diff' },
+    { '<leader>Of', desc = 'Toggle Focus' },
+    { '<leader>Oz', desc = 'Toggle Zoom' },
+    { '<leader>Ox', desc = 'Cancel Request' },
+
     { '<leader>p', group = ' Packages' },
     { '<leader>pm', ':Mason<cr>', desc = 'Mason' },
     { '<leader>pu', ':lua vim.pack.update()<cr>', desc = 'Update Plugins' },
@@ -255,6 +271,7 @@ local visual_mappings = {
     { '<leader>la', ':lua vim.lsp.buf.code_action()<cr>', desc = 'Code Action' },
 
     -- { "<leader>o", group = " Options" },
+    { '<leader>O', group = '󰚩 OpenCode' },
 
     { '<leader>y', group = ' Yank' },
     { '<leader>yg', ':lua require"gitlinker".get_buf_range_url("v")<cr>', desc = 'Copy Git URL' },

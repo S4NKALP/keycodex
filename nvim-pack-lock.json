@@ -104,6 +104,10 @@
       "rev": "d7220b55e16ed3c04e88086256def5d282429493",
       "src": "https://github.com/windwp/nvim-ts-autotag"
     },
+    "opencode.nvim": {
+      "rev": "96c610b841788f738eefe65442d05bc9f600b857",
+      "src": "https://github.com/sudo-tee/opencode.nvim"
+    },
     "showkeys": {
       "rev": "cb0a50296f11f1e585acffba8c253b9e8afc1f84",
       "src": "https://github.com/nvzone/showkeys"
