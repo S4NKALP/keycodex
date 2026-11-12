@@ -5,6 +5,11 @@ add({
     'Exafunction/windsurf.vim', -- windsurf ai for autocompletion
     'akinsho/toggleterm.nvim', --float terminal
     'lambdalisue/suda.vim', -- edit files as sudo (:SudaWrite)
+    'sudo-tee/opencode.nvim',
+})
+
+require('opencode').setup({
+    preferred_picker = 'snacks',
 })
 
 require('toggleterm').setup({
