@@ -38,6 +38,7 @@ local lsp_server = {
     'bashls',
     'clangd',
     'rust_analyzer',
+    'gopls',
 }
 
 local formatter = {

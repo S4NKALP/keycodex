@@ -150,4 +150,17 @@ vim.schedule(function()
         },
     })
     vim.lsp.enable('clangd')
+
+    vim.lsp.config('gopls', {
+        settings = {
+            gopls = {
+                analyses = {
+                    unusedparams = true,
+                },
+                staticcheck = true,
+                gofumpt = true,
+            },
+        },
+    })
+    vim.lsp.enable('gopls')
 end)

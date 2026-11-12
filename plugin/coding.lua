@@ -21,6 +21,7 @@ require('lint').linters_by_ft = {
     ['sh'] = { 'shellcheck' },
     ['yaml'] = { 'actionlint' },
     ['python'] = { 'ruff' },
+    -- ['go'] = { 'gofmt' },
 }
 
 require('tiny-code-action').setup({
