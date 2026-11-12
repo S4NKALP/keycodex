@@ -101,7 +101,6 @@ local normal_mappings = {
     { '<leader>ga', ':Gitsigns stage_hunk<cr>', desc = 'Stage Hunk' },
     { '<leader>gb', ":lua require('gitsigns').blame_line({full = true})<cr>", desc = 'Blame' },
     { '<leader>gB', ":lua require('snacks').git.blame_line()<cr>", desc = 'Detailed Blame' },
-    { '<leader>gc', ':Gitignore<cr>', desc = 'Generate .gitignore' },
     {
         '<leader>gd',
         function()

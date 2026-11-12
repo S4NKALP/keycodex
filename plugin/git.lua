@@ -1,6 +1,5 @@
 add({
     'lewis6991/gitsigns.nvim',
-    'wintermute-cell/gitignore.nvim', -- .gitignore generator
     'esmuellert/codediff.nvim', -- side-by-side diffs and history.
 })
 
