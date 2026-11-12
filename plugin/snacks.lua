@@ -62,58 +62,12 @@ Snacks.setup({
         size = 1000 * 1024, -- 1 MB instead of 100 KB
     },
     bufdelete = { enabled = true },
-    dashboard = {
-        preset = {
-            header = [[
- ██╗  ██╗███████╗██╗   ██╗ ██████╗ ██████╗ ██████╗ ███████╗██╗  ██╗
- ██║ ██╔╝██╔════╝╚██╗ ██╔╝██╔════╝██╔═══██╗██╔══██╗██╔════╝╚██╗██╔╝
- █████╔╝ █████╗   ╚████╔╝ ██║     ██║   ██║██║  ██║█████╗   ╚███╔╝ 
- ██╔═██╗ ██╔══╝    ╚██╔╝  ██║     ██║   ██║██║  ██║██╔══╝   ██╔██╗ 
- ██║  ██╗███████╗   ██║   ╚██████╗╚██████╔╝██████╔╝███████╗██╔╝ ██╗
- ╚═╝  ╚═╝╚══════╝   ╚═╝    ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝
-            ]],
-        },
-        sections = {
-            { section = 'header' },
-            {
-                icon = '  ',
-                title = 'Keymaps',
-                section = 'keys',
-                indent = 2,
-                padding = 1,
-            },
-            {
-                icon = ' ',
-                title = 'Recent Files',
-                section = 'recent_files',
-                indent = 2,
-                padding = 1,
-            },
-            {
-                icon = ' ',
-                title = 'Projects',
-                section = 'projects',
-                indent = 2,
-                padding = 1,
-            },
-        },
-    },
-    debug = { enabled = false },
     dim = {
         enabled = true,
         scope = {
             min_size = 5,
             max_size = 20,
             siblings = true,
-        },
-    },
-    explorer = { enabled = false },
-    projects = {
-        enabled = true,
-        dirs = {
-            '~/Projects',
-            '~/Projects/other',
-            '~/.config/Modus',
         },
     },
     git = { enabled = true },
@@ -146,7 +100,6 @@ Snacks.setup({
         expand = true,
     },
     layout = { enabled = true },
-    lazygit = { enabled = true },
     notifier = {
         enabled = true,
         timeout = 2000,
@@ -274,62 +227,6 @@ Snacks.setup({
             },
         },
     },
-    scratch = {
-        enabled = true,
-        name = 'SCRATCH',
-        ft = function()
-            if vim.bo.buftype == '' and vim.bo.filetype ~= '' then
-                return vim.bo.filetype
-            end
-            return 'markdown'
-        end,
-        icon = nil,
-        root = vim.fn.stdpath('data') .. '/scratch',
-        autowrite = true,
-        filekey = {
-            cwd = true,
-            branch = true,
-            count = true,
-        },
-        win = {
-            width = 120,
-            height = 40,
-            bo = { buftype = '', buflisted = false, bufhidden = 'hide', swapfile = false },
-            minimal = false,
-            noautocmd = false,
-            zindex = 20,
-            wo = { winhighlight = 'NormalFloat:Normal' },
-            border = 'rounded',
-            title_pos = 'center',
-            footer_pos = 'center',
-
-            keys = {
-                ['execute'] = {
-                    '<cr>',
-                    function(_)
-                        vim.cmd('%SnipRun')
-                    end,
-                    desc = 'Execute buffer',
-                    mode = { 'n', 'x' },
-                },
-            },
-        },
-        win_by_ft = {
-            lua = {
-                keys = {
-                    ['source'] = {
-                        '<leader>cr',
-                        function(self)
-                            local name = 'scratch.' .. vim.fn.fnamemodify(vim.api.nvim_buf_get_name(self.buf), ':e')
-                            Snacks.debug.run({ buf = self.buf, name = name })
-                        end,
-                        desc = 'Source buffer',
-                        mode = { 'n', 'x' },
-                    },
-                },
-            },
-        },
-    },
     scroll = { enabled = true },
     select = { enabled = true },
     statuscolumn = {
@@ -345,10 +242,8 @@ Snacks.setup({
         },
         refresh = 50,
     },
-    terminal = { enabled = false },
     toggle = { enabled = true },
     win = { enabled = true },
-    words = { enabled = true },
     zen = {
         enabled = true,
         toggles = {
