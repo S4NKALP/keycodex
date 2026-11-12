@@ -232,7 +232,6 @@ local normal_mappings = {
     { '<leader>wc', ':set spell!<cr>', desc = 'Spellcheck' },
     { '<leader>wd', ':lua require("snacks").dim.enable()<cr>', desc = 'Dim On' },
     { '<leader>wD', ':lua require("snacks").dim.disable()<cr>', desc = 'Dim Off' },
-    { '<leader>wf', ":lua require'utils'.sudo_write()<cr>", desc = 'Force Write' },
     { '<leader>wj', ']s', desc = 'Next Misspell' },
     { '<leader>wk', '[s', desc = 'Prev Misspell' },
     { '<leader>wn', ':WriteNoFormat<cr>', desc = 'Write Without Formatting' },

@@ -1,10 +1,8 @@
 add({
     { src = 'iamcco/markdown-preview.nvim', build = 'cd app && npm install' },
     'wakatime/vim-wakatime', --wakaTime coding time tracker
-    'szw/vim-maximizer',
     'Exafunction/windsurf.vim', -- windsurf ai for autocompletion
     'akinsho/toggleterm.nvim', --float terminal
-    'lambdalisue/suda.vim', -- edit files as sudo (:SudaWrite)
     'sudo-tee/opencode.nvim',
 })
 
