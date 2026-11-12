@@ -138,18 +138,13 @@ local normal_mappings = {
     { '<leader>it', ":put =strftime('## %r')<cr>", desc = 'Time' },
 
     { '<leader>l', group = ' LSP' },
-    { '<leader>la', ':lua vim.lsp.buf.code_action()<cr>', desc = 'Code Action' },
     { '<leader>ld', ':lua Snacks.picker.lsp_definitions()<cr>', desc = 'Goto Definition' },
     { '<leader>lf', ':lua Snacks.picker.lsp_references()<cr>', desc = 'Finder (References)' },
     { '<leader>lh', ':lua vim.lsp.buf.hover()<cr>', desc = 'Hover' },
-    { '<leader>lI', ':LspInfo<cr>', desc = 'LSP Info' },
     { '<leader>lj', ':lua vim.diagnostic.goto_next()<cr>', desc = 'Next Diagnostic' },
     { '<leader>lk', ':lua vim.diagnostic.goto_prev()<cr>', desc = 'Prev Diagnostic' },
     { '<leader>lo', ':lua Snacks.picker.lsp_symbols()<cr>', desc = 'Outline (Symbols)' },
     { '<leader>lp', ':lua Snacks.picker.lsp_definitions()<cr>', desc = 'Peek Definition' },
-    { '<leader>lq', ':LspStop<cr>', desc = 'Stop LSP' },
-    { '<leader>lQ', ':LspRestart<cr>', desc = 'Restart LSP' },
-    { '<leader>lr', ':lua vim.lsp.buf.rename()<cr>', desc = 'Rename' },
     { '<leader>lt', ':lua Snacks.picker.lsp_type_definitions()<cr>', desc = 'Goto Type Definition' },
     { '<leader>lT', ':lua Snacks.picker.lsp_type_definitions()<cr>', desc = 'Peek Type Definition' },
 
@@ -265,9 +260,6 @@ local visual_mappings = {
     { '<leader>ga', ":'<,'>Gitsigns stage_hunk<cr>", desc = 'Stage Hunk' },
     { '<leader>gr', ":'<,'>Gitsigns reset_hunk<cr>", desc = 'Reset Hunk' },
     { '<leader>gu', ":'<,'>Gitsigns undo_stage_hunk<cr>", desc = 'Undo Stage Hunk' },
-
-    { '<leader>l', group = ' LSP' },
-    { '<leader>la', ':lua vim.lsp.buf.code_action()<cr>', desc = 'Code Action' },
 
     -- { "<leader>o", group = " Options" },
     { '<leader>O', group = '󰚩 OpenCode' },
