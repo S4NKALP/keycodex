@@ -35,6 +35,15 @@ map({ 'i', 'c' }, '<C-f>', '<Right>')
 map('n', '<leader>rL', vim.lsp.buf.rename, { desc = 'Rename Lsp Symbol' })
 map('n', '`', "'", { noremap = true }) -- better marks
 
+-- Options (which-key only listed these before)
+map('n', '<leader>oi', function()
+    vim.show_pos()
+end, { desc = 'Inspect Position' })
+map('n', '<leader>oN', function()
+    require('snacks').notifier.show_history()
+end, { desc = 'Notification History' })
+map('n', '<leader>or', '<cmd>set relativenumber!<cr>', { desc = 'Relative Numbers' })
+
 map({ 'n', 'v' }, 'H', '^', { desc = 'Move to the beginning of the line' })
 map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 
