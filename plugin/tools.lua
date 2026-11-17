@@ -8,6 +8,9 @@ add({
 require('opencode').setup({
     preferred_picker = 'snacks',
     default_global_keymaps = false,
+    server = {
+        timeout = 15,
+    },
     keymap = {
         editor = {
             ['<leader>Oo'] = { 'toggle', desc = 'OpenCode: Toggle panel' },
@@ -34,6 +37,15 @@ require('opencode').setup({
             ['<M-e>'] = { 'undo', mode = { 'n', 'i' }, desc = 'Edit last prompt' },
         },
     },
+})
+
+-- Alias :OpenCode -> :Opencode with full autocompletion support
+local opencode_cmd = require('opencode.commands')
+vim.api.nvim_create_user_command('OpenCode', opencode_cmd.execute_command_opts, {
+    desc = 'OpenCode command alias',
+    nargs = '*',
+    range = true,
+    complete = opencode_cmd.complete_command,
 })
 
 -- Keep the selected model when switching agent/mode.

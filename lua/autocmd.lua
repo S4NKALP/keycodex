@@ -97,6 +97,9 @@ vim.api.nvim_create_autocmd('BufWritePre', {
     group = augroup('strip_space'),
     pattern = '*',
     callback = function()
+        if not vim.bo.modifiable or vim.bo.buftype ~= '' then
+            return
+        end
         local save = vim.fn.winsaveview()
         vim.cmd([[keeppatterns %s/\s\+$//e]])
         vim.fn.winrestview(save)
