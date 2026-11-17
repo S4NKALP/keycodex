@@ -64,7 +64,12 @@ local normal_mappings = {
         '<leader>ee',
         function()
             local minifiles = require('mini.files')
-            minifiles.open(vim.api.nvim_buf_get_name(0), true)
+            -- Scratch buffers (dashboard "KEYCODEX", etc.) have names that are not real paths
+            local path = vim.api.nvim_buf_get_name(0)
+            if path == '' or (vim.fn.filereadable(path) == 0 and vim.fn.isdirectory(path) == 0) then
+                path = vim.fn.getcwd()
+            end
+            minifiles.open(path, true)
             minifiles.reveal_cwd()
         end,
         desc = 'Explore Tree',
