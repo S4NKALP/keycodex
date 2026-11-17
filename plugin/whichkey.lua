@@ -153,6 +153,17 @@ local normal_mappings = {
     { '<leader>lT', ':lua Snacks.picker.lsp_type_definitions()<cr>', desc = 'Peek Type Definition' },
 
     { '<leader>o', group = ' Options' },
+    {
+        '<leader>oc',
+        function()
+            local codelens = vim.lsp.codelens
+            codelens.enable(not codelens.is_enabled())
+            vim.notify('Codelens: ' .. (codelens.is_enabled() and 'on' or 'off'), vim.log.levels.INFO, {
+                title = 'LSP',
+            })
+        end,
+        desc = 'Toggle Codelens',
+    },
     { '<leader>oi', 'vim.show_pos', desc = 'Inspect Position' },
     { '<leader>oN', ':lua Snacks.notifier.show_history()<cr>', desc = 'Notification History' },
     { '<leader>or', ':set relativenumber!<cr>', desc = 'Relative Numbers' },

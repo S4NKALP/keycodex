@@ -99,6 +99,7 @@ The **Leader Key** is mapped to `<Space>`.
 | `<leader>ps` | Open Plugin Manager (Pack) |
 | `<leader>ca` | LSP Code Actions |
 | `<leader>cr` | Rename Symbol |
+| `<leader>oc` | Toggle Codelens |
 | `<leader>wz` | Toggle Zen Mode |
 
 *Tip: Use `<leader>` and wait for **WhichKey** to show you the full list of available commands.*
