@@ -75,6 +75,7 @@ nvim
   - [`pack_helper.lua`](./lua/pack_helper.lua) - Helper functions and `add` API for native plugins.
   - [`packui.lua`](./lua/packui.lua) - Interactive UI for the native plugin manager.
   - [`keys.lua`](./lua/keys.lua) - Base keybindings and leader configuration.
+  - [`paste.lua`](./lua/paste.lua) - Reindents pasted text to the surrounding indentation level.
   - [`autocmd.lua`](./lua/autocmd.lua) - Smart automation (Auto-save, Smart Column, `.env` masking, Auto-install).
   - [`options.lua`](./lua/options.lua) - Global Neovim settings & performance tweaks.
   - [`lsp.lua`](./lua/lsp.lua) - Language Server Protocol & Tree-sitter setup.

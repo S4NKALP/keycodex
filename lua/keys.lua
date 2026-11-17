@@ -91,6 +91,12 @@ map('n', 'x', '"_x', { desc = 'Cut without replacing clipboard' })
 map('n', 'c', '"_c', { desc = 'Change without replacing clipboard' })
 map('v', 'p', '"_dP', { desc = 'Paste without replacing clipboard' })
 
+-- Paste and reindent to the surrounding indentation level
+map('n', 'p', 'p<Cmd>lua require("paste").reindent_put()<cr>', { desc = 'Paste and reindent' })
+map('n', 'P', 'P<Cmd>lua require("paste").reindent_put()<cr>', { desc = 'Paste before and reindent' })
+map('n', 'gp', 'gp<Cmd>lua require("paste").reindent_put()<cr>', { desc = 'Paste and reindent (cursor after)' })
+map('n', 'gP', 'gP<Cmd>lua require("paste").reindent_put()<cr>', { desc = 'Paste before and reindent (cursor after)' })
+
 --insert the following characters around the visual selection
 map('v', '<leader>(', 's()<esc>Pll', { desc = 'wrap selection with parens' })
 map('v', '<leader>[', 's[]<esc>Pll', { desc = 'wrap selection with square braces' })
