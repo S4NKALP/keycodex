@@ -144,6 +144,95 @@ map(
     { desc = 'Search & replace word in current line', silent = false }
 )
 
+-- Replace all occurrences of the visually selected text
+map('v', '<leader>r', '"hy:%s/<C-r>h//g<Left><Left>', { desc = 'Buffer find and replace (selected)' })
+
+-- Replace word under cursor in the current buffer
+map('n', '<leader>r', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = 'Replace word under cursor' })
+
+-- Replace word under cursor, choosing the scope with a snacks picker
+local function replace_word()
+    local word = vim.fn.expand('<cword>')
+    if word == '' then
+        vim.notify('No word under cursor', vim.log.levels.WARN)
+        return
+    end
+
+    local scopes = {
+        { text = 'Buffer', detail = 'all occurrences', icon = '󰈔', kind = 'buffer' },
+        { text = 'Buffer (confirm each)', detail = 'y/n per match', icon = '󰈔', kind = 'buffer_confirm' },
+    }
+    if vim.fn.executable('rg') == 1 then
+        table.insert(
+            scopes,
+            { text = 'Project (confirm each)', detail = 'ripgrep + quickfix', icon = '󰉋', kind = 'project' }
+        )
+    end
+
+    -- Escaped pattern for the word and replacement
+    local pat = '\\<' .. vim.fn.escape(word, '\\/.*$^~[]|') .. '\\>'
+
+    require('snacks').picker.select(scopes, {
+        prompt = "Replace '" .. word .. "' in",
+        format_item = function(item, supports_chunks)
+            if supports_chunks then
+                return { { item.icon .. ' ', 'SnacksPickerIcon' }, { item.text }, { ' ' .. item.detail, 'Comment' } }
+            end
+            return item.text
+        end,
+    }, function(choice)
+        if not choice then
+            return
+        end
+
+        require('snacks').input({ prompt = "Replace '" .. word .. "' with", default = word }, function(new)
+            if not new or new == '' or new == word then
+                return
+            end
+
+            local rep = vim.fn.escape(new, '\\/&~|')
+            local sub = ('%%s/%s/%s/'):format(pat, rep)
+
+            if choice.kind == 'buffer' then
+                vim.cmd(sub .. 'g')
+            elseif choice.kind == 'buffer_confirm' then
+                vim.cmd(sub .. 'gc')
+            else
+                local out = vim.fn.systemlist({
+                    'rg',
+                    '--vimgrep',
+                    '--no-heading',
+                    '--color=never',
+                    '-w',
+                    '-F',
+                    '--',
+                    word,
+                })
+                local items = {}
+                for _, line in ipairs(out) do
+                    local file, lnum, col, text = line:match('^(.-):(%d+):(%d+):(.*)$')
+                    if file then
+                        items[#items + 1] = {
+                            filename = file,
+                            lnum = tonumber(lnum),
+                            col = tonumber(col),
+                            text = text,
+                        }
+                    end
+                end
+                if #items == 0 then
+                    vim.notify("No matches for '" .. word .. "'", vim.log.levels.WARN)
+                    return
+                end
+                vim.fn.setqflist({}, ' ', { title = "Replace '" .. word .. "'", items = items })
+                vim.cmd('cfdo ' .. sub .. 'gce | update')
+            end
+        end)
+    end)
+end
+
+map('n', '<leader>R', replace_word, { desc = 'Replace word (choose scope)' })
+
 -- Folds
 map('n', '<leader><', function()
     if not vim.opt.foldmethod then
