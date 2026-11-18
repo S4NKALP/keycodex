@@ -78,9 +78,38 @@ vim.schedule(function()
     vim.lsp.config('rust_analyzer', {
         settings = {
             ['rust-analyzer'] = {
-                diagnostics = {
+                cargo = {
+                    buildScripts = {
+                        enable = true,
+                    },
+                },
+                check = {
+                    command = 'clippy',
+                },
+                procMacro = {
                     enable = true,
-                    experimental = { enable = true },
+                },
+                completion = {
+                    autoimport = {
+                        enable = true,
+                    },
+                },
+                inlayHints = {
+                    bindingModeHints = {
+                        enable = true,
+                    },
+                    closureReturnTypeHints = {
+                        enable = 'always',
+                    },
+                    lifetimeElisionHints = {
+                        enable = 'always',
+                    },
+                    parameterHints = {
+                        enable = true,
+                    },
+                    typeHints = {
+                        enable = true,
+                    },
                 },
             },
         },
