@@ -71,7 +71,7 @@ local normal_mappings = {
         end,
         desc = 'Explore Tree',
     },
-    { '<leader>ef', 'gf', desc = 'File Under Cursor' },
+    { '<leader>ef', desc = 'File Under Cursor' },
     { '<leader>em', ':e README.md<cr>', desc = 'Readme' },
     { '<leader>en', ':enew<cr>', desc = 'New File' },
     { '<leader>er', ":lua require('snacks').rename.rename_file()<cr>", desc = 'Rename Current File' },
