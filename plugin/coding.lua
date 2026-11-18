@@ -20,17 +20,17 @@ vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave' }, {
 
 require('lint').linters_by_ft = {
     ['*'] = { 'codespell' },
-    ['javascript'] = { 'eslint_d', 'cspell' },
-    ['typescript'] = { 'eslint_d', 'cspell' },
-    ['javascriptreact'] = { 'eslint_d', 'cspell' },
-    ['typescriptreact'] = { 'eslint_d', 'cspell' },
+    ['javascript'] = { 'oxlint', 'cspell' },
+    ['typescript'] = { 'oxlint', 'cspell' },
+    ['javascriptreact'] = { 'oxlint', 'cspell' },
+    ['typescriptreact'] = { 'oxlint', 'cspell' },
     ['dockerfile'] = { 'hadolint' },
-    ['markdown'] = { 'write_good', 'markdownlint' },
+    ['markdown'] = { 'write_good', 'markdownlint-cli2' },
     ['text'] = { 'write_good' },
     ['sh'] = { 'shellcheck' },
     ['yaml'] = { 'actionlint' },
     ['python'] = { 'ruff' },
-    -- ['go'] = { 'gofmt' },
+    ['go'] = { 'golangcilint' },
 }
 
 require('tiny-code-action').setup({
@@ -73,12 +73,14 @@ require('conform').setup({
         ['c'] = { 'clang_format' },
         ['cpp'] = { 'clang_format' },
         ['h'] = { 'clang_format' },
+        ['go'] = { 'gofumpt' },
+        ['rust'] = { 'rustfmt' },
         ['python'] = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
-        ['javascript'] = { 'biome' },
-        ['typescript'] = { 'biome' },
-        ['typescriptreact'] = { 'biome' },
-        ['markdown'] = { 'prettier', 'markdownlint-cli2' },
-        ['mdx'] = { 'prettier' },
+        ['javascript'] = { 'oxfmt' },
+        ['javascriptreact'] = { 'oxfmt' },
+        ['typescript'] = { 'oxfmt' },
+        ['typescriptreact'] = { 'oxfmt' },
+        ['markdown'] = { 'markdownlint-cli2' },
         ['_'] = { 'trim_whitespace' },
     },
     options = {
