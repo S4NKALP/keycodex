@@ -74,6 +74,18 @@ vim.schedule(function()
         },
     })
 
+    -- rust
+    vim.lsp.config('rust_analyzer', {
+        settings = {
+            ['rust-analyzer'] = {
+                diagnostics = {
+                    enable = true,
+                    experimental = { enable = true },
+                },
+            },
+        },
+    })
+
     -- lua
     vim.lsp.config('lua_ls', {
         settings = {
@@ -123,34 +135,23 @@ vim.schedule(function()
 
     -- cpp
     vim.lsp.config('clangd', {
-        cmd = { 'clangd', '--background-index', '--completion-style=detailed' },
-        filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+        cmd = {
+            'clangd',
+            '--fallback-style=llvm',
+            '--header-insertion=iwyu',
+            '-j=4',
+        },
     })
 
     vim.lsp.config('gopls', {
         settings = {
             gopls = {
-                gofumpt = true,
-                analyses = { unusedparams = true, shadow = true },
+                analyses = {
+                    unusedparams = true,
+                },
                 staticcheck = true,
-                linksInHover = false,
-                codelenses = {
-                    generate = true,
-                    gc_details = true,
-                    regenerate_cgo = true,
-                    tidy = true,
-                    upgrade_dependency = true,
-                    vendor = true,
-                },
-                hints = {
-                    assignVariableTypes = true,
-                    compositeLiteralFields = true,
-                    constantValues = true,
-                    parameterNames = true,
-                    rangeVariableTypes = true,
-                },
+                gofumpt = true,
             },
-            usePlaceholders = true,
         },
     })
 

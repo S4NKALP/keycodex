@@ -13,7 +13,7 @@ Required
 - fd                  Snacks picker file finding
 - nodejs + npm        vtsls, tailwindcss, oxfmt, oxlint, markdownlint-cli2, cspell
 - python3 + pip       basedpyright, ruff, djlint, write-good
-- cargo / rustup      blink.cmp native fuzzy matcher (`cargo build --release`), rustfmt
+- cargo / rustup      blink.cmp native fuzzy matcher (`cargo build --release`), rust_analyzer, rustfmt
 - clang / clangd      clangd LSP, clang-format
 - go                  gopls, gofumpt, golangci-lint
 - luarocks            lua_ls
@@ -40,9 +40,7 @@ Not required (removed or never used by this config)
 
 Language servers installed via mason-lspconfig (see lua/extensions.lua)
 -----------------------------------------------------------------------
-vtsls, html, cssls, tailwindcss, lua_ls, basedpyright, bashls, clangd, gopls
-(the rust-analyzer binary is installed by Mason too, but its client is started
-by rustaceanvim, so it is not in the lsp_server list)
+vtsls, html, cssls, tailwindcss, lua_ls, basedpyright, bashls, clangd, rust_analyzer, gopls
 
 Formatters (mason-conform): clang_format, ruff, stylua, oxfmt, markdown-toc,
 markdownlint-cli2, gofumpt. rustfmt comes with the Rust toolchain, not Mason.
