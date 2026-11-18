@@ -1,40 +1,81 @@
-# System Prerequisites for Neovim Configuration (nvim-new)
+System prerequisites for this Neovim configuration
+==================================================
 
-## Core Tools
-- git (Plugin management)
-- curl (Treesitter/Mason downloads)
-- tar (Parser extraction)
-- gcc / g++ (Compiling Treesitter parsers)
+Neovim: 0.12+ required (uses vim.pack, vim.lsp.config, vim.pack.UI). Check with `nvim --version`.
+Most tooling below is installed by `:Mason` on demand; the list marks what Mason cannot provide.
 
-## Search & Navigation
-- ripgrep (rg) - Fast grep for Snacks Picker
-- fd - Fast file find for Snacks Picker
+Required
+--------
+- git                 plugin install/update (vim.pack)
+- curl, tar, unzip    treesitter parsers, mason downloads
+- gcc / g++ , make    compiling treesitter parsers
+- ripgrep (rg)        Snacks picker grep, replace-word project scope
+- fd                  Snacks picker file finding
+- nodejs + npm        ts_ls, tailwindcss, biome, prettier, markdownlint-cli2, cspell
+- python3 + pip       basedpyright, ruff, djlint, write-good
+- cargo / rustup      blink.cmp native fuzzy matcher (`cargo build --release`), rust_analyzer
+- clang / clangd      clangd LSP, clang-format
+- go                  gopls
+- luarocks            lua_ls
+- wl-clipboard        system clipboard on Wayland (or xclip on X11)
+  [Arch: wl-clipboard]  [Debian: wl-clipboard]
 
-## Git Enhancements
-- lazygit (Integrated git UI in Snacks) [pacman: lazygit]
+Optional, feature-specific
+--------------------------
+- opencode CLI       required by opencode.nvim (<leader>O); install per opencode.ai
+- tmux               lets Navigator.nvim (<C-hjkl>, <C-\>) cross tmux panes; falls back to nvim windows
+- imagemagick        Snacks.image: raster images in buffers
+- ghostscript (gs)   Snacks.image: PDF rendering
+- tectonic           Snacks.image: LaTeX rendering
+- mermaid-cli        Snacks.image: Mermaid diagrams (npm i -g @mermaid-js/mermaid-cli)
+- wakatime-cli       vim-wakatime tracking; the plugin downloads its CLI on first use
 
-## Snacks.image & Media Rendering
-- imagemagick (Image processing) [pacman: imagemagick]
-- ghostscript (gs) - PDF rendering [pacman: ghostscript]
-- tectonic (LaTeX rendering) [pacman: tectonic]
-- mermaid-cli (mmdc) - Mermaid diagram rendering [pacman: mermaid-cli]
+Not required (removed or never used by this config)
+---------------------------------------------------
+- lazygit            no lazygit/Snacks explorer integration exists; use <leader>gF / :CodeDiff
+- gio / glib2        Snacks explorer trash support, but the Snacks explorer is not enabled
+- jdk / php / ruby   no Java, PHP or Ruby language server is configured
+- composer, luarocks is the only Lua dependency builder needed
+- ranger / oil / netrw  file browsing is mini.files; netrw is disabled
 
-## Clipboard (Wayland)
-- wl-clipboard (wl-copy / wl-paste) [pacman: wl-clipboard]
+Language servers installed via mason-lspconfig (see lua/extensions.lua)
+-----------------------------------------------------------------------
+ts_ls, html, cssls, tailwindcss, lua_ls, basedpyright, bashls, clangd, rust_analyzer, gopls
 
-## Language Runtimes (for Mason & LSPs)
-- nodejs & npm (JS/TS, Tailwind, etc.) [pacman: nodejs, npm]
-- python3 & python-pip (Python LSPs) [pacman: python, python-pip]
-- go (Go LSPs) [pacman: go]
-- cargo (Rust LSPs) [pacman: rust]
-- ruby (Ruby LSPs) [pacman: ruby]
-- php & composer (PHP LSPs) [pacman: php, composer]
-- openjdk (Java LSPs) [pacman: jdk-openjdk]
-- luarocks (Lua dependency building) [pacman: luarocks]
+Formatters (mason-conform): clang_format, ruff, stylua, prettier, markdown-toc,
+markdownlint-cli2, biome
 
-## System Integration
-- gio (Used by Snacks Explorer for trash support) [pacman: glib2]
+Linters (mason-nvim-lint): eslint_d, hadolint, write_good, markdownlint, shellcheck,
+actionlint, djlint, ruff, codespell, cspell
 
----
-### Installation Command (Arch Linux)
-sudo pacman -S git curl tar gcc ripgrep fd lazygit imagemagick ghostscript tectonic mermaid-cli wl-clipboard nodejs npm python python-pip go rust ruby php composer jdk-openjdk luarocks glib2
+Install on Arch
+---------------
+sudo pacman -S --needed git curl tar unzip gcc make ripgrep fd nodejs npm python python-pip \
+  rustup go clang luarocks wl-clipboard imagemagick ghostscript tectonic
+
+npm i -g @mermaid-js/mermaid-cli   # optional, Mermaid rendering
+
+Install on Debian/Ubuntu
+------------------------
+sudo apt install git curl tar unzip gcc make ripgrep fd-find nodejs npm python3 python3-pip \
+  cargo clang golang luarocks wl-clipboard imagemagick ghostscript
+
+First run
+---------
+Nothing manual is required. On the first launch the config installs:
+
+- plugins from nvim-pack-lock.json (vim.pack.add)
+- LSP servers (mason-lspconfig ensure_installed)
+- formatters (mason-conform ensure_installed)
+- linters (mason-nvim-lint ensure_installed)
+- treesitter parsers (nvim-treesitter install)
+
+All lists live in lua/extensions.lua.
+
+Optional verification / extra tools:
+:Mason          browse, add or remove tools not in the lists above
+:TSInstallAll   re-run the parser install (also runs every startup)
+:checkhealth    confirm clipboard, providers, LSP and treesitter
+
+Note: mason-lspconfig skips ensure_installed in headless mode, so a headless
+first run (nvim --headless) will not populate the servers.
