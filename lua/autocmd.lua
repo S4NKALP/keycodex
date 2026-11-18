@@ -13,11 +13,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- smart column only when needed
 local smart_column_group = vim.api.nvim_create_augroup('SmartColumn', { clear = true })
-vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'BufEnter' }, {
+vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI', 'BufEnter', 'WinEnter' }, {
     group = smart_column_group,
     callback = function()
         local limit = 120
-        local disabled_fts = { 'help', 'text', 'markdown', 'oil', 'snacks_dashboard', 'dashboard' }
+        local disabled_fts = { 'help', 'text', 'markdown', 'oil', 'snacks_dashboard', 'dashboard', 'keycodex' }
 
         if vim.tbl_contains(disabled_fts, vim.bo.filetype) then
             vim.wo.colorcolumn = ''
@@ -89,20 +89,6 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile', 'BufWriteCmd' }, {
                 end
             end
         end
-    end,
-})
-
--- Strip trailing spaces before write
-vim.api.nvim_create_autocmd('BufWritePre', {
-    group = augroup('strip_space'),
-    pattern = '*',
-    callback = function()
-        if not vim.bo.modifiable or vim.bo.buftype ~= '' then
-            return
-        end
-        local save = vim.fn.winsaveview()
-        vim.cmd([[keeppatterns %s/\s\+$//e]])
-        vim.fn.winrestview(save)
     end,
 })
 
@@ -216,38 +202,6 @@ vim.api.nvim_create_autocmd('RecordingLeave', {
     end,
 })
 
--- Auto-Save on InsertLeave with 3s Debounce
-local save_timer = nil
-
-local function clear_timer()
-    if save_timer then
-        save_timer:stop()
-        save_timer = nil
-    end
-end
-
-vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
-    group = augroup('autosave_cancel'),
-    callback = clear_timer,
-})
-
-vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
-    group = augroup('autosave'),
-    callback = function(args)
-        clear_timer()
-        if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].modified and vim.bo[args.buf].buftype == '' then
-            save_timer = vim.defer_fn(function()
-                if vim.api.nvim_buf_is_valid(args.buf) and vim.bo[args.buf].modified then
-                    vim.api.nvim_buf_call(args.buf, function()
-                        vim.cmd('silent! write')
-                        vim.notify('Autosaved ' .. vim.fn.expand('%:t'), vim.log.levels.INFO, { title = 'Auto-Save' })
-                    end)
-                end
-            end, 3000)
-        end
-    end,
-})
-
 -- Disable conform during VimLeavePre to prevent LSP shutdown race
 vim.api.nvim_create_autocmd('VimLeavePre', {
     group = augroup('disable_conform_on_exit'),
@@ -259,22 +213,6 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
     end,
 })
 
--- Autoinstall missing plugins on startup
-vim.api.nvim_create_autocmd('VimEnter', {
-    group = augroup('autoinstall'),
-    callback = function()
-        local ok, items = pcall(vim.pack.get, nil, { info = true })
-        if ok then
-            local missing = {}
-            for _, item in ipairs(items) do
-                if not item.path or vim.fn.isdirectory(item.path) == 0 then
-                    table.insert(missing, item.spec.name or item.spec.src:match('([^/]+)/*$'))
-                end
-            end
-            if #missing > 0 then
-                vim.notify('Installing missing plugins...', vim.log.levels.INFO, { title = 'vim.pack' })
-                vim.pack.update(missing, { force = true })
-            end
-        end
-    end,
-})
+-- Autoinstall is handled by `vim.pack.add()` in `lua/pack_helper.lua`:
+-- plugins missing from disk are installed on the `add()` call, so the extra
+-- `vim.pack.get()` scan at VimEnter (measured ~170ms) is not needed.
