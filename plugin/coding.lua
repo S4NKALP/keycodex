@@ -9,6 +9,15 @@ add({
 })
 
 require('todo-comments').setup({ signs = false })
+
+-- Run linters on save and after leaving insert mode
+vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave' }, {
+    group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
+    callback = function()
+        require('lint').try_lint()
+    end,
+})
+
 require('lint').linters_by_ft = {
     ['*'] = { 'codespell' },
     ['javascript'] = { 'eslint_d', 'cspell' },
@@ -69,12 +78,11 @@ require('conform').setup({
         ['typescript'] = { 'biome' },
         ['typescriptreact'] = { 'biome' },
         ['markdown'] = { 'prettier', 'markdownlint-cli2' },
-        ['markdown.mdx'] = { 'prettier', 'markdownlint-cli2' },
         ['mdx'] = { 'prettier' },
         ['_'] = { 'trim_whitespace' },
     },
     options = {
-        stop_after_first = true,
+        stop_after_first = false,
     },
     format_after_save = function(bufnr)
         if not vim.b[bufnr].conform_disable then
@@ -90,6 +98,14 @@ vim.keymap.set('n', '<leader>tf', function()
     local status = vim.b.conform_disable and 'disabled' or 'enabled'
     vim.notify('Autoformat ' .. status, vim.log.levels.INFO)
 end, { desc = 'Toggle autoformat' })
+
+vim.api.nvim_create_user_command('WriteNoFormat', function()
+    local prev = vim.b.conform_disable
+    vim.b.conform_disable = true
+    vim.cmd('write')
+    vim.b.conform_disable = prev
+end, { desc = 'Write without formatting' })
+
 require('mason-conform').setup({
     ensure_installed = require('extensions').formatter,
     automatic_installation = true,
