@@ -13,18 +13,21 @@ vim.schedule(function()
         capabilities = require('blink.cmp').get_lsp_capabilities(),
     })
 
-    -- ts_ls
-    vim.lsp.config('ts_ls', {
+    -- vtsls (TypeScript/JavaScript; drop-in for ts_ls)
+    vim.lsp.config('vtsls', {
         settings = {
+            -- use the TypeScript version pinned by the project when there is one
+            vtsls = {
+                autoUseWorkspaceTsdk = true,
+            },
             typescript = {
                 inlayHints = {
-                    includeInlayParameterNameHints = 'all',
-                    includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                    includeInlayFunctionParameterTypeHints = true,
-                    includeInlayVariableTypeHints = true,
-                    includeInlayPropertyDeclarationTypeHints = true,
-                    includeInlayFunctionLikeReturnTypeHints = true,
-                    includeInlayEnumMemberValueHints = true,
+                    parameterNames = { enabled = 'all', suppressWhenArgumentMatchesName = false },
+                    parameterTypes = { enabled = true },
+                    variableTypes = { enabled = true },
+                    propertyDeclarationTypes = { enabled = true },
+                    functionLikeReturnTypes = { enabled = true },
+                    enumMemberValues = { enabled = true },
                 },
             },
         },

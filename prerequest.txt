@@ -40,13 +40,13 @@ Not required (removed or never used by this config)
 
 Language servers installed via mason-lspconfig (see lua/extensions.lua)
 -----------------------------------------------------------------------
-ts_ls, html, cssls, tailwindcss, lua_ls, basedpyright, bashls, clangd, rust_analyzer, gopls
+vtsls, html, cssls, tailwindcss, lua_ls, basedpyright, bashls, clangd, rust_analyzer, gopls
 
-Formatters (mason-conform): clang_format, ruff, stylua, prettier, markdown-toc,
-markdownlint-cli2, biome
+Formatters (mason-conform): clang_format, ruff, stylua, oxfmt, markdown-toc,
+markdownlint-cli2, gofumpt. rustfmt comes with the Rust toolchain, not Mason.
 
-Linters (mason-nvim-lint): eslint_d, hadolint, write_good, markdownlint, shellcheck,
-actionlint, djlint, ruff, codespell, cspell
+Linters (mason-nvim-lint): oxlint, hadolint, write_good, markdownlint-cli2,
+shellcheck, actionlint, djlint, ruff, codespell, cspell, golangcilint
 
 Install on Arch
 ---------------

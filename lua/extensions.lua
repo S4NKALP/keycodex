@@ -29,7 +29,7 @@ local treesitter_parsers = {
 }
 
 local lsp_server = {
-    'ts_ls',
+    'vtsls',
     'html',
     'cssls',
     'tailwindcss',
