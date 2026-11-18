@@ -238,34 +238,8 @@ map('n', '<leader>>', function()
 end, { desc = 'Open all folds' })
 
 -- Open the file under the cursor, without Vim's E447 when there is no file.
--- Understands `path:line`, and searches buffer dir / cwd as fallbacks.
-map('n', '<leader>ef', function()
-    -- `<cfile>` strips a trailing `:line`, so start from the WORD and clean it
-    local raw = vim.fn.expand('<cWORD>'):gsub('^[%(%[{<"\']+', ''):gsub('[%]%)}>"\',;]+$', '')
-    local path, line = raw:match('^(.+):(%d+)$')
-    path = path or vim.fn.expand('<cfile>')
-
-    if path == '' then
-        vim.notify('No file under cursor', vim.log.levels.WARN, { title = 'File Under Cursor' })
-        return
-    end
-
-    for _, candidate in ipairs({
-        path,
-        vim.fn.expand('%:p:h') .. '/' .. path,
-        vim.fn.getcwd() .. '/' .. path,
-    }) do
-        if vim.fn.filereadable(candidate) == 1 then
-            vim.cmd.edit(vim.fn.fnameescape(candidate))
-            if line and vim.fn.line('$') >= tonumber(line) then
-                vim.api.nvim_win_set_cursor(0, { tonumber(line), 0 })
-            end
-            return
-        end
-    end
-
-    vim.notify('No file found for "' .. path .. '"', vim.log.levels.WARN, { title = 'File Under Cursor' })
-end, { desc = 'File Under Cursor' })
+-- Handles paths, `path:line` and Python module imports (see lua/open_path.lua).
+map('n', '<leader>ef', require('open_path').open, { desc = 'File Under Cursor' })
 
 -- LSP rename (labelled under <leader>r in which-key)
 map('n', '<leader>rr', function()

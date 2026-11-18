@@ -114,6 +114,7 @@ Leader is `<Space>`. Pressing `<leader>` waits for **which-key** to list everyth
 | `<leader>fg` | Live grep |
 | `<leader>fp` | Projects |
 | `<leader>ee` | File explorer (mini.files) |
+| `<leader>ef` | Open file under cursor (paths, `path:line`, Python imports) |
 | `<leader>ps` | Plugin manager (`:PackUI`) |
 | `<leader>.` | Code action |
 | `<leader>rr` | Rename symbol |
