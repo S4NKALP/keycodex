@@ -18,7 +18,7 @@
 
 > All commit messages in this repo are AI-generated using [DevGen](https://github.com/S4NKALP/DevGen)
 
-<h3>Handcrafted Neovim setup for the ultimate CLI development experience. ❤️👨‍💻</h3>
+<h3>Handcrafted Neovim setup for the ultimate CLI development experience. ❤️‍👨‍💻</h3>
 
 <figure>
   <img src="assets/screenshot.png" alt="KeyCodeX screenshot" style="border-radius: 10px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); max-width: 100%; height: auto;">
@@ -31,78 +31,102 @@
 ## ✨ Features
 
 - **📦 Native Plugin Management**
-  - Leverages Neovim's built-in package system for robust and fast plugin loading.
-  - Interactive UI for managing plugins with  `:PackUI`.
-  - Automatic detection and installation of missing plugins on startup.
-  - Non-interactive cleaning of inactive plugins.
+  - Uses Neovim's built-in `vim.pack` and a committed `nvim-pack-lock.json` for reproducible installs.
+  - Interactive manager with `:PackUI` / `<leader>ps` (update, delete, inspect, open plugin paths).
+  - Missing plugins are installed by `vim.pack.add()` on the first launch.
 
 - **🚀 Powered by [Snacks.nvim](https://github.com/folke/snacks.nvim)**
-  - **Dashboard**: Beautiful startup screen with quick actions.
-  - **Picker**: Ultra-fast file, grep, and project fuzzy finding.
-  - **Notifier**: Modern notification system with history.
-  - **Scratch**: Persistent scratchpads for quick notes or code snippets.
-  - **Explorer**: Integrated file explorer and rename utilities.
+  - **Picker**: files, grep, projects, git log/status/branches, LSP symbols, undo, todo comments.
+  - **Notifier**: notification history (`<leader>oN`) and LSP attach messages.
+  - **Indent / Statuscolumn / Zen / Dim / Rename / Bufdelete / Profiler**.
 
-- **🎨 Modern UI & UX**
-  - **Smart Column**: Dynamic `colorcolumn` that only appears when lines exceed limits.
-  - **Aesthetic Design**: Curated color schemes and smooth animations via `Snacks.animate`.
-  - **Mini Ecosystem**: Leveraging `mini.nvim` for files, icons, pairs, and more.
+- **🎨 UI & UX**
+  - Custom `KEYCODEX` start screen (`lua/dashboard.lua`), no dashboard plugin.
+  - `gruvbox` with hand-tuned highlights, transparent background.
+  - **Mini ecosystem**: files (`<leader>ee`), icons, pairs, ai textobjects, surround, splitjoin,
+    bracketed motions, diff overlay, custom statusline.
+  - **Smart column**: `colorcolumn` appears only when a line exceeds 120 columns.
 
 - **🛠️ Developer Productivity**
-  - **LSP & Tree-sitter**: Fully configured with auto-installation via `:TSInstallAll`.
-  - **Auto-Save**: Smart debounced auto-saving (3s) to prevent data loss.
-  - **Secure Env**: Automatic masking of sensitive values in `.env` files.
-  - **Auto-Directory**: Automatically creates parent directories when saving a new file.
+  - **LSP**: native `vim.lsp.config` / `vim.lsp.enable`, Mason for installation.
+  - **Completion**: `blink.cmp` with Rust fuzzy matcher, LSP/path/snippet/buffer sources.
+  - **Format on save**: `conform.nvim`; toggle with `<leader>tf`, skip with `<leader>wn`.
+  - **Lint on save and on insert leave**: `nvim-lint`.
+  - **Treesitter**: `nvim-treesitter` highlighting + indentation for configured languages.
+  - **Git**: `gitsigns` (signs, inline blame), `mini.diff` overlay (`<leader>gd`), `codediff` history.
+  - **Secure env**: `.env` values are masked on open, `<leader>et` toggles.
+  - **Auto-directory**: saving `dir/new_file` creates parent folders.
+  - **Paste reindent**: pasted code snaps to the surrounding indentation.
+  - **OpenCode**: in-editor AI panel under `<leader>O`.
 
 ---
 
 ## 💻 Installation
 
 ```bash
-# Clone the repository to your Neovim config directory
+# System tools first: see prerequest.txt
 git clone https://github.com/S4NKALP/keycodex ~/.config/nvim
 
-# Launch Neovim - Missing plugins will install automatically!
+# Launch Neovim - missing plugins install automatically
 nvim
 ```
+
+The first launch also installs every LSP server, formatter, linter and tree-sitter parser listed
+in [`lua/extensions.lua`](./lua/extensions.lua) via Mason's `ensure_installed`. `:Mason` is only
+needed to add or remove tools by hand, and `:TSInstallAll` to re-run the parser install.
 
 ---
 
 ## 📂 Project Structure
 
-- [`init.lua`](./init.lua) - Main entry point and orchestration.
-- [`lua/`](./lua/) - Core logic and system configurations.
-  - [`pack_helper.lua`](./lua/pack_helper.lua) - Helper functions and `add` API for native plugins.
-  - [`packui.lua`](./lua/packui.lua) - Interactive UI for the native plugin manager.
-  - [`keys.lua`](./lua/keys.lua) - Base keybindings and leader configuration.
-  - [`paste.lua`](./lua/paste.lua) - Reindents pasted text to the surrounding indentation level.
-  - [`autocmd.lua`](./lua/autocmd.lua) - Smart automation (Auto-save, Smart Column, `.env` masking, Auto-install).
-  - [`options.lua`](./lua/options.lua) - Global Neovim settings & performance tweaks.
-  - [`lsp.lua`](./lua/lsp.lua) - Language Server Protocol & Tree-sitter setup.
-- [`plugin/`](./plugin/) - Detailed plugin configurations.
-  - [`snacks.lua`](./plugin/snacks.lua) - Modern UI modules (Dashboard, Picker, Notifier, Scratchpad).
-  - [`whichkey.lua`](./plugin/whichkey.lua) - Interactive keyboard shortcut groupings.
-  - [`mini.lua`](./plugin/mini.lua) - Mini ecosystem utilities (Files, Icons, Pairs).
+- [`init.lua`](./init.lua) - Entry point.
+- [`lua/`](./lua/) - Core logic.
+  - [`pack_helper.lua`](./lua/pack_helper.lua) - `add()` wrapper over `vim.pack` + build hooks.
+  - [`packui.lua`](./lua/packui.lua) - Interactive plugin manager UI.
+  - [`keys.lua`](./lua/keys.lua) - Leader, base keymaps, yank/copy helpers.
+  - [`options.lua`](./lua/options.lua) - Options, providers, `filetype` additions.
+  - [`autocmd.lua`](./lua/autocmd.lua) - Smart column, `.env` masking, auto-mkdir, LSP attach.
+  - [`lsp.lua`](./lua/lsp.lua) - Per-server LSP settings and capabilities.
+  - [`paste.lua`](./lua/paste.lua) - Reindent pasted text.
+  - [`dashboard.lua`](./lua/dashboard.lua) - `KEYCODEX` start screen.
+  - [`extensions.lua`](./lua/extensions.lua) - Lists of parsers, servers, formatters, linters.
+- [`plugin/`](./plugin/) - Plugin configuration (loaded in filename order).
+  - [`01-lsp.lua`](./plugin/01-lsp.lua) - Mason.
+  - [`coding.lua`](./plugin/coding.lua) - conform, nvim-lint, todo-comments, code actions, diagnostics.
+  - [`editor.lua`](./plugin/editor.lua) - blink.cmp, Navigator, hardtime, visual-multi, tabout, hlslens.
+  - [`git.lua`](./plugin/git.lua) - gitsigns, codediff.
+  - [`mini.lua`](./plugin/mini.lua) - Mini modules and statusline.
+  - [`snacks.lua`](./plugin/snacks.lua) - Snacks modules, layouts, LSP notifications.
+  - [`tools.lua`](./plugin/tools.lua) - OpenCode, toggleterm, wakatime.
+  - [`treesitter.lua`](./plugin/treesitter.lua) - Parsers, highlighting, autotag, matchup.
+  - [`ui.lua`](./plugin/ui.lua) - Colorscheme, markview, color highlighter, showkeys.
+  - [`whichkey.lua`](./plugin/whichkey.lua) - Keymap groups and labels.
 
 ---
 
 ## ⌨️ Keybindings
 
-The **Leader Key** is mapped to `<Space>`.
+Leader is `<Space>`. Pressing `<leader>` waits for **which-key** to list everything.
 
 | Key | Action |
 | --- | --- |
-| `<leader>ff` | Find Files |
-| `<leader>fg` | Live Grep |
-| `<leader>ee` | Explore Files (Mini) |
-| `<leader>eE` | Explorer (Snacks) |
-| `<leader>ps` | Open Plugin Manager (Pack) |
-| `<leader>ca` | LSP Code Actions |
-| `<leader>cr` | Rename Symbol |
-| `<leader>oc` | Toggle Codelens |
-| `<leader>wz` | Toggle Zen Mode |
-
-*Tip: Use `<leader>` and wait for **WhichKey** to show you the full list of available commands.*
+| `<leader>ff` | Find files |
+| `<leader>fg` | Live grep |
+| `<leader>fp` | Projects |
+| `<leader>ee` | File explorer (mini.files) |
+| `<leader>ps` | Plugin manager (`:PackUI`) |
+| `<leader>.` | Code action |
+| `<leader>rr` | Rename symbol |
+| `<leader>rd` / `<leader>rj` | Definition / usages |
+| `<leader>cf` | Format buffer |
+| `<leader>tf` | Toggle autoformat |
+| `<leader>wn` | Write without formatting |
+| `<leader>oc` | Toggle codelens |
+| `<leader>gd` | Toggle diff overlay |
+| `<leader>wz` | Zen mode |
+| `<leader>t1` / `<leader>t2` | Toggle terminal |
+| `<C-hjkl>` | Move across tmux/nvim splits |
+| `<C-\>` | Previous pane |
 
 ---
 

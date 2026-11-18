@@ -1,5 +1,5 @@
 local options = {
-    ai = true,
+    autoindent = true,
     clipboard = 'unnamedplus', -- use system clipboard
     number = true,
     relativenumber = true,
@@ -59,7 +59,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-vim.opt.path:append({ '**' })
 vim.opt.shortmess:append({ W = true, I = true, c = true }) -- disable greeting
 
 -- Fix markdown indentation settings

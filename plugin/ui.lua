@@ -35,9 +35,6 @@ require('gruvbox').setup({
         BlinkCmpLabelMatch = { fg = palette.bright_green },
         BlinkCmpScrollBarGutter = { bg = palette.dark2 },
         BlinkCmpScrollBarThumb = { bg = palette.light1 },
-
-        -- indent guides
-        MiniIndentscopeSymbol = { fg = palette.dark1 },
     },
 })
 

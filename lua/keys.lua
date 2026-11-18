@@ -6,7 +6,6 @@ end
 local opts = { noremap = true, silent = true }
 
 -- Space as leader
-map('n', '<Space>', '', opts)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -46,17 +45,6 @@ map('n', '<leader>or', '<cmd>set relativenumber!<cr>', { desc = 'Relative Number
 map({ 'n', 'v' }, 'H', '^', { desc = 'Move to the beginning of the line' })
 map({ 'n', 'v' }, 'L', '$', { desc = 'Move to the end of the line' })
 
--- Visual overwrite paste
-map({ 'v', 'x' }, 'p', '"_dP', opts)
-
--- Do not copy on x
-map({ 'v', 'x' }, 'x', '"_x', opts)
-map('n', 'X', '"_D', opts)
-map('n', 'dd', '"_dd', opts)
-map({ 'v', 'x' }, 'X', '"_d', opts)
-
--- Select all
-
 -- Select all
 map('n', '<leader>a', 'ggVG', { desc = 'Select all' })
 map('n', '<C-a>', 'ggVG', { desc = 'Select all' })
@@ -86,9 +74,12 @@ map('i', '<C-BS>', '<C-w>', { desc = 'Delete word backward' })
 map('n', '<C-Del>', 'dw', { desc = 'Delete word forward' })
 map('i', '<C-Del>', '<C-o>dw', { desc = 'Delete word forward' })
 
-map('n', 'd', '"_d', { desc = 'Delete without replacing clipboard' })
-map('n', 'x', '"_x', { desc = 'Cut without replacing clipboard' })
-map('n', 'c', '"_c', { desc = 'Change without replacing clipboard' })
+-- Deletes and changes go to the black-hole register, so the clipboard survives.
+-- No `dd` mapping: `d` followed by the line motion already covers it, and a
+-- separate `dd` makes `d` wait for `timeoutlen` as an ambiguous prefix.
+for _, key in ipairs({ 'd', 'c', 'x', 'X' }) do
+    map({ 'n', 'v' }, key, '"_' .. key, { desc = 'Delete without replacing clipboard' })
+end
 map('v', 'p', '"_dP', { desc = 'Paste without replacing clipboard' })
 
 -- Paste and reindent to the surrounding indentation level
@@ -149,12 +140,6 @@ map(
     'viw"9y:s@<c-r>9@<c-r>9@g<left><left>',
     { desc = 'Search & replace word in current line', silent = false }
 )
-
--- Replace all occurrences of the visually selected text
-map('v', '<leader>r', '"hy:%s/<C-r>h//g<Left><Left>', { desc = 'Buffer find and replace (selected)' })
-
--- Replace word under cursor in the current buffer
-map('n', '<leader>r', [[:%s/\<<C-r><C-w>\>//g<Left><Left>]], { desc = 'Replace word under cursor' })
 
 -- Replace word under cursor, choosing the scope with a snacks picker
 local function replace_word()
@@ -251,3 +236,31 @@ map('n', '<leader>>', function()
     vim.opt.foldenable = false
     vim.cmd('normal! zR')
 end, { desc = 'Open all folds' })
+
+-- LSP rename (labelled under <leader>r in which-key)
+map('n', '<leader>rr', function()
+    vim.lsp.buf.rename()
+end, { desc = 'Smart Rename' })
+
+-- Copy helpers behind the <leader>y* mappings
+local function copy_to_clipboard(text)
+    vim.fn.setreg('+', text)
+    vim.notify('Copied: ' .. text, vim.log.levels.INFO, { title = 'Yank', timeout = 1000 })
+end
+
+local function path_with_line(expr, with_line)
+    local path = vim.fn.expand(expr)
+    return with_line and ('%s:%d'):format(path, vim.fn.line('.')) or path
+end
+
+for name, spec in pairs({
+    CopyFileName = { '%:t', false },
+    CopyRelativePath = { '%:.', false },
+    CopyAbsolutePath = { '%:p', false },
+    CopyRelativePathWithLine = { '%:.', true },
+    CopyAbsolutePathWithLine = { '%:p', true },
+}) do
+    vim.api.nvim_create_user_command(name, function()
+        copy_to_clipboard(path_with_line(spec[1], spec[2]))
+    end, { desc = 'Copy ' .. name })
+end

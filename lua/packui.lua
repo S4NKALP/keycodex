@@ -75,7 +75,14 @@ local function render()
         '  ─────────────────────────────────────────────────────────────────────────────────',
         '',
         string.format('  %-3s %-30s %-10s %-15s %s', 'Act', 'Plugin', 'Rev', 'Version', 'Source'),
-        string.format('  %-3s %-30s %-10s %-15s %s', '───', '──────', '───', '───────', '──────'),
+        string.format(
+            '  %-3s %-30s %-10s %-15s %s',
+            '───',
+            '──────',
+            '───',
+            '───────',
+            '──────'
+        ),
     }
 
     local ns_id = vim.api.nvim_create_namespace('packui')
@@ -260,8 +267,12 @@ function M.open()
     map('r', render, 'Refresh')
     map('u', update_item, 'Update plugin')
     map('U', update_all, 'Update all')
-    map('d', function() delete_item(false) end, 'Delete plugin')
-    map('D', function() delete_item(true) end, 'Force delete')
+    map('d', function()
+        delete_item(false)
+    end, 'Delete plugin')
+    map('D', function()
+        delete_item(true)
+    end, 'Force delete')
     map('i', inspect_item, 'Inspect plugin')
     map('o', open_path, 'Open path')
     map('<CR>', open_path, 'Open path')

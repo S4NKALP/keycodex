@@ -1,5 +1,4 @@
 add({
-    { src = 'iamcco/markdown-preview.nvim', build = 'cd app && npm install' },
     'wakatime/vim-wakatime', --wakaTime coding time tracker
     'akinsho/toggleterm.nvim', --float terminal
     'sudo-tee/opencode.nvim',
@@ -76,7 +75,7 @@ end)
 
 require('toggleterm').setup({
     size = 10,
-    open_mapping = [[<c-\>]],
+    open_mapping = false, -- <C-\> is Navigator; use <leader>t1 / <leader>t2
     hide_numbers = true,
     shade_filetypes = {},
     shade_terminals = true,

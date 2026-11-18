@@ -2,15 +2,6 @@
 -- LSP
 --------------------------------------------------------------------------------
 
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'PackerComplete', -- Fallback or custom event if needed, but let's use a more standard one
-    callback = function()
-        -- This is where we would put it if we had a specific event.
-        -- Since we're using VimEnter, let's use that instead.
-    end,
-})
-
--- Let's use a simple function and schedule it to run after plugins
 vim.schedule(function()
     vim.lsp.config('*', {
         capabilities = require('blink.cmp').get_lsp_capabilities(),

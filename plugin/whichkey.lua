@@ -47,11 +47,8 @@ local normal_mappings = {
 
     { '<leader>c', group = ' Code' },
     { '<leader>cF', ':retab<cr>', desc = 'Fix Tabs' },
-    { '<leader>cd', ':RootDir<cr>', desc = 'Root Directory' },
     { '<leader>cf', ':lua vim.lsp.buf.format({async = true})<cr>', desc = 'Format File' },
-    { '<leader>cg', ':Neogen<cr>', desc = 'Generate Docstring' },
     { '<leader>cl', '::g/^\\s*$/d<cr>', desc = 'Clean Empty Lines' },
-    { '<leader>cm', ':MarkdownPreviewToggle<cr>', desc = 'Markdown Preview' },
     { '<leader>cq', ':lua Snacks.picker.qflist()<cr>', desc = 'Quickfix List' },
     { '<leader>cd', '<cmd>CodeDiff<cr>', desc = 'Toggle CodeDiff' },
     { '<leader>ch', '<cmd>CodeDiff history %<cr>', desc = 'File History (Current File)' },
@@ -114,7 +111,7 @@ local normal_mappings = {
         end,
         desc = 'Toggle MiniDiff overlay',
     },
-    { '<leader>gF', ':Git<cr>', desc = 'Fugitive Panel' },
+    { '<leader>gF', ':Gitsigns diffthis<cr>', desc = 'Diff Current Buffer' },
     { '<leader>gi', ':Gitsigns preview_hunk<cr>', desc = 'Hunk Info' },
     { '<leader>gj', ':Gitsigns next_hunk<cr>', desc = 'Next Hunk' },
     { '<leader>gk', ':Gitsigns prev_hunk<cr>', desc = 'Prev Hunk' },
@@ -164,9 +161,10 @@ local normal_mappings = {
         end,
         desc = 'Toggle Codelens',
     },
-    { '<leader>oi', 'vim.show_pos', desc = 'Inspect Position' },
-    { '<leader>oN', ':lua Snacks.notifier.show_history()<cr>', desc = 'Notification History' },
-    { '<leader>or', ':set relativenumber!<cr>', desc = 'Relative Numbers' },
+    { '<leader>oi', desc = 'Inspect Position' },
+    { '<leader>oN', desc = 'Notification History' },
+    { '<leader>or', desc = 'Relative Numbers' },
+    { '<leader>tf', desc = 'Toggle Autoformat' },
 
     { '<leader>O', group = '󰚩 OpenCode' },
     { '<leader>Oo', desc = 'Toggle Panel' },
@@ -200,15 +198,14 @@ local normal_mappings = {
     { '<leader>qw', ':wq<cr>', desc = 'Write and Quit' },
 
     { '<leader>r', group = ' Refactor' },
-    { '<leader>rd', desc = 'Go To Definition' }, -- treesitter navigation
-    { '<leader>rD', desc = 'List Definition' },
-    { '<leader>rh', desc = 'List Definition Head' },
-    { '<leader>rj', desc = 'Next Usage' },
-    { '<leader>rk', desc = 'Previous Usage' },
-    { '<leader>rn', desc = 'Swap Next' },
-    { '<leader>rp', desc = 'Swap Previous' },
+    { '<leader>rd', ':lua Snacks.picker.lsp_definitions()<cr>', desc = 'Go To Definition' },
+    { '<leader>rD', ':lua vim.lsp.buf.declaration()<cr>', desc = 'Go To Declaration' },
+    { '<leader>rj', ':lua Snacks.picker.lsp_references()<cr>', desc = 'List Usages' },
     { '<leader>rr', desc = 'Smart Rename' },
     { '<leader>rs', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Replace Word Buffer' },
+    { '<leader>R', desc = 'Replace Word (pick scope)' },
+    { '<leader>rw', desc = 'Replace Word In Buffer' },
+    { '<leader>rl', desc = 'Replace Word In Line' },
 
     { '<leader>s', group = ' Split' },
     { '<leader>s+', ':resize +10<cr>', desc = 'Increase window height' },
@@ -255,7 +252,6 @@ local normal_mappings = {
     { '<leader>yP', ':CopyAbsolutePath<cr>', desc = 'Absolute Path' },
     { '<leader>ya', ':%y+<cr>', desc = 'Copy Whole File' },
     { '<leader>yf', ':CopyFileName<cr>', desc = 'File Name' },
-    { '<leader>yg', ':lua require"gitlinker".get_buf_range_url()<cr>', desc = 'Copy Git URL' },
     { '<leader>yl', ':CopyRelativePathWithLine<cr>', desc = 'Relative Path with Line' },
     { '<leader>yp', ':CopyRelativePath<cr>', desc = 'Relative Path' },
 }
@@ -278,9 +274,6 @@ local visual_mappings = {
 
     -- { "<leader>o", group = " Options" },
     { '<leader>O', group = '󰚩 OpenCode' },
-
-    { '<leader>y', group = ' Yank' },
-    { '<leader>yg', ':lua require"gitlinker".get_buf_range_url("v")<cr>', desc = 'Copy Git URL' },
 }
 
 local no_leader_mappings = {
