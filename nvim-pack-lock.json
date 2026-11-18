@@ -100,6 +100,10 @@
       "rev": "b796436d17a73f29b08b06dc4ca7a69cb64afe74",
       "src": "https://github.com/sudo-tee/opencode.nvim"
     },
+    "rustaceanvim": {
+      "rev": "8d01bdea498b77a34cf84d9dc04a8e5bef459918",
+      "src": "https://github.com/mrcjkb/rustaceanvim"
+    },
     "showkeys": {
       "rev": "cb0a50296f11f1e585acffba8c253b9e8afc1f84",
       "src": "https://github.com/nvzone/showkeys"

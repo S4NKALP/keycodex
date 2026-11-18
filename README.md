@@ -48,7 +48,8 @@
   - **Smart column**: `colorcolumn` appears only when a line exceeds 120 columns.
 
 - **🛠️ Developer Productivity**
-  - **LSP**: native `vim.lsp.config` / `vim.lsp.enable`, Mason for installation.
+  - **LSP**: native `vim.lsp.config` / `vim.lsp.enable`, Mason for installation; Rust goes through
+    `rustaceanvim` (`:RustLsp`, `:RustFmt`, `:RustTest`, inlay hints).
   - **Completion**: `blink.cmp` with Rust fuzzy matcher, LSP/path/snippet/buffer sources.
   - **Format on save**: `conform.nvim`; toggle with `<leader>tf`, skip with `<leader>wn`.
   - **Lint on save and on insert leave**: `nvim-lint`.
@@ -96,6 +97,7 @@ needed to add or remove tools by hand, and `:TSInstallAll` to re-run the parser 
   - [`editor.lua`](./plugin/editor.lua) - blink.cmp, Navigator, hardtime, visual-multi, tabout, hlslens.
   - [`git.lua`](./plugin/git.lua) - gitsigns, codediff.
   - [`mini.lua`](./plugin/mini.lua) - Mini modules and statusline.
+  - [`rust.lua`](./plugin/rust.lua) - rustaceanvim; owns the rust-analyzer client.
   - [`snacks.lua`](./plugin/snacks.lua) - Snacks modules, layouts, LSP notifications.
   - [`tools.lua`](./plugin/tools.lua) - OpenCode, toggleterm, wakatime.
   - [`treesitter.lua`](./plugin/treesitter.lua) - Parsers, highlighting, autotag, matchup.

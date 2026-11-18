@@ -37,7 +37,6 @@ local lsp_server = {
     'basedpyright',
     'bashls',
     'clangd',
-    'rust_analyzer',
     'gopls',
 }
 
