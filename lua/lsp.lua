@@ -2,7 +2,13 @@
 -- LSP
 --------------------------------------------------------------------------------
 
+-- Servers are enabled in one call at the end, from the list in `extensions.lua`.
+-- That list is also what mason-lspconfig installs, so adding a server means
+-- editing one file instead of touching this one.
+
 vim.schedule(function()
+    local servers = require('extensions').lsp_server
+
     vim.lsp.config('*', {
         capabilities = require('blink.cmp').get_lsp_capabilities(),
     })
@@ -23,10 +29,7 @@ vim.schedule(function()
             },
         },
     })
-    vim.lsp.enable('ts_ls')
 
-    vim.lsp.enable('html')
-    vim.lsp.enable('cssls')
     vim.lsp.config('tailwindcss', {
         filetypes = {
             'astro',
@@ -67,7 +70,6 @@ vim.schedule(function()
             'templ',
         },
     })
-    vim.lsp.enable('tailwindcss')
 
     -- rust
     vim.lsp.config('rust_analyzer', {
@@ -80,7 +82,6 @@ vim.schedule(function()
             },
         },
     })
-    vim.lsp.enable('rust_analyzer')
 
     -- lua
     vim.lsp.config('lua_ls', {
@@ -95,7 +96,6 @@ vim.schedule(function()
             },
         },
     })
-    vim.lsp.enable('lua_ls')
 
     -- python
     vim.lsp.config('basedpyright', {
@@ -113,11 +113,11 @@ vim.schedule(function()
                         reportArgumentType = 'error',
                     },
                     typeCheckingMode = 'standard',
+                    autoSearchPaths = true,
                 },
             },
         },
     })
-    vim.lsp.enable('basedpyright')
 
     -- bash
     vim.lsp.config('bashls', {
@@ -129,7 +129,6 @@ vim.schedule(function()
             },
         },
     })
-    vim.lsp.enable('bashls')
 
     -- cpp
     vim.lsp.config('clangd', {
@@ -140,7 +139,6 @@ vim.schedule(function()
             '-j=4',
         },
     })
-    vim.lsp.enable('clangd')
 
     vim.lsp.config('gopls', {
         settings = {
@@ -153,5 +151,7 @@ vim.schedule(function()
             },
         },
     })
-    vim.lsp.enable('gopls')
+
+    -- html, cssls and every other server above start from this single call
+    vim.lsp.enable(servers)
 end)
