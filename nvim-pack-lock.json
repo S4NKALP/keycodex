@@ -8,10 +8,6 @@
       "rev": "3d3631f641e6e9b60066f269f435d23c524ceeb0",
       "src": "https://github.com/saghen/blink.cmp"
     },
-    "blink.indent": {
-      "rev": "2e9c9768affeaf3a48b2dc329eb59763012f79f6",
-      "src": "https://github.com/saghen/blink.indent"
-    },
     "blink.lib": {
       "rev": "fd9a48ebbe6ec30d5dfcc5b42c243941ccdca1aa",
       "src": "https://github.com/saghen/blink.lib"
@@ -44,10 +40,6 @@
       "rev": "721a75b9a0c2eb1fb811d34507708ee315cb04eb",
       "src": "https://github.com/m4xshen/hardtime.nvim"
     },
-    "markdown-preview.nvim": {
-      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
-      "src": "https://github.com/iamcco/markdown-preview.nvim"
-    },
     "markview.nvim": {
       "rev": "a6dbc5a4a4828b474c81fbcec11546cbd9000e3b",
       "src": "https://github.com/OXY2DEV/markview.nvim"
@@ -79,18 +71,6 @@
     "mini.nvim": {
       "rev": "e199196f5ed6b085743da6a808e6c8510698cdce",
       "src": "https://github.com/echasnovski/mini.nvim"
-    },
-    "mini.pick": {
-      "rev": "406d41308e58486ea5c3352f5821c4cd9992af65",
-      "src": "https://github.com/nvim-mini/mini.pick"
-    },
-    "mini.statusline": {
-      "rev": "591b9d553dc3604b114577bc0f6e289ea3783fc2",
-      "src": "https://github.com/nvim-mini/mini.statusline"
-    },
-    "nordwave.nvim": {
-      "rev": "c57f1bdfd73c3d88fc8f58229870492fd72cb114",
-      "src": "https://github.com/hrbtk/nordwave.nvim"
     },
     "nvim-highlight-colors": {
       "rev": "e4c7af0211866162d999ce0bdd6a029302e19139",

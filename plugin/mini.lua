@@ -43,6 +43,9 @@ require('mini.diff').setup({
     view = {
         -- show whole reference part above whole buffer part, as in `git diff`
         overlay_style = 'hunk',
+        -- gutter signs come from gitsigns; mini.diff keeps overlay + hunk mappings
+        style = 'sign',
+        signs = { add = '', change = '', delete = '' },
     },
     mappings = {
         -- same keymaps as codediff.nvim
@@ -65,15 +68,6 @@ require('mini.surround').setup({
         suffix_last = 'l',
         suffix_next = 'n',
     },
-})
-
-vim.api.nvim_create_autocmd('BufEnter', {
-    pattern = '*',
-    callback = function(args)
-        if vim.bo[args.buf].buftype ~= '' then
-            vim.b[args.buf].miniindentscope_disable = true
-        end
-    end,
 })
 
 -- statusline
