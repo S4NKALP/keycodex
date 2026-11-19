@@ -10,11 +10,54 @@ add({
 
 require('todo-comments').setup({ signs = false })
 
--- Run linters on save and after leaving insert mode
-vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave' }, {
-    group = vim.api.nvim_create_augroup('nvim_lint', { clear = true }),
-    callback = function()
+-- Linters are external processes, and InsertLeave is often followed by a
+-- BufWritePost for the same buffer, so debounce them per buffer and skip the
+-- buffer entirely when its text has not changed since the last run.
+local lint_group = vim.api.nvim_create_augroup('nvim_lint', { clear = true })
+local lint_timers = {}
+
+local function lint_buffer(buf)
+    local tick = vim.api.nvim_buf_get_changedtick(buf)
+    if vim.b[buf].lint_tick == tick then
+        return
+    end
+    vim.b[buf].lint_tick = tick
+    vim.api.nvim_buf_call(buf, function()
         require('lint').try_lint()
+    end)
+end
+
+vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave' }, {
+    group = lint_group,
+    callback = function(args)
+        local buf = args.buf
+        local timer = lint_timers[buf]
+        if not timer then
+            timer = vim.uv.new_timer()
+            lint_timers[buf] = timer
+        end
+        timer:stop()
+        timer:start(
+            300,
+            0,
+            vim.schedule_wrap(function()
+                if vim.api.nvim_buf_is_valid(buf) then
+                    lint_buffer(buf)
+                end
+            end)
+        )
+    end,
+})
+
+vim.api.nvim_create_autocmd('BufDelete', {
+    group = lint_group,
+    callback = function(args)
+        local timer = lint_timers[args.buf]
+        if timer then
+            timer:stop()
+            timer:close()
+            lint_timers[args.buf] = nil
+        end
     end,
 })
 
