@@ -68,6 +68,9 @@ vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
     pattern = { '.env', '.env.*', '*.env' },
     callback = function(args)
         vim.wo.conceallevel = 2
+        -- 'nvic': also hide the value on the line the cursor is on, in every
+        -- mode. Reveal one line with <leader>et when you need to edit it.
+        vim.wo.concealcursor = 'nvic'
         vim.keymap.set('n', '<leader>et', function()
             vim.wo.conceallevel = vim.wo.conceallevel > 0 and 0 or 2
             vim.notify(
@@ -86,6 +89,7 @@ vim.api.nvim_create_autocmd({ 'TextChanged', 'BufEnter' }, {
     pattern = { '.env', '.env.*', '*.env' },
     callback = function(args)
         if vim.wo.conceallevel > 0 then
+            vim.wo.concealcursor = 'nvic'
             mask_env(args.buf)
         end
     end,
