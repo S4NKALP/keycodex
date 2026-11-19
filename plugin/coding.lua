@@ -28,9 +28,10 @@ require('lint').linters_by_ft = {
     ['markdown'] = { 'write_good', 'markdownlint-cli2' },
     ['text'] = { 'write_good' },
     ['sh'] = { 'shellcheck' },
-    ['yaml'] = { 'actionlint' },
+    ['yaml.ghaction'] = { 'actionlint' },
     ['python'] = { 'ruff' },
     ['go'] = { 'golangcilint' },
+    ['htmldjango'] = { 'djlint' },
 }
 
 require('tiny-code-action').setup({
