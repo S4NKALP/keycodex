@@ -33,61 +33,60 @@ vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI', 'BufEnter', 'WinEnter
     end,
 })
 
--- Secure .env Masking
+-- Secure .env masking
+--
+-- The values are hidden with extmark conceal, so the buffer always holds the
+-- real text: writes, yanks, LSP and other plugins see the file as it is. What
+-- is hidden is only what gets drawn on screen, which is privacy for screen
+-- sharing and pair programming, not a sandbox.
 local env_ns = vim.api.nvim_create_namespace('secure_env')
 
-local function toggle_env(buf)
-    local is_mod = vim.bo[buf].modified
-    vim.bo[buf].modifiable = true
-    if vim.b[buf].env_cache then
-        vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.b[buf].env_cache)
-        vim.api.nvim_buf_clear_namespace(buf, env_ns, 0, -1)
-        vim.b[buf].env_cache = nil
-    else
-        local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-        vim.b[buf].env_cache = vim.deepcopy(lines)
-        for i, l in ipairs(lines) do
-            if not l:match('^%s*#') then
-                lines[i] = l:gsub('(=%s*["\']?)(.-)(["\']?%s*)$', function(p, v, s)
-                    return #v > 0 and (p .. string.rep('*', math.max(#v, 8)) .. s) or l
-                end)
+local function mask_env(buf)
+    vim.api.nvim_buf_clear_namespace(buf, env_ns, 0, -1)
+    for i, line in ipairs(vim.api.nvim_buf_get_lines(buf, 0, -1, false)) do
+        -- skip comments and anything that is not `KEY=value`
+        local eq = line:find('=')
+        if eq and not line:match('^%s*#') and line:match('^%s*[%w_.%-]+%s*=') then
+            local rest = line:sub(eq + 1)
+            -- HIDE="x" keeps the HIDE= part and the closing quote visible
+            local skip = #(rest:match('^%s*["\']?') or '')
+            local start_col = eq + skip
+            local end_col = #(line:gsub('[%s"\']+$', ''))
+            if end_col > start_col then
+                vim.api.nvim_buf_set_extmark(buf, env_ns, i - 1, start_col, {
+                    end_col = end_col,
+                    conceal = '*',
+                    hl_group = 'Comment',
+                })
             end
         end
-        vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
-        vim.api.nvim_buf_set_extmark(
-            buf,
-            env_ns,
-            0,
-            0,
-            { virt_text = { { '  [Values Hidden]', 'WarningMsg' } }, virt_text_pos = 'eol' }
-        )
-        vim.bo[buf].modifiable = false
     end
-    vim.bo[buf].modified = is_mod
 end
 
-vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile', 'BufWriteCmd' }, {
+vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
     group = augroup('secure_env'),
     pattern = { '.env', '.env.*', '*.env' },
     callback = function(args)
-        local ev, buf = args.event, args.buf
-        if ev == 'BufReadPost' or ev == 'BufNewFile' then
-            vim.keymap.set('n', '<leader>et', function()
-                toggle_env(buf)
-            end, { buffer = buf, desc = 'Toggle env' })
-            if not vim.b[buf].env_cache then
-                toggle_env(buf)
-            end
-        elseif ev == 'BufWriteCmd' then
-            local file = vim.api.nvim_buf_get_name(buf)
-            if file ~= '' then
-                local lines = vim.b[buf].env_cache or vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-                if pcall(vim.fn.writefile, lines, file) then
-                    vim.bo[buf].modified = false
-                else
-                    vim.notify('Write failed!', vim.log.levels.ERROR)
-                end
-            end
+        vim.wo.conceallevel = 2
+        vim.keymap.set('n', '<leader>et', function()
+            vim.wo.conceallevel = vim.wo.conceallevel > 0 and 0 or 2
+            vim.notify(
+                'Secrets ' .. (vim.wo.conceallevel > 0 and 'hidden' or 'visible'),
+                vim.log.levels.INFO,
+                { title = '.env' }
+            )
+        end, { buffer = args.buf, desc = 'Toggle env hiding' })
+        mask_env(args.buf)
+    end,
+})
+
+-- extmarks follow edits, but new lines and window switches need a refresh
+vim.api.nvim_create_autocmd({ 'TextChanged', 'BufEnter' }, {
+    group = augroup('secure_env_refresh'),
+    pattern = { '.env', '.env.*', '*.env' },
+    callback = function(args)
+        if vim.wo.conceallevel > 0 then
+            mask_env(args.buf)
         end
     end,
 })
