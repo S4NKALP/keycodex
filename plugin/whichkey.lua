@@ -201,6 +201,7 @@ local normal_mappings = {
     { '<leader>rd', ':lua Snacks.picker.lsp_definitions()<cr>', desc = 'Go To Definition' },
     { '<leader>rD', ':lua vim.lsp.buf.declaration()<cr>', desc = 'Go To Declaration' },
     { '<leader>rj', ':lua Snacks.picker.lsp_references()<cr>', desc = 'List Usages' },
+    { '<leader>rf', desc = 'Refactor (pick)' },
     { '<leader>rr', desc = 'Smart Rename' },
     { '<leader>rs', ':%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>', desc = 'Replace Word Buffer' },
     { '<leader>R', desc = 'Replace Word (pick scope)' },

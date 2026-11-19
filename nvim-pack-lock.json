@@ -4,6 +4,10 @@
       "rev": "91d86506ac2a039504d5205d32a1d4bc7aa57072",
       "src": "https://github.com/numToStr/Navigator.nvim"
     },
+    "async.nvim": {
+      "rev": "028d843a892b4920d8306216369aeee9fbcebae5",
+      "src": "https://github.com/lewis6991/async.nvim"
+    },
     "blink.cmp": {
       "rev": "3d3631f641e6e9b60066f269f435d23c524ceeb0",
       "src": "https://github.com/saghen/blink.cmp"
@@ -99,6 +103,10 @@
     "opencode.nvim": {
       "rev": "b796436d17a73f29b08b06dc4ca7a69cb64afe74",
       "src": "https://github.com/sudo-tee/opencode.nvim"
+    },
+    "refactoring.nvim": {
+      "rev": "ea18f97c58276e213736c9f0193f7aa4c690693e",
+      "src": "https://github.com/ThePrimeagen/refactoring.nvim"
     },
     "showkeys": {
       "rev": "cb0a50296f11f1e585acffba8c253b9e8afc1f84",

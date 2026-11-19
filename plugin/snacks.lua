@@ -49,6 +49,12 @@ local function palette_layout(height, width)
 end
 
 local Snacks = require('snacks')
+
+-- Answer vim.ui.select with the snacks picker instead of the command line.
+-- refactoring.nvim asks which refactor to run this way, and so do the LSP
+-- fallbacks in Neovim's runtime.
+vim.ui.select = Snacks.picker.select
+
 Snacks.setup({
     animate = {
         enabled = true,
