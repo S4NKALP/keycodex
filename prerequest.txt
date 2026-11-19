@@ -1,78 +1,103 @@
-System prerequisites for this Neovim configuration
-==================================================
+KEYCODEX - SYSTEM PREREQUISITES
+===============================
 
-Neovim: 0.12+ required (uses vim.pack, vim.lsp.config, vim.pack.UI). Check with `nvim --version`.
-Most tooling below is installed by `:Mason` on demand; the list marks what Mason cannot provide.
+Neovim 0.12 or newer - the config uses vim.pack, vim.pack.UI and
+vim.lsp.config. Check with:
 
-Required
---------
-- git                 plugin install/update (vim.pack)
-- curl, tar, unzip    treesitter parsers, mason downloads
-- gcc / g++ , make    compiling treesitter parsers
-- ripgrep (rg)        Snacks picker grep, replace-word project scope
-- fd                  Snacks picker file finding
-- nodejs + npm        vtsls, tailwindcss, oxfmt, oxlint, markdownlint-cli2, cspell
-- python3 + pip       basedpyright, ruff, djlint, write-good
-- cargo / rustup      blink.cmp native fuzzy matcher (`cargo build --release`), rust_analyzer, rustfmt
-- clang / clangd      clangd LSP, clang-format
-- go                  gopls, gofumpt, golangci-lint
-- luarocks            lua_ls
-- wl-clipboard        system clipboard on Wayland (or xclip on X11)
-  [Arch: wl-clipboard]  [Debian: wl-clipboard]
+  nvim --version
 
-Optional, feature-specific
---------------------------
-- opencode CLI       required by opencode.nvim (<leader>O); install per opencode.ai
-- tmux               lets Navigator.nvim (<C-hjkl>, <C-\>) cross tmux panes; falls back to nvim windows
-- imagemagick        Snacks.image: raster images in buffers
-- ghostscript (gs)   Snacks.image: PDF rendering
-- tectonic           Snacks.image: LaTeX rendering
-- wakatime-cli       vim-wakatime tracking; the plugin downloads its CLI on first use
+Two kinds of dependencies:
+  * system tools - install with your package manager (listed below)
+  * editor tooling - installed on first launch by Mason and nvim-treesitter,
+    from the lists in lua/extensions.lua
 
-Not required (removed or never used by this config)
----------------------------------------------------
-- lazygit            no lazygit/Snacks explorer integration exists; use <leader>gF / :CodeDiff
-- gio / glib2        Snacks explorer trash support, but the Snacks explorer is not enabled
-- jdk / php / ruby   no Java, PHP or Ruby language server is configured
-- composer, luarocks is the only Lua dependency builder needed
-- ranger / oil / netrw  file browsing is mini.files; netrw is disabled
+Quick install
+-------------
+Arch:
 
-Language servers installed via mason-lspconfig (see lua/extensions.lua)
------------------------------------------------------------------------
-vtsls, html, cssls, tailwindcss, lua_ls, basedpyright, bashls, clangd, rust_analyzer, gopls
+  sudo pacman -S --needed git curl tar unzip gcc make ripgrep fd wl-clipboard \
+    nodejs npm python python-pip rustup clang go luarocks \
+    imagemagick ghostscript tectonic
 
-Formatters (mason-conform): clang_format, ruff, stylua, oxfmt, markdown-toc,
-markdownlint-cli2, gofumpt. rustfmt comes with the Rust toolchain, not Mason.
+Debian/Ubuntu:
 
-Linters (mason-nvim-lint): oxlint, hadolint, write_good, markdownlint-cli2,
-shellcheck, actionlint, djlint, ruff, codespell, cspell, golangcilint
+  sudo apt install git curl tar unzip gcc make ripgrep fd-find nodejs npm \
+    python3 python3-pip cargo clang golang-go luarocks wl-clipboard \
+    imagemagick ghostscript
 
-Install on Arch
----------------
-sudo pacman -S --needed git curl tar unzip gcc make ripgrep fd nodejs npm python python-pip \
-  rustup go clang luarocks wl-clipboard imagemagick ghostscript tectonic
+  fd-find installs the binary as `fdfind`; symlink it once:
 
-Install on Debian/Ubuntu
-------------------------
-sudo apt install git curl tar unzip gcc make ripgrep fd-find nodejs npm python3 python3-pip \
-  cargo clang golang luarocks wl-clipboard imagemagick ghostscript
+    ln -s "$(command -v fdfind)" ~/.local/bin/fd
+
+  tectonic is not packaged there - skip it, or install from
+  https://github.com/tectonic-typesetting/tectonic/releases if you want
+  Snacks.image to render LaTeX.
+
+Required for everyone
+---------------------
+- git               clone and update plugins (vim.pack)
+- curl, tar, unzip  download treesitter parsers and Mason packages
+- gcc, make         compile treesitter parsers
+- ripgrep (rg)      picker grep, project-wide word replace
+- fd                picker file search
+- wl-clipboard      system clipboard on Wayland (xclip on X11)
+                   without one of them `clipboard=unnamedplus` yanks fail
+
+Language toolchains
+-------------------
+Every language below is enabled by default, so a missing toolchain means that
+server, formatter or linter fails to install or run. Trim lua/extensions.lua
+if you never write the language.
+
+- nodejs + npm      JS/TS and web: vtsls, tailwindcss, cssls, oxfmt, oxlint,
+                    markdownlint-cli2, cspell
+- python3 + pip     Python: basedpyright, ruff, djlint, write_good
+- go                Go: gopls, gofumpt, golangci-lint
+- rustup + cargo    Rust: rust_analyzer and rustfmt (`rustup component add
+                    rustfmt` if it is missing). cargo also builds blink.cmp's
+                    native fuzzy matcher; without it the Lua matcher is used
+- luarocks          Lua: lua_ls
+- clang             C/C++: clangd and clang-format ship as Mason binaries, the
+                    toolchain is only needed for the projects you build
+
+Optional, per feature
+---------------------
+- opencode CLI      in-editor AI panel (<leader>O); install from opencode.ai
+- tmux              lets Navigator.nvim (<C-hjkl>, <C-\>) cross tmux panes,
+                    otherwise it moves between Neovim windows only
+- imagemagick       Snacks.image: raster images inside buffers
+- ghostscript (gs)  Snacks.image: PDF pages
+- tectonic          Snacks.image: LaTeX rendering
+- wakatime-cli      vim-wakatime time tracking; the plugin downloads its CLI
+                    on first use, so installing it yourself is unnecessary
+
+Installed automatically on first launch
+---------------------------------------
+Everything here comes from lua/extensions.lua:
+
+- plugins         every entry in nvim-pack-lock.json, via vim.pack.add()
+- LSP servers     vtsls, html, cssls, tailwindcss, lua_ls, basedpyright,
+                  bashls, clangd, rust_analyzer, gopls
+- formatters      clang_format, ruff, stylua, oxfmt, markdown-toc,
+                  markdownlint-cli2, gofumpt
+                  (rustfmt comes from the Rust toolchain, not Mason)
+- linters         oxlint, hadolint, write_good, markdownlint-cli2, shellcheck,
+                  actionlint, djlint, ruff, codespell, cspell, golangcilint
+- treesitter      the 27 parsers in extensions.ts_parsers
+
+Mason prepends ~/.local/share/nvim/mason/bin to Neovim's PATH, so the tools
+it installs are not on PATH in a plain shell - call them by full path
+(~/.local/share/nvim/mason/bin/<tool>) from scripts.
 
 First run
 ---------
-Nothing manual is required. On the first launch the config installs:
+No manual step is needed: open `nvim` and the installs above run by
+themselves. A headless first run (nvim --headless) does not populate the Mason
+tools, because mason-lspconfig skips ensure_installed without a UI.
 
-- plugins from nvim-pack-lock.json (vim.pack.add)
-- LSP servers (mason-lspconfig ensure_installed)
-- formatters (mason-conform ensure_installed)
-- linters (mason-nvim-lint ensure_installed)
-- treesitter parsers (nvim-treesitter install)
-
-All lists live in lua/extensions.lua.
-
-Optional verification / extra tools:
-:Mason          browse, add or remove tools not in the lists above
-:TSInstallAll   re-run the parser install (also runs every startup)
-:checkhealth    confirm clipboard, providers, LSP and treesitter
-
-Note: mason-lspconfig skips ensure_installed in headless mode, so a headless
-first run (nvim --headless) will not populate the servers.
+Verify
+------
+:Mason          browse, add or remove tools outside the lists above
+:TSInstallAll   re-run the parser install (also runs on every startup)
+:checkhealth    clipboard, LSP, treesitter and provider status
+:PackUI         plugin manager - update, delete, inspect (<leader>ps)
