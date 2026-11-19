@@ -142,24 +142,46 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 vim.api.nvim_create_autocmd('LspAttach', {
     group = augroup('lsp_attach_autocmds'),
     callback = function(args)
+        local buf = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if not client then
+            return
+        end
 
-        -- Document Highlight
-        if client and client:supports_method('textDocument/documentHighlight') then
-            vim.api.nvim_create_autocmd({ 'CursorHold' }, {
-                buffer = args.buf,
+        -- Document Highlight. One augroup per buffer, created with `clear`, so a
+        -- second client attaching replaces that buffer's autocmds instead of
+        -- stacking a duplicate set that highlights twice per cursor hold.
+        if client:supports_method('textDocument/documentHighlight') then
+            local group = vim.api.nvim_create_augroup('nvim_lsp_highlight_' .. buf, { clear = true })
+            vim.api.nvim_create_autocmd('CursorHold', {
+                group = group,
+                buffer = buf,
                 callback = vim.lsp.buf.document_highlight,
             })
             vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-                buffer = args.buf,
+                group = group,
+                buffer = buf,
                 callback = vim.lsp.buf.clear_references,
             })
         end
 
         -- Inlay Hints
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+        if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            vim.lsp.inlay_hint.enable(true, { bufnr = buf })
         end
+    end,
+})
+
+-- Drop the per-buffer highlight augroup once no client left can serve it
+vim.api.nvim_create_autocmd('LspDetach', {
+    group = augroup('lsp_detach_autocmds'),
+    callback = function(args)
+        for _, client in ipairs(vim.lsp.get_clients({ bufnr = args.buf })) do
+            if client.id ~= args.data.client_id and client:supports_method('textDocument/documentHighlight') then
+                return
+            end
+        end
+        pcall(vim.api.nvim_del_augroup_by_name, 'nvim_lsp_highlight_' .. args.buf)
     end,
 })
 
