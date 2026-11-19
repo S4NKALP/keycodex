@@ -16,9 +16,7 @@
   </a>
 </p>
 
-> All commit messages in this repo are AI-generated using [DevGen](https://github.com/S4NKALP/DevGen)
-
-<h3>Handcrafted Neovim setup for the ultimate CLI development experience. ❤️‍👨‍💻</h3>
+<h3>Handcrafted Neovim setup for the ultimate CLI development experience.</h3>
 
 <figure>
   <img src="assets/screenshot.png" alt="KeyCodeX screenshot" style="border-radius: 10px; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5); max-width: 100%; height: auto;">
@@ -28,40 +26,40 @@
 
 ---
 
-## ✨ Features
+## Features
 
-- **📦 Native Plugin Management**
+- **Native Plugin Management**
   - Uses Neovim's built-in `vim.pack` and a committed `nvim-pack-lock.json` for reproducible installs.
   - Interactive manager with `:PackUI` / `<leader>ps` (update, delete, inspect, open plugin paths).
   - Missing plugins are installed by `vim.pack.add()` on the first launch.
 
-- **🚀 Powered by [Snacks.nvim](https://github.com/folke/snacks.nvim)**
+- **Powered by [Snacks.nvim](https://github.com/folke/snacks.nvim)**
   - **Picker**: files, grep, projects, git log/status/branches, LSP symbols, undo, todo comments.
   - **Notifier**: notification history (`<leader>oN`) and LSP attach messages.
   - **Indent / Statuscolumn / Zen / Dim / Rename / Bufdelete / Profiler**.
 
-- **🎨 UI & UX**
+- **UI & UX**
   - Custom `KEYCODEX` start screen (`lua/dashboard.lua`), no dashboard plugin.
   - `gruvbox` with hand-tuned highlights, transparent background.
   - **Mini ecosystem**: files (`<leader>ee`), icons, pairs, ai textobjects, surround, splitjoin,
     bracketed motions, diff overlay, custom statusline.
   - **Smart column**: `colorcolumn` appears only when a line exceeds 120 columns.
 
-- **🛠️ Developer Productivity**
+- **Developer Productivity**
   - **LSP**: native `vim.lsp.config` / `vim.lsp.enable`, Mason for installation.
   - **Completion**: `blink.cmp` with Rust fuzzy matcher, LSP/path/snippet/buffer sources.
   - **Format on save**: `conform.nvim`; toggle with `<leader>tf`, skip with `<leader>wn`.
   - **Lint on save and on insert leave**: `nvim-lint`.
   - **Treesitter**: `nvim-treesitter` highlighting + indentation for configured languages.
   - **Git**: `gitsigns` (signs, inline blame), `mini.diff` overlay (`<leader>gd`), `codediff` history.
-  - **Secure env**: `.env` values are masked on open, `<leader>et` toggles.
+  - **Secure env**: `.env` values are concealed except the line being edited, `<leader>et` toggles.
   - **Auto-directory**: saving `dir/new_file` creates parent folders.
   - **Paste reindent**: pasted code snaps to the surrounding indentation.
   - **OpenCode**: in-editor AI panel under `<leader>O`.
 
 ---
 
-## 💻 Installation
+## Installation
 
 ```bash
 # System tools first: see prerequest.txt
@@ -77,7 +75,7 @@ needed to add or remove tools by hand, and `:TSInstallAll` to re-run the parser 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 - [`init.lua`](./init.lua) - Entry point.
 - [`lua/`](./lua/) - Core logic.
@@ -96,6 +94,7 @@ needed to add or remove tools by hand, and `:TSInstallAll` to re-run the parser 
   - [`editor.lua`](./plugin/editor.lua) - blink.cmp, Navigator, hardtime, visual-multi, tabout, hlslens.
   - [`git.lua`](./plugin/git.lua) - gitsigns, codediff.
   - [`mini.lua`](./plugin/mini.lua) - Mini modules and statusline.
+  - [`refactor.lua`](./plugin/refactor.lua) - refactoring.nvim, picked through the snacks picker.
   - [`snacks.lua`](./plugin/snacks.lua) - Snacks modules, layouts, LSP notifications.
   - [`tools.lua`](./plugin/tools.lua) - OpenCode, toggleterm, wakatime.
   - [`treesitter.lua`](./plugin/treesitter.lua) - Parsers, highlighting, autotag, matchup.
@@ -104,7 +103,7 @@ needed to add or remove tools by hand, and `:TSInstallAll` to re-run the parser 
 
 ---
 
-## ⌨️ Keybindings
+## Keybindings
 
 Leader is `<Space>`. Pressing `<leader>` waits for **which-key** to list everything.
 
@@ -118,6 +117,7 @@ Leader is `<Space>`. Pressing `<leader>` waits for **which-key** to list everyth
 | `<leader>ps` | Plugin manager (`:PackUI`) |
 | `<leader>.` | Code action |
 | `<leader>rr` | Rename symbol |
+| `<leader>rf` | Refactor (inline/extract, snacks picker) |
 | `<leader>rd` / `<leader>rj` | Definition / usages |
 | `<leader>cf` | Format buffer |
 | `<leader>tf` | Toggle autoformat |
@@ -132,5 +132,5 @@ Leader is `<Space>`. Pressing `<leader>` waits for **which-key** to list everyth
 ---
 
 <div align="center">
-  <p>Handcrafted with ❤️ by <a href="https://github.com/S4NKALP">Sankalp</a></p>
+  <p>Handcrafted by <a href="https://github.com/S4NKALP">Sankalp</a></p>
 </div>
