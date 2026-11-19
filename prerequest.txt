@@ -27,7 +27,6 @@ Optional, feature-specific
 - imagemagick        Snacks.image: raster images in buffers
 - ghostscript (gs)   Snacks.image: PDF rendering
 - tectonic           Snacks.image: LaTeX rendering
-- mermaid-cli        Snacks.image: Mermaid diagrams (npm i -g @mermaid-js/mermaid-cli)
 - wakatime-cli       vim-wakatime tracking; the plugin downloads its CLI on first use
 
 Not required (removed or never used by this config)
@@ -52,8 +51,6 @@ Install on Arch
 ---------------
 sudo pacman -S --needed git curl tar unzip gcc make ripgrep fd nodejs npm python python-pip \
   rustup go clang luarocks wl-clipboard imagemagick ghostscript tectonic
-
-npm i -g @mermaid-js/mermaid-cli   # optional, Mermaid rendering
 
 Install on Debian/Ubuntu
 ------------------------
