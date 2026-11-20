@@ -38,6 +38,47 @@ require('opencode').setup({
     },
 })
 
+-- Upstream `toggle` focuses the input window in Normal mode (start_insert =
+-- false). The `/`, `@`, `#` and `~` trigger maps in the input window are
+-- Insert-mode only, so Normal mode swallowed them first (search, macro, word
+-- search, case toggle). Open the panel in Insert mode again, and keep a
+-- Normal-mode fallback for those trigger keys inside the input buffer.
+local opencode_insert_until = 0
+
+vim.keymap.set('n', '<leader>Oo', function()
+    opencode_insert_until = vim.uv.now() + 5000
+    vim.cmd('Opencode toggle')
+end, { desc = 'OpenCode: Toggle panel' })
+
+vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
+    group = vim.api.nvim_create_augroup('OpencodeInputInsert', { clear = true }),
+    callback = function(args)
+        if vim.uv.now() > opencode_insert_until or vim.bo[args.buf].filetype ~= 'opencode' then
+            return
+        end
+        opencode_insert_until = 0
+        vim.schedule(function()
+            if vim.api.nvim_get_current_buf() == args.buf and vim.fn.mode() ~= 'i' then
+                vim.cmd('startinsert')
+            end
+        end)
+    end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('OpencodeInputKeys', { clear = true }),
+    pattern = 'opencode',
+    callback = function(args)
+        for _, key in ipairs({ '/', '@', '#', '~' }) do
+            vim.keymap.set('n', key, 'i' .. key, {
+                buffer = args.buf,
+                remap = true,
+                desc = 'OpenCode: type trigger key',
+            })
+        end
+    end,
+})
+
 -- Alias :OpenCode -> :Opencode with full autocompletion support
 local opencode_cmd = require('opencode.commands')
 vim.api.nvim_create_user_command('OpenCode', opencode_cmd.execute_command_opts, {
