@@ -63,35 +63,49 @@ local function mask_env(buf)
     end
 end
 
+-- Hide or reveal `buf` in every window showing it, and remember the choice on
+-- the buffer so a new window does not come up unmasked.
+local function apply_env_conceal(buf, hidden)
+    vim.b[buf].secure_env_hidden = hidden
+    for _, win in ipairs(vim.fn.win_findbuf(buf)) do
+        vim.wo[win].conceallevel = hidden and 2 or 0
+        if hidden then
+            -- 'nvc': hide the value on the cursor line too, except in insert
+            -- mode, where the line you are editing shows the real text.
+            vim.wo[win].concealcursor = 'nvc'
+        end
+    end
+    if hidden then
+        mask_env(buf)
+    else
+        vim.api.nvim_buf_clear_namespace(buf, env_ns, 0, -1)
+    end
+end
+
 vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
     group = augroup('secure_env'),
     pattern = { '.env', '.env.*', '*.env' },
     callback = function(args)
-        vim.wo.conceallevel = 2
-        -- 'nvc': hide the value on the cursor line too, except in insert mode,
-        -- where the line you are editing shows the real text.
-        vim.wo.concealcursor = 'nvc'
+        apply_env_conceal(args.buf, true)
         vim.keymap.set('n', '<leader>et', function()
-            vim.wo.conceallevel = vim.wo.conceallevel > 0 and 0 or 2
-            vim.notify(
-                'Secrets ' .. (vim.wo.conceallevel > 0 and 'hidden' or 'visible'),
-                vim.log.levels.INFO,
-                { title = '.env' }
-            )
+            local hidden = vim.b[args.buf].secure_env_hidden ~= false
+            apply_env_conceal(args.buf, not hidden)
+            vim.notify('Secrets ' .. (hidden and 'visible' or 'hidden'), vim.log.levels.INFO, { title = '.env' })
         end, { buffer = args.buf, desc = 'Toggle env hiding' })
-        mask_env(args.buf)
     end,
 })
 
--- extmarks follow edits, but new lines and window switches need a refresh
-vim.api.nvim_create_autocmd({ 'TextChanged', 'BufEnter' }, {
+-- extmarks follow edits, but new lines and window switches need a refresh.
+-- TextChanged only fires for Normal mode edits, so Insert mode needs its own
+-- events; otherwise a variable typed on a new line stays visible.
+vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI', 'TextChangedP', 'InsertLeave', 'BufEnter' }, {
     group = augroup('secure_env_refresh'),
     pattern = { '.env', '.env.*', '*.env' },
     callback = function(args)
-        if vim.wo.conceallevel > 0 then
-            vim.wo.concealcursor = 'nvc'
-            mask_env(args.buf)
+        if vim.b[args.buf].secure_env_hidden == false then
+            return
         end
+        apply_env_conceal(args.buf, true)
     end,
 })
 
